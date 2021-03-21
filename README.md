@@ -37,11 +37,15 @@ To get started, click [this link ](https://trello.com/b/vYAmm1du/project-3) to v
 
 ***
 
-### ***Screenshots***
+### ***The Plan***
 
-##### Add screenshots of your projects
-![Image Alt](https://iq.opengenus.org/content/images/2019/12/semicolon.jpg)
-![Image Alt](https://i.pinimg.com/originals/78/8f/27/788f27edb761cb3e6af9422ece19fcc4.jpg)
+<h3 align="center" >ERD</h3>
+
+![CodeStack ERD](/store/code_stackERD-hor.png)
+
+<h3 align="center" >Component Hierarchy Diagram</h3>
+
+![CodeStack Component Hierarchy Diagram](/store/code_stackCHD-hor.png)
 
 ***
 
@@ -56,7 +60,4 @@ To get started, click [this link ](https://trello.com/b/vYAmm1du/project-3) to v
 
 ### ***Credit***
 
-* memes from: [google](https://google.com)
-
-* [Markdown Cheasheet](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)
-* [Markdown guide](https://ia.net/writer/support/general/markdown-guide)
+* TBD
