@@ -27,11 +27,7 @@ Code Stack is a fun and interactive educational tool that allows users to create
 
 ### ***Technologies***
 
-<img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Flogonoid.com%2Fimages%2Fpostgresql-logo.png&f=1&nofb=1" alt="PostgresSQL logo" width="150"/>
-<img src="https://i.cloudup.com/zfY6lL7eFa-3000x3000.png" alt="express logo" width="150"/>
-<img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fyycjs.com%2Freal-world-react%2Fimg%2Freact-logo.png&f=1&nofb=1" alt="React logo" width="150"/>
-<img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.ict.social%2Fimages%2F5728%2Fnodejs_logo.png&f=1&nofb=1" alt="Node logo" width="150"/>
-
+<img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Flogonoid.com%2Fimages%2Fpostgresql-logo.png&f=1&nofb=1" alt="PostgresSQL logo" width="150"/><img src="https://i.cloudup.com/zfY6lL7eFa-3000x3000.png" alt="express logo" width="150"/><img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fyycjs.com%2Freal-world-react%2Fimg%2Freact-logo.png&f=1&nofb=1" alt="React logo" width="150"/><img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.ict.social%2Fimages%2F5728%2Fnodejs_logo.png&f=1&nofb=1" alt="Node logo" width="150"/>
 
 ***
 
