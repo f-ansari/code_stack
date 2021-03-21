@@ -21,7 +21,7 @@ Installation packages for back-end:
       npm install express
       npm install pg sequelize
       npm install --save-dev nodemon 
-      npm install cors body-parser morgan compression logger
+      npm install cors body-parser morgan logger
       npm install bcrypt jsonwebtoken
 /**************************************************/
 
