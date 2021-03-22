@@ -1,8 +1,11 @@
-
-
 /node_modules
 .DS_Store
 .env
 yarn.lock
 package-lock.json
+
 /notes.txt
+/christina-notes.txt
+/note.txt
+/details.txt
+/note.txt
