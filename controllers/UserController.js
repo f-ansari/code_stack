@@ -1,19 +1,40 @@
 const { User } = require('../models')
-const { Op } = require('sequelize')
-// const user = require('./models/User')
 
-
-
-
-
-const Search = async (req, res) => {
+const getOneUser = async (req, res) => {
   try {
-    const users = await User.findAll({
-      attributes: ['handle'],
-      limit: 10,
-      where: { handle: { [Op.iLike]: `${req.query.searchQuery}%` } }
+    let handle = parseInt(req.params.handle)
+    const user = await User.findByPk(handle)
+    res.send(user)
+  } catch (error) {
+    throw error
+  }
+}
+
+const createUser = async (req, res) => {
+  try {
+    let newUser = await User.create({ ...req.body })
+    res.send(newUser)
+  } catch (error) {
+    throw error
+  }
+}
+
+const updateUser = async (req, res) => {
+  try {
+    let updated = await User.update(req.body, {
+      where: { handle: req.params.handle },
+      returning: true
     })
-    res.send(users)
+    res.send(updated)
+  } catch (error) {
+    throw error
+  }
+}
+
+const deleteUser = async (req, res) => {
+  try {
+    await User.destroy({ where: { handle: req.params.handle } })
+    res.send(`User with handle ${req.params.handle} deleted`)
   } catch (error) {
     throw error
   }
@@ -42,6 +63,8 @@ const Search = async (req, res) => {
 // }
 
 module.exports = {
-    // GetFriends, 
-    Search
+  getOneUser,
+  createUser,
+  updateUser,
+  deleteUser
 }
