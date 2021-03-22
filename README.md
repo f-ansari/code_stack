@@ -23,7 +23,7 @@
 
 ***
 #### ***Description***
-Code Stack is a fun and interactive educational tool that allows users to create their custom decks of flashcards. Each flashcard will enable the user to input the title, code block, and notes, as well as selecting the coding language being reviewed. In addition to their own sets, users will also be able to see and interact with decks that other users have created. Coding just got a whole lot easier.
+CodeStack is a fun and interactive educational tool that allows users to create their custom decks of flashcards. Each flashcard will enable the user to input the title, code block, and notes, as well as selecting the coding language being reviewed. In addition to their own sets, users will also be able to see and interact with decks that other users have created. Coding just got a whole lot easier.
 
 ### ***Technologies***
 
