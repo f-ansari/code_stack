@@ -1,4 +1,4 @@
-'use strict'; 
+'use strict'
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -8,7 +8,7 @@ module.exports = {
         {
           title:'HTML',
           userId: 1,
-          likecount: 10 ,
+          likeCount: 10 ,
           createdAt: new Date(),
           updatedAt: new Date()
         }
@@ -21,4 +21,3 @@ module.exports = {
     return queryInterface.bulkDelete('decks', null, {})
   }
 }
-
