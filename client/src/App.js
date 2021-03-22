@@ -1,4 +1,7 @@
 import React, { useReducer, useEffect } from 'react'
+import { Route, useHistory } from 'react-router'
+import Nav from './components/Nav'
+import AuthForm from './pages/AuthForm'
 import {
   SET_AUTHENTICATED,
   SET_SELECTED_USER,
@@ -11,7 +14,7 @@ import {
 import './App.css'
 
 const iState = {
-  authenticated: '',
+  authenticated: false,
   allDecks: '',
   selectedUser: '',
   selectedDeck: '',
@@ -44,13 +47,39 @@ const reducer = (state, action) => {
 function App() {
   const [state, dispatch] = useReducer(reducer, iState)
 
+  const checkStoredToken = async () => {
+    let token = localStorage.getItem('token')
+    if (token) {
+      // const res = await axios.get(`${BASE_URL}/auth/session`) for us to keep
+      // dispatch({ type: SET_CURRENT_USER, payload: res.data }) for us to keep
+      // setUser(res.data) delete later
+      dispatch({ type: SET_AUTHENTICATED, payload: true })
+      // history.push('/feed') //route to profile
+    }
+  }
+
+  const logOut = () => {
+    localStorage.clear()
+    dispatch({ type: SET_AUTHENTICATED, payload: false })
+    dispatch({ type: SET_CURRENT_USER, payload: null })
+    // history.push('/')
+  }
+
+  useEffect(() => {
+    checkStoredToken()
+  }, [state.authenticated])
+
   return (
     <div className="App">
-      <header className="App-header">
-        Hello Project 3 Team!
-        <br />
-        Let's get Hacking
-      </header>
+      <Nav
+        authenticated={state.authenticated}
+        currentUser={state.currentUser}
+        logOut={logOut}
+      />
+
+      <main>
+        <AuthForm />
+      </main>
     </div>
   )
 }
