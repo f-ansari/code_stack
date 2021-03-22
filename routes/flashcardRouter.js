@@ -3,7 +3,7 @@ const controller = require('../controllers/FlashcardController')
 const { StripHeaders, VerifyToken } = require('../middleware')
 
 Router.get('/:flashcard_id', controller.getFlashcard)
-Router.get('/:deck_id', controller.getFlashcardsByDeck)
+Router.get('/deck/:deck_id', controller.getFlashcardsByDeck)
 
 Router.post('/:deck_id', controller.createFlashcard)
 
