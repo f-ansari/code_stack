@@ -1,5 +1,13 @@
 import React, { useReducer, useEffect } from 'react'
-import { SET_DECKS } from './store/types'
+import {
+  SET_AUTHENTICATED,
+  SET_SELECTED_USER,
+  SET_SELECTED_DECK,
+  GET_DECKS_BY_HANDLE,
+  GET_FRIENDS_DECKS,
+  GET_ALL_DECKS,
+  SET_CURRENT_USER
+} from './store/types'
 import './App.css'
 
 const iState = {

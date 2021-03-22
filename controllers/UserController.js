@@ -1,27 +1,26 @@
-const {User}= require('../models')
+const { User } = require('../models')
 const { Op } = require('sequelize')
-const user = require('./models/user')
+// const user = require('./models/User')
 
 
 
 
 
 const Search = async (req, res) => {
-    try {
+  try {
     const users = await User.findAll({
-        attributes: ['handle'],
-        limit: 10,
-        where: { handle: { [Op.iLike]: `${req.query.searchQuery}%` } }
+      attributes: ['handle'],
+      limit: 10,
+      where: { handle: { [Op.iLike]: `${req.query.searchQuery}%` } }
     })
     res.send(users)
-    } catch (error) {
+  } catch (error) {
     throw error
-    }
+  }
 }
 
-
 // const GetFriends = async (req, res) => {
-    
+
 //     try {
 //     const { token } = res.locals
 //     const user = await User.findByPk(token.id)
@@ -34,14 +33,13 @@ const Search = async (req, res) => {
 //         }],
 //         order:[['createdAt', 'DESC' ]],
 //         where: {id: token.id}
-        
+
 //     })
 //     res.send({following: true})
 //     } catch (error) {
 //     throw error
 //     }
 // }
-
 
 module.exports = {
     // GetFriends, 
