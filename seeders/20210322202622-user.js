@@ -10,7 +10,7 @@ module.exports = {
           email: 'demo@demo.com',
           handle: '',
           passwordDigest:'',
-          avatorUrl:'',
+          avatarUrl:'',
           createdAt: new Date(),
           updatedAt: new Date()
         }

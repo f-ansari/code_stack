@@ -9,7 +9,7 @@ module.exports = {
           title:'ClassName',
           notes:'className is to idenfity what need to get style',
           codeBlock:'<div className=button>',
-          deckId: 5,
+          deckId: 2,
           createdAt: new Date(),
           updatedAt: new Date()
         }

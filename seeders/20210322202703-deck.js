@@ -8,7 +8,7 @@ module.exports = {
         {
           title:'HTML',
           userId: 1,
-          likecount: 10 ,
+          likeCount: 10 ,
           createdAt: new Date(),
           updatedAt: new Date()
         }
