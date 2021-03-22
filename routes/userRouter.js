@@ -1,20 +1,13 @@
 const Router = require('express').Router()
-const { route } = require('.')
 const controller = require('../controllers/UserController')
 const { StripHeaders, VerifyToken } = require('../middleware')
 
+Router.get('/:handle', controller.getOneUser)
 
-Router.get('/')
-Router.get('/profile/:handle')
-Router.get('/getDecks')
+Router.post('/', controller.createUser)
 
-Router.post('/createDecks')
-Router.post('/createFlashcard')
+Router.put('/:handle', controller.updateUser)
 
-Router.delete('/deleteDeck')
-Router.delete('/deleteFlashcard')
-
-
-
+Router.delete('/:handle', controller.deleteUser)
 
 module.exports = Router
