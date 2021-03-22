@@ -14,7 +14,7 @@ module.exports = {
         onDelete: 'CASCADE',
         references: { model: 'users', key: 'id' }
       },
-      likeCount: { type: Sequelize.INTEGER, defaultValue: 0 },
+      likeCount: { type: Sequelize.INTEGER, defaultValue: 0, allowNull: false },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

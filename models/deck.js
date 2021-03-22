@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE',
         references: { model: 'users', key: 'id' }
       },
-      likeCount: { type: DataTypes.INTEGER, defaultValue: 0 }
+      likeCount: { type: DataTypes.INTEGER, defaultValue: 0, allowNull: false }
     },
     {
       sequelize,
