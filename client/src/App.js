@@ -1,5 +1,5 @@
 import React, { useReducer, useEffect } from 'react'
-import { Route, useHistory, Switch } from 'react-router'
+import { Route, useHistory, Switch } from 'react-router-dom'
 import Nav from './components/Nav'
 import Profile from './pages/Profile'
 import Deck from './pages/Deck'
@@ -18,7 +18,6 @@ import {
   SET_CURRENT_USER
 } from './store/types'
 import './App.css'
-import { Router } from 'express'
 
 const iState = {
   authenticated: false,
