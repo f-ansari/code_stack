@@ -13,11 +13,19 @@ module.exports = (sequelize, DataTypes) => {
   }
   User.init(
     {
-      handle: DataTypes.STRING,
+      handle: { type: DataTypes.STRING, allowNull: false, unique: true },
       name: DataTypes.STRING,
-      email: DataTypes.STRING,
-      passwordDigest: DataTypes.STRING,
-      avatarUrl: DataTypes.STRING
+      email: { type: DataTypes.STRING, validate: { isEmail: true } },
+      passwordDigest: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: ''
+      },
+      avatarUrl: {
+        type: DataTypes.STRING,
+        defaultValue:
+          'https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png'
+      }
     },
     {
       sequelize,

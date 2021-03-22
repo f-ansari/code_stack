@@ -15,7 +15,10 @@ module.exports = (sequelize, DataTypes) => {
   Deck.init(
     {
       title: DataTypes.STRING,
-      userId: DataTypes.INTEGER,
+      userId: {
+        type: DataTypes.INTEGER,
+        references: { model: 'users', key: 'id' }
+      },
       likeCount: DataTypes.INTEGER
     },
     {
