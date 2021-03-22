@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 
-const PublicNav = () => {
+const PublicNav = (props) => {
   return (
-    <div>PublicNav</div>
+    <div>
+      <button>Login</button>
+    </div>
   )
 }
 
