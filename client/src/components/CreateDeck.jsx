@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 const CreateDeck = () => {
   return (
-    <div>AuthNav</div>
+    <div>CreateDeck</div>
   )
 }
 

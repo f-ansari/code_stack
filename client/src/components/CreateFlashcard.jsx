@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 const CreateFlashcard = () => {
   return (
-    <div>AuthNav</div>
+    <div>CreateFlashcard</div>
   )
 }
 
