@@ -7,7 +7,7 @@ const Nav = (props) => {
   return props.authenticated ? (
     <AuthenticatedNav logout={props.logout} currentUser={props.currentUser} />
   ) : (
-    <PublicNav toggleModal={props.toggleModal} />
+    <PublicNav />
   )
 }
 
