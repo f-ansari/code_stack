@@ -3,19 +3,6 @@ const { Op } = require('sequelize')
 const user = require('./models/user')
 
 
-const getAllDecks = async (req, res) =>{
-    try{
-} catch (error){
-    }throw error
-}
-
-const createDecks = async (req, res) =>{
-    try{
-} catch (error){
-    }throw error
-}
-
-
 
 
 
@@ -57,8 +44,6 @@ const Search = async (req, res) => {
 
 
 module.exports = {
-    getAllDecks,
     // GetFriends, 
-    createDecks,
     Search
 }
