@@ -4,7 +4,7 @@ const cors = require('cors')
 const logger = require('morgan')
 // const compression = require('compression')
 
-const AppRouter = require('./routes')
+const AppRouter = require('./routes/index')
 const app = express()
 
 const PORT = process.env.PORT || 3001

@@ -3,7 +3,9 @@ const controller = require('../controllers/DeckController')
 
 
 
-Router.post('/:user_id', controller.createDecks)
-Router.get('/view/:user_id', controller.getAllDecks)
-Router.put('/:deck_id', controller.updateDecks)
-Router.delete('/:deck_id', controller.deleteDecks)
+Router.post('/:user_Id', controller.createDecks)
+Router.get('/view/:deck_Id', controller.getOneDecks)
+Router.put('/:deck_Id', controller.updateDecks)
+Router.delete('/:deck_Id', controller.deleteDecks)
+
+module.exports=Router
