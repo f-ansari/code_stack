@@ -1,7 +1,13 @@
 import React, { useReducer, useEffect } from 'react'
-import { Route, useHistory } from 'react-router'
+import { Route, useHistory, Switch } from 'react-router'
 import Nav from './components/Nav'
-import AuthForm from './pages/AuthForm'
+import Profile from './pages/Profile'
+import Deck from './pages/Deck'
+import HomePage from './pages/HomePage'
+import Flashcard from './pages/Flashcard'
+import LoginForm from './components/LoginForm'
+import SignUp from './components/SignUp'
+
 import {
   SET_AUTHENTICATED,
   SET_SELECTED_USER,
@@ -47,7 +53,7 @@ const reducer = (state, action) => {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, iState)
-
+  const history = useHistory()
   const checkStoredToken = async () => {
     let token = localStorage.getItem('token')
     if (token) {
@@ -60,10 +66,11 @@ function App() {
   }
 
   const logOut = () => {
+    console.log('clicked logout!')
     localStorage.clear()
     dispatch({ type: SET_AUTHENTICATED, payload: false })
     dispatch({ type: SET_CURRENT_USER, payload: null })
-    // history.push('/')
+    history.push('/')
   }
 
   useEffect(() => {
@@ -78,7 +85,35 @@ function App() {
         logOut={logOut}
       />
 
-      <main></main>
+      <main>
+        <Switch>
+          <Route
+            exact
+            path="/user/:userhandle"
+            component={(props) => <HomePage {...props} />}
+          />
+          <Route
+            path="/user/:userhandle"
+            component={(props) => <Profile {...props} />}
+          />
+          <Route
+            path="/deck/:deckId"
+            component={(props) => <Deck {...props} />}
+          />
+          <Route
+            path="/flashcard/:flashcardId"
+            component={(props) => <Flashcard {...props} />}
+          />
+          <Route
+            path="/login"
+            component={(props) => <LoginForm {...props} />}
+          />
+          <Route
+            path="/register"
+            component={(props) => <SignUp {...props} />}
+          />
+        </Switch>
+      </main>
     </div>
   )
 }
