@@ -1,8 +1,15 @@
 import React, { useState } from 'react'
+import { NavLink } from 'react-router-dom'
 
-const AuthenticatedNav = () => {
+const AuthenticatedNav = (props) => {
+  console.log(props.logOut)
   return (
-    <div>AuthNav</div>
+    <div>
+      AuthNav
+      {/* <NavLink to="/"> */}
+      <button onClick={() => props.logOut()}>Logout</button>
+      {/* </NavLink> */}
+    </div>
   )
 }
 
