@@ -14,8 +14,9 @@ app.use(cors())
 // app.use(compression({ level: 8 }))
 app.use(bodyParser.json())
 
-app.get('/', (req, res) => res.json({ message: 'Server Works' }))
 
 app.use('/api', AppRouter)
+
+app.get('/', (req, res) => res.json({ message: 'Server Works' }))
 
 app.listen(PORT, () => console.log(`Server Started On Port: ${PORT}`))
