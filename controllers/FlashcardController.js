@@ -1,24 +1,63 @@
 const { Flashcard } = require('../models')
 const { op } = require('sequelize')
 
-getFlashcardsByDeck = async (req, res) => {
+const getFlashcard = async (req, res) => {
   try {
+    let flashcardId = parseInt(req.params.flashcard_id)
+    let flashcard = await Flashcard.findOne({ where: { id: flashcardId } })
+    res.send(flashcard)
+  } catch (error) {
+    throw error
+  }
+}
+
+const getFlashcardsByDeck = async (req, res) => {
+  try {
+    let deckId = parseInt(req.params.deck_id)
+    let flashcards = await Flashcard.findAll({ where: { deckId: deckId } })
+    res.send(flashcards)
   } catch (error) {}
 }
 
-updateFlashcard = async (req, res) => {
+const updateFlashcard = async (req, res) => {
   try {
-  } catch (error) {}
+    let flashcardId = parseInt(req.params.flashcard_id)
+    await Flashcard.update(req.body, {
+      where: { id: flashcardId },
+      returning: true
+    })
+  } catch (error) {
+    throw error
+  }
 }
 
-deleteFlashcard = async (req, res) => {
+const deleteFlashcard = async (req, res) => {
   try {
-  } catch (error) {}
+    let flashcardId = parseInt(req.params.flashcard_id)
+    await Flashcard.destroy({ where: { id: flashcardId } })
+    res.send(`Flashcard with id ${flashcardId} has been destroyed`)
+  } catch (error) {
+    throw error
+  }
 }
 
-createNewFlashcard = async (req, res) => {
+const createFlashcard = async (req, res) => {
   try {
-  } catch (error) {}
+    let deckId = parseInt(req.params.deck_id)
+    let flashcard = await Flashcard.create({
+      deckId,
+      ...req.body
+    })
+    res.send(flashcard)
+  } catch (error) {
+    throw error
+  }
 }
 
-module.exports = {}
+module.exports = {
+  getFlashcard,
+  getFlashcardsByDeck,
+  updateFlashcard,
+  deleteFlashcard,
+  createFlashcard
+}
