@@ -6,9 +6,9 @@ module.exports = {
       'decks',
       [
         {
-          title: 'HTML',
-          userId: 2,
-          likeCount: 10,
+          title:'HTML',
+          userId: 1,
+          likeCount: 10 ,
           createdAt: new Date(),
           updatedAt: new Date()
         }

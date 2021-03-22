@@ -6,9 +6,9 @@ module.exports = {
       'flashcards',
       [
         {
-          title: 'ClassName',
-          notes: 'className is to idenfity what need to get style',
-          codeBlock: '<div className=button>',
+          title:'ClassName',
+          notes:'className is to idenfity what need to get style',
+          codeBlock:'<div className=button>',
           deckId: 2,
           createdAt: new Date(),
           updatedAt: new Date()
