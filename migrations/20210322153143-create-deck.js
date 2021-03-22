@@ -8,15 +8,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      title: {
-        type: Sequelize.STRING
-      },
+      title: { type: Sequelize.STRING, allowNull: false },
       userId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        references: { model: 'users', key: 'id' }
       },
-      likeCount: {
-        type: Sequelize.INTEGER
-      },
+      likeCount: { type: Sequelize.INTEGER, defaultValue: 0 },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

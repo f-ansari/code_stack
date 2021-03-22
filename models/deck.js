@@ -14,12 +14,13 @@ module.exports = (sequelize, DataTypes) => {
   }
   Deck.init(
     {
-      title: DataTypes.STRING,
+      title: { type: DataTypes.STRING, allowNull: false },
       userId: {
         type: DataTypes.INTEGER,
+        onDelete: 'CASCADE',
         references: { model: 'users', key: 'id' }
       },
-      likeCount: DataTypes.INTEGER
+      likeCount: { type: DataTypes.INTEGER, defaultValue: 0 }
     },
     {
       sequelize,

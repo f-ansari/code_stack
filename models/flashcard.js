@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Flashcard.init(
     {
-      title: DataTypes.STRING,
+      title: { type: DataTypes.STRING, allowNull: false },
       notes: DataTypes.STRING,
       codeBlock: DataTypes.STRING,
       deckId: {
