@@ -23,10 +23,10 @@ const iState = {
   authenticated: false,
   allDecks: '',
   selectedUser: '',
-  selectedDeck: '',
-  decksByHandle: '',
-  allFriendsDecks: '',
-  currentUser: ''
+  selectedDeck: [],
+  decksByHandle: [],
+  allFriendsDecks: [],
+  currentUser: {}
 }
 
 const reducer = (state, action) => {
@@ -88,7 +88,7 @@ function App() {
         <Switch>
           <Route
             exact
-            path="/user/:userhandle"
+            path="/"
             component={(props) => <HomePage {...props} />}
           />
           <Route
