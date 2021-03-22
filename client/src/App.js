@@ -12,6 +12,7 @@ import {
   SET_CURRENT_USER
 } from './store/types'
 import './App.css'
+import { Router } from 'express'
 
 const iState = {
   authenticated: false,
@@ -77,9 +78,7 @@ function App() {
         logOut={logOut}
       />
 
-      <main>
-        <AuthForm />
-      </main>
+      <main></main>
     </div>
   )
 }
