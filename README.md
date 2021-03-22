@@ -1,7 +1,5 @@
 # CodeStack
 
-<<<<<<< HEAD
-Write a breif description...>
 =======
 ### Date: 21 March 2021
 
@@ -27,7 +25,7 @@ Write a breif description...>
 ***
 #### ***Description***
 Code Stack is a fun and interactive educational tool that allows users to create their custom decks of flashcards. Each flashcard will enable the user to input the title, code block, and notes, as well as selecting the coding language being reviewed. In addition to their own sets, users will also be able to see and interact with decks that other users have created. Coding just got a whole lot easier.
->>>>>>> 819e01cfaf2506006afef79dec451444b4119f24
+
 
 ### ***Technologies***
 
