@@ -1,4 +1,4 @@
-'use strict'; 
+'use strict'
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -9,8 +9,8 @@ module.exports = {
           name: 'John',
           email: 'demo@demo.com',
           handle: '',
-          passwordDigest:'',
-          avatorUrl:'',
+          passwordDigest: '',
+          avatarUrl: '',
           createdAt: new Date(),
           updatedAt: new Date()
         }
@@ -23,4 +23,3 @@ module.exports = {
     return queryInterface.bulkDelete('users', null, {})
   }
 }
-

@@ -1,4 +1,4 @@
-'use strict'; 
+'use strict'
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -6,10 +6,10 @@ module.exports = {
       'flashcards',
       [
         {
-          title:'ClassName',
-          notes:'className is to idenfity what need to get style',
-          codeBlock:'<div className=button>',
-          deckId: 5,
+          title: 'ClassName',
+          notes: 'className is to idenfity what need to get style',
+          codeBlock: '<div className=button>',
+          deckId: 2,
           createdAt: new Date(),
           updatedAt: new Date()
         }
@@ -22,4 +22,3 @@ module.exports = {
     return queryInterface.bulkDelete('flashcards', null, {})
   }
 }
-
