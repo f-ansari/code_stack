@@ -22,10 +22,11 @@ const getFlashcardsByDeck = async (req, res) => {
 const updateFlashcard = async (req, res) => {
   try {
     let flashcardId = parseInt(req.params.flashcard_id)
-    await Flashcard.update(req.body, {
+    let updated = await Flashcard.update(req.body, {
       where: { id: flashcardId },
       returning: true
     })
+    res.send(updated)
   } catch (error) {
     throw error
   }
