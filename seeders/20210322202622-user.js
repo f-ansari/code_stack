@@ -1,25 +1,22 @@
-'use strict'
+const faker = require('faker')
+const bcrypt = require('bcrypt')
+
+const users = [...Array(10)].map(() => ({
+  name: faker.name.firstName(),
+  email: faker.internet.email(),
+  handle: faker.internet.userName(),
+  passwordDigest: '',
+  avatarUrl: faker.internet.avatar(),
+  createdAt: faker.date.past(),
+  updatedAt: faker.date.recent(15)
+}))
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert(
-      'users',
-      [
-        {
-          name: 'John',
-          email: 'demo@demo.com',
-          handle: '',
-          passwordDigest: '',
-          avatarUrl: '',
-          createdAt: new Date(),
-          updatedAt: new Date()
-        }
-      ],
-      {}
-    )
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkInsert('users', users)
   },
 
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('users', null, {})
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkDelete('users', null, {})
   }
 }
