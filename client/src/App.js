@@ -7,6 +7,8 @@ import HomePage from './pages/HomePage'
 import Flashcard from './pages/Flashcard'
 import LoginForm from './components/LoginForm'
 import SignUp from './components/SignUp'
+import axios from 'axios'
+import { BASE_URL } from './globals'
 
 import {
   SET_AUTHENTICATED,
@@ -22,7 +24,7 @@ import './App.css'
 const iState = {
   authenticated: false,
   //allDecks: '',
-  selectedUser: '',
+  selectedUser: null,
   selectedDeck: [],
   decksByHandle: [],
   //allFriendsDecks: [],
@@ -72,9 +74,22 @@ function App() {
     history.push('/')
   }
 
-  useEffect(() => {
-    checkStoredToken()
-  }, [state.authenticated])
+  // const getProfile = async () => {
+  //   // fetch profile from db using selectedUser.id or selectedUser.handle??
+  //   // TODO: to fetch decks with user, we would need to update the getProfile controller
+  //   try {
+  //     const res = await axios.get(`${BASE_URL}/users/Alisa.Gaylord35`)
+  //     console.log(res)
+  //     dispatch({ type: SET_SELECTED_USER, payload: res.data[0] })
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   checkStoredToken()
+  //   // getProfile()
+  // }, [])
 
   return (
     <div className="App">
