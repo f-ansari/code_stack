@@ -14,7 +14,7 @@ module.exports = {
     await queryInterface.bulkInsert('decks', decks)
   },
 
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('decks', null, {})
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkDelete('decks', null, {})
   }
 }

@@ -1,24 +1,22 @@
-'use strict'
+const faker = require('faker')
+const { Deck } = require('../models')
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert(
-      'flashcards',
-      [
-        {
-          title:'ClassName',
-          notes:'className is to idenfity what need to get style',
-          codeBlock:'<div className=button>',
-          deckId: 2,
-          createdAt: new Date(),
-          updatedAt: new Date()
-        }
-      ],
-      {}
-    )
+  up: async (queryInterface, Sequelize) => {
+    const decks = await Deck.findAll({ raw: true })
+    const flashcards = [...Array(100)].map(() => ({
+      title: faker.lorem.word(),
+      notes: faker.lorem.sentence(),
+      codeBlock: faker.lorem.words(),
+      deckId: decks[Math.floor(Math.random() * decks.length)].id,
+      language: faker.lorem.word(),
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }))
+    await queryInterface.bulkInsert('flashcards', flashcards)
   },
 
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('flashcards', null, {})
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkDelete('flashcards', null, {})
   }
 }
