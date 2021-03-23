@@ -26,7 +26,7 @@ const Deck = (props) => {
 
   const history = useHistory()
   const redirectToFlashcardPage = (id) => {
-    history.push(`/flashcards/${id}`)
+    history.push(`/flashcard/${id}`)
   }
 
   return (
