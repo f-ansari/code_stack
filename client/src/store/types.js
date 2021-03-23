@@ -11,3 +11,7 @@ export const SIGNUP_FORM = 'signup_form'
 export const SUBMIT_SIGNUP = 'submit_signup'
 
 export const LOGIN_FORM = 'login_form'
+export const RESET_LOGIN = 'RESET_LOGIN'
+
+export const DECK_FORM = 'deck_form'
+export const SUBMIT_DECK_FORM = 'submited_deck_form'

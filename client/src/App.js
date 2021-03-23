@@ -119,6 +119,7 @@ function App() {
                 {...props}
                 currentUser={state.currentUser}
                 authenticated={state.authenticated}
+                dispatch={dispatch}
               />
             )}
           />
