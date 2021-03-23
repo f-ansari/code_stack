@@ -4,7 +4,7 @@ const { HashPassword } = require('../middleware')
 const getOneUser = async (req, res) => {
   try {
     let handle = parseInt(req.params.handle)
-    const user = await User.findByPk(handle)
+    const user = await User.findOne(handle)
     res.send(user)
   } catch (error) {
     throw error

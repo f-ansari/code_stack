@@ -7,7 +7,9 @@ const getOneDecks = async (req, res) =>{
     try{
         const deckId = parseInt(req.params.deck_Id)
         console.log(req.query)
-        const deck= await Deck.findByPk(deckId)
+        const deck= await Deck.findAll({ where: {id: deckId},
+            include: [{model: Flashcard, attributes: ['title', 'codeBlock', 'language', 'notes']}]
+        })
         res.send(deck)
     } catch (error){
         console.log(error)
@@ -16,8 +18,7 @@ const getOneDecks = async (req, res) =>{
 
 const getAllDecks = async (req, res) =>{
     try{
-        const deckId= parseInt(req.params.deck_Id)
-        const deck = await Deck.findAll(deckId)
+        const deck = await Deck.findAll()
         res.send(deck)
     } catch (error){
         throw error
