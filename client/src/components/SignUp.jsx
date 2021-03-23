@@ -43,6 +43,7 @@ const SignUp = () => {
   }
 
   const handleSubmit = async (e) => {
+    e.preventDefault()
     try {
       // await axios.post(`${BASE_URL}/auth/register`, state.register)
       dispatch({ type: SUBMIT_SIGNUP, payload: true })
@@ -55,6 +56,13 @@ const SignUp = () => {
   return (
     <div>
       {state.signupSubmitted ? (
+        <div>
+          <h2>Nice! Your account was created.</h2>
+          <NavLink to="/login">
+            <button>Sign in</button>
+          </NavLink>
+        </div>
+      ) : (
         <div>
           <h1>SignUp</h1>
           <form onSubmit={(event) => handleSubmit(event)}>
@@ -96,13 +104,6 @@ const SignUp = () => {
 
             <input type="submit" value="Submit" />
           </form>
-        </div>
-      ) : (
-        <div>
-          <h2>Nice! Your account was created.</h2>
-          <NavLink to="/login">
-            <button>Sign in</button>
-          </NavLink>
         </div>
       )}
     </div>
