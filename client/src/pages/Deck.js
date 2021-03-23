@@ -7,6 +7,7 @@ const Deck = (props) => {
     { title: 'Functions', id: 2 },
     { title: 'HOF', id: 3 }
   ]
+  let likeCount = 10
   let selectedUser = { handle: 'luke', avatarUrl: 'url' }
   let currentUser = { handle: 'luke' }
   const renderProfileButton = () => {
@@ -38,6 +39,8 @@ const Deck = (props) => {
         alt={`avatar for ${selectedUser ? selectedUser.handle : null}`}
       />
       <h1>Deck</h1>
+      <button>Edit</button>
+      <p>Likes: {likeCount}</p>
       {flashcards.length ? (
         flashcards.map((flashcard) => (
           <div onClick={() => redirectToFlashcardPage(flashcard.id)}>
