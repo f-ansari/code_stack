@@ -1,10 +1,40 @@
-import React, { useState, useEffect } from 'react'
+import React, { useReducer, useEffect } from 'react'
 import DeckForm from '../components/CreateDeck'
-import { SET_SELECTED_DECK, SET_SELECTED_USER } from '../store/types'
+import {
+  // TODO update store types
+  SET_SELECTED_DECK,
+  SET_SELECTED_USER,
+  DECK_FORM,
+  SUBMIT_DECK_FORM
+} from '../store/types'
 // import { BASE_URL } from '../globals'
 // import axios from 'axios'
 
+// useReduce handles DeckForm state
+const iState = {
+  deckForm: '',
+  deckFormSubmitted: false
+}
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case DECK_FORM:
+      return {
+        ...state,
+        register: {
+          ...state.register,
+          [action.payload.name]: action.payload.value
+        }
+      }
+    case SUBMIT_DECK_FORM:
+      return { ...iState, deckSubmitted: action.payload }
+    default:
+      return state
+  }
+}
+
 const Profile = (props) => {
+  const [state, action] = useReducer(iState, reducer)
   const {
     currentUser,
     selectedUser,
@@ -24,14 +54,22 @@ const Profile = (props) => {
     }
   }
 
-  const switchButton = () => {
+  const checkFollowing = () => {
+    // axios call that returns a boolean
+  }
+
+  const renderProfileButton = () => {
     // SWITCH statement
     // render createDeck btn if selectedUser matches currentUser
     // render follow btn if selectedUser does not match currentUser & checkFollowing is false
     // render unfollow btn is selectedUser does not match currentUser & checkFollowing is true
     switch (true) {
-      case currentUser && currentUser.handle:
+      case currentUser && currentUser.handle === selectedUser.handle:
         return <button>+ Create Deck</button>
+      // case currentUser &&
+      //   currentUser.handle !== selectedUser.handle &&
+      //   checkFollowing() === false:
+      //   return <button>+ Create Deck</button>
       default:
         return <button>Follow</button>
     }
@@ -52,6 +90,7 @@ const Profile = (props) => {
     props.params.history.push(`/deck/${deckId}`)
   }
 
+  // fill profile will props.match.params.handle on mount
   useEffect(() => {
     getProfile()
   }, [props.match.params.handle])
@@ -59,10 +98,10 @@ const Profile = (props) => {
   return (
     <div>
       <h1>Profile: {selectedUser ? selectedUser.handle : null}</h1>
-      {switchButton}
+      {renderProfileButton}
       <img
-        src={currentUser ? currentUser.avatarUrl : null}
-        alt={`avatar for ${currentUser ? currentUser.handle : null}`}
+        src={selectedUser ? selectedUser.avatarUrl : null}
+        alt={`avatar for ${selectedUser ? selectedUser.handle : null}`}
       />
       <div>{renderDecksByHandle}</div>
     </div>
