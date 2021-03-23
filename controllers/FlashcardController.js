@@ -1,5 +1,4 @@
 const { Flashcard } = require('../models')
-const { op } = require('sequelize')
 
 const getFlashcard = async (req, res) => {
   try {
@@ -16,7 +15,9 @@ const getFlashcardsByDeck = async (req, res) => {
     let deckId = parseInt(req.params.deck_id)
     let flashcards = await Flashcard.findAll({ where: { deckId: deckId } })
     res.send(flashcards)
-  } catch (error) {}
+  } catch (error) {
+    throw error
+  }
 }
 
 const updateFlashcard = async (req, res) => {
