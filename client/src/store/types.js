@@ -9,3 +9,5 @@ export const GET_ALL_DECKS = 'get_all_decks'
 
 export const SIGNUP_FORM = 'signup_form'
 export const SUBMIT_SIGNUP = 'submit_signup'
+
+export const LOGIN_FORM = 'login_form'
