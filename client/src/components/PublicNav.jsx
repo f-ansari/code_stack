@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 const PublicNav = (props) => {
   return (
     <div>
-      <NavLink to="/login">
+      <NavLink to="/login" {...props}>
         <button>Login</button>
       </NavLink>
       <NavLink to="/register">

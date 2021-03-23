@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
-const LoginForm = () => {
+const LoginForm = (props) => {
+  console.log(props)
   const [handle, setHandle] = useState('')
   const [password, setPassword] = useState('')
 
@@ -25,7 +26,7 @@ const LoginForm = () => {
         />
         <button color="black" type="submit">
             Submit
-          </button>
+        </button>
       </form>
     </div>
   )

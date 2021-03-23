@@ -105,7 +105,13 @@ function App() {
           />
           <Route
             path="/login"
-            component={(props) => <LoginForm {...props} />}
+            component={(props) => (
+              <LoginForm
+                {...props}
+                currentUser={state.currentUser}
+                authenticated={state.authenticated}
+              />
+            )}
           />
           <Route
             path="/register"
