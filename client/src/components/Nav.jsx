@@ -8,7 +8,7 @@ const Nav = (props) => {
   return props.authenticated ? (
     <AuthenticatedNav logOut={props.logOut} currentUser={props.currentUser} />
   ) : (
-    <PublicNav />
+    <PublicNav {...props}/>
   )
 }
 
