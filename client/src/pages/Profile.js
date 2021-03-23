@@ -59,10 +59,6 @@ const Profile = (props) => {
   }
 
   const renderProfileButton = () => {
-    // SWITCH statement
-    // render createDeck btn if selectedUser matches currentUser
-    // render follow btn if selectedUser does not match currentUser & checkFollowing is false
-    // render unfollow btn is selectedUser does not match currentUser & checkFollowing is true
     switch (true) {
       case currentUser && currentUser.handle === selectedUser.handle:
         return <button>+ Create Deck</button>
