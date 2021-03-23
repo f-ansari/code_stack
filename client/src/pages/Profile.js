@@ -48,9 +48,15 @@ const Profile = (props) => {
     // fetch profile from db using selectedUser.id or selectedUser.handle??
     // TODO: to fetch decks with user, we would need to update the getProfile controller
     try {
-      const res = await axios.get(`${BASE_URL}/users/Alisa.Gaylord35`)
+      const res = await axios.get(
+        `${BASE_URL}/users/${props.match.params.handle}`
+      )
       console.log(res)
-      // appDispatch({ type: SET_SELECTED_USER, payload: res.data })
+      if (!selectedUser && res.data[0]) {
+        appDispatch({ type: SET_SELECTED_USER, payload: res.data[0] })
+      } else if (selectedUser && selectedUser.handle !== res.data[0].handle) {
+        appDispatch({ type: SET_SELECTED_USER, payload: res.data[0] })
+      }
     } catch (error) {
       console.log(error)
     }
@@ -98,11 +104,11 @@ const Profile = (props) => {
     props.history.push(`/deck/${deckId}`)
   }
 
+  // console.log(selectedUser)
   // fill profile will props.match.params.handle on mount
   useEffect(() => {
     getProfile()
-    // getDecksByHandle()
-  }, [])
+  }, [selectedUser, getProfile])
 
   return (
     <div>
