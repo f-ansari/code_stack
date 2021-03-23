@@ -1,6 +1,5 @@
 const { User, Deck } = require('../models')
 const { HashPassword } = require('../middleware')
-const { deleteDecks } = require('./DeckController')
 
 const getOneUser = async (req, res) => {
   try {
