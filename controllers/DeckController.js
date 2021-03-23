@@ -14,6 +14,16 @@ const getOneDecks = async (req, res) =>{
     }   
 }
 
+const getAllDecks = async (req, res) =>{
+    try{
+        const deckId= parseInt(req.params.deck_Id)
+        const deck = await Deck.findAll(deckId)
+        res.send(deck)
+    } catch (error){
+        throw error
+    }
+}
+
 const createDecks = async (req, res) =>{
     try{
         let user_Id= parseInt(req.params.user_Id)
@@ -52,5 +62,6 @@ module.exports= {
     getOneDecks,
     createDecks,
     deleteDecks,
-    updateDecks
+    updateDecks,
+    getAllDecks
 }
