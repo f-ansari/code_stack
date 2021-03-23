@@ -6,3 +6,6 @@ export const SET_CURRENT_USER = 'set_current_user'
 export const GET_DECKS_BY_HANDLE = 'get_decks_by_handle'
 export const GET_FRIENDS_DECKS = 'get_friends_decks'
 export const GET_ALL_DECKS = 'get_all_decks'
+
+export const SIGNUP_FORM = 'signup_form'
+export const SUBMIT_SIGNUP = 'submit_signup'

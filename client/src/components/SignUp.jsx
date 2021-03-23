@@ -1,22 +1,15 @@
 import React, { useReducer } from 'react'
 import { NavLink } from 'react-router-dom'
-import {
-  // TODO add these types of store
-  SIGNUP_FORM,
-  SUBMIT_SIGNUP
-} from '../store/types'
-import { BASE_URL } from '../globals'
-import axios from 'axios'
-
-// TODO:  add props.currentUser to PubNav component so that handle can be pre-filled in when user is routed to login post-register
+import { SIGNUP_FORM, SUBMIT_SIGNUP } from '../store/types'
+// import { BASE_URL } from '../globals'
+// import axios from 'axios'
 
 const iState = {
   register: {
     firstname: '',
     handle: '',
     email: '',
-    avatar:
-      'https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png',
+    avatar: '',
     password: ''
   },
   signupSubmitted: false
@@ -51,9 +44,9 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     try {
-      await axios.post(`${BASE_URL}/auth/register`, state.register)
+      // await axios.post(`${BASE_URL}/auth/register`, state.register)
       dispatch({ type: SUBMIT_SIGNUP, payload: true })
-      // history.push('/login') // ! should we route user to login page once register form is submitted. Confirmation Message?
+      // history.push('/login')
     } catch (err) {
       console.log(err)
     }
