@@ -7,8 +7,8 @@ import {
   DECK_FORM,
   SUBMIT_DECK_FORM
 } from '../store/types'
-//import { BASE_URL } from '../globals'
-// import axios from 'axios'
+import { BASE_URL } from '../globals'
+import axios from 'axios'
 
 // useReduce handles DeckForm state
 const iState = {
@@ -47,8 +47,8 @@ const Profile = (props) => {
     // fetch profile from db using selectedUser.id or selectedUser.handle??
     // TODO: to fetch decks with user, we would need to update the getProfile controller
     try {
-      // const res = await axios.get(`${BASE_URL}/${props.match.params.handle}`)
-      // dispatch({ type: SET_SELECTED_USER, payload: res.data })
+      const res = await axios.get(`${BASE_URL}/${props.match.params.handle}`)
+      dispatch({ type: SET_SELECTED_USER, payload: res.data })
     } catch (error) {
       console.log(error)
     }

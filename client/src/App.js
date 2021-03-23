@@ -104,14 +104,14 @@ function App() {
               />
             )}
           />
-          {/* <Route
+          <Route
             path="/deck/:deckId"
             component={(props) => <Deck {...props} />}
           />
           <Route
             path="/flashcard/:flashcardId"
             component={(props) => <Flashcard {...props} />}
-          /> */}
+          />
           <Route
             path="/login"
             component={(props) => (
