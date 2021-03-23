@@ -1,6 +1,6 @@
 const Router = require('express').Router()
 const controller = require('../controllers/DeckController')
-
+const { StripHeaders, VerifyToken } = require('../middleware')
 
 
 Router.post('/:user_Id', controller.createDecks)
