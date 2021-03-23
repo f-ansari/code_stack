@@ -38,11 +38,15 @@ const Deck = (props) => {
         alt={`avatar for ${selectedUser ? selectedUser.handle : null}`}
       />
       <h1>Deck</h1>
-      {flashcards.map((flashcard) => (
-        <div onClick={() => redirectToFlashcardPage(flashcard.id)}>
-          <h3>{flashcard.title}</h3>
-        </div>
-      ))}
+      {flashcards.length ? (
+        flashcards.map((flashcard) => (
+          <div onClick={() => redirectToFlashcardPage(flashcard.id)}>
+            <h3>{flashcard.title}</h3>
+          </div>
+        ))
+      ) : (
+        <div>You don't have any decks yet!</div>
+      )}
     </div>
   )
 }
