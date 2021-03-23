@@ -5,7 +5,8 @@ import {
   SET_SELECTED_DECK,
   SET_SELECTED_USER,
   DECK_FORM,
-  SUBMIT_DECK_FORM
+  SUBMIT_DECK_FORM,
+  GET_DECKS_BY_HANDLE
 } from '../store/types'
 import { BASE_URL } from '../globals'
 import axios from 'axios'
@@ -40,17 +41,28 @@ const Profile = (props) => {
     selectedUser,
     selectedDeck,
     decksByHandle,
-    dispatch
+    appDispatch
   } = props
 
   const getProfile = async () => {
     // fetch profile from db using selectedUser.id or selectedUser.handle??
     // TODO: to fetch decks with user, we would need to update the getProfile controller
     try {
-      const res = await axios.get(`${BASE_URL}/${props.match.params.handle}`)
-      dispatch({ type: SET_SELECTED_USER, payload: res.data })
+      const res = await axios.get(`${BASE_URL}/users/Alisa.Gaylord35`)
+      console.log(res)
+      // appDispatch({ type: SET_SELECTED_USER, payload: res.data })
     } catch (error) {
       console.log(error)
+    }
+  }
+
+  const getDecksByHandle = async () => {
+    // get decks by handle
+    try {
+      // const res = await axios.get(`${BASE_URL}/users/${/*controller for getDecksByHandle*/}`)
+      // appDispatch({ type: GET_DECKS_BY_HANDLE, payload: res.data })
+    } catch (error) {
+      throw error
     }
   }
 
@@ -82,24 +94,25 @@ const Profile = (props) => {
 
   // route user to deck page to view deck details
   const targetDeck = (deckId) => {
-    dispatch({ type: SET_SELECTED_DECK, payload: deckId })
-    //props.params.history.push(`/deck/${deckId}`)
+    appDispatch({ type: SET_SELECTED_DECK, payload: deckId })
+    props.history.push(`/deck/${deckId}`)
   }
 
   // fill profile will props.match.params.handle on mount
   useEffect(() => {
     getProfile()
-  }, [props.match.params.handle])
+    // getDecksByHandle()
+  }, [])
 
   return (
     <div>
       <h1>Profile: {selectedUser ? selectedUser.handle : null}</h1>
-      {renderProfileButton}
+      {/* {renderProfileButton} */}
       <img
         src={selectedUser ? selectedUser.avatarUrl : null}
         alt={`avatar for ${selectedUser ? selectedUser.handle : null}`}
       />
-      <div>{renderDecksByHandle}</div>
+      {/* <div>{renderDecksByHandle}</div> */}
     </div>
   )
 }

@@ -92,7 +92,7 @@ function App() {
             component={(props) => <HomePage {...props} />}
           />
           <Route
-            path="/user/:userhandle"
+            path="/user/:handle"
             component={(props) => (
               <Profile
                 {...props}
@@ -100,7 +100,7 @@ function App() {
                 selectedUser={state.selectedUser}
                 selectedDeck={state.selectedDeck}
                 decksByHandle={state.decksByHandle}
-                dispatch={dispatch}
+                appDispatch={dispatch}
               />
             )}
           />
