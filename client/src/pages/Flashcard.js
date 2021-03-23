@@ -2,16 +2,13 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { BASE_URL } from '../globals'
 
-const Flashcard = () => {
-  // const[notes, setnotes]=useState('')
-  // const[language, setlanguge] =useState('')
-  // const[codeBlock, setCodeBlock]= useState('')
-  // const[title, settitle]= useState('')
+const Flashcard = (props) => {
   const [getOneCard, setGetOneCard]=useState('')
+  const { flashcardId }= props.match.params
 
   const getOneCard= async () =>{
     try{
-      const res = await axios.get(`${BASE_URL}/flashcard/one/${deckId}`)
+      const res = await axios.get(`${BASE_URL}/flashcards/${flashcardId}`)
       setGetOneCard(res.data)
     } catch (error){
       console.log(error)
@@ -19,10 +16,8 @@ const Flashcard = () => {
   }
 
 useEffect(()=>{
-
-},[])
-
-
+getOneCard()
+},[flashcardId])
 
 
 
@@ -32,9 +27,9 @@ useEffect(()=>{
     <div>
       <h1>{props.title}</h1>
       <p>{props.codeBlock}</p>
-      <p>{props.noted}</p>
+      <p>{props.notes}</p>
       <p>{props.language}</p>
-      <button>Back to Flashcard</button>
+      <button>Back to Deck</button>
     </div>
   )}
 
