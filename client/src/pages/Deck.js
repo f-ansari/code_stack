@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 
 const Deck = (props) => {
-  let flashcards = ['Classes', 'Functions', 'HOF']
+  let flashcards = [
+    { title: 'Classes', id: 1 },
+    { title: 'Functions', id: 2 },
+    { title: 'HOF', id: 3 }
+  ]
   let selectedUser = { handle: 'luke', avatarUrl: 'url' }
   let currentUser = { handle: 'luke' }
   const renderProfileButton = () => {
@@ -19,6 +24,11 @@ const Deck = (props) => {
 
   // ^^^ SHOULD BE PASSED IN AS PROPS, HARD CODED FOR DEMO
 
+  const history = useHistory()
+  const redirectToFlashcardPage = (id) => {
+    history.push(`/flashcard/${id}`)
+  }
+
   return (
     <div>
       <h1>Profile: {selectedUser ? selectedUser.handle : null}</h1>
@@ -28,11 +38,15 @@ const Deck = (props) => {
         alt={`avatar for ${selectedUser ? selectedUser.handle : null}`}
       />
       <h1>Deck</h1>
-      {flashcards.map((flashcard) => (
-        <div>
-          <h3>{flashcard}</h3>
-        </div>
-      ))}
+      {flashcards.length ? (
+        flashcards.map((flashcard) => (
+          <div onClick={() => redirectToFlashcardPage(flashcard.id)}>
+            <h3>{flashcard.title}</h3>
+          </div>
+        ))
+      ) : (
+        <div>You don't have any decks yet!</div>
+      )}
     </div>
   )
 }
