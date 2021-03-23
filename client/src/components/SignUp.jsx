@@ -1,14 +1,8 @@
 import React, { useReducer } from 'react'
 import { NavLink } from 'react-router-dom'
-import {
-  // TODO add these types of store
-  SIGNUP_FORM,
-  SUBMIT_SIGNUP
-} from '../store/types'
+import { SIGNUP_FORM, SUBMIT_SIGNUP } from '../store/types'
 import { BASE_URL } from '../globals'
 import axios from 'axios'
-
-// TODO:  add props.currentUser to PubNav component so that handle can be pre-filled in when user is routed to login post-register
 
 const iState = {
   register: {
