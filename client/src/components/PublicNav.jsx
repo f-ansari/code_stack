@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
-const PublicNav = (props) => {
+const PublicNav = () => {
   return (
     <div>
-      <NavLink to="/login" {...props}>
+      <NavLink to="/login">
         <button>Login</button>
       </NavLink>
       <NavLink to="/register">
