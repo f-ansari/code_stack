@@ -93,16 +93,25 @@ function App() {
           />
           <Route
             path="/user/:userhandle"
-            component={(props) => <Profile {...props} />}
+            component={(props) => (
+              <Profile
+                {...props}
+                currentUser={state.currentUser}
+                selectedUser={state.selectedUser}
+                selectedDeck={state.selectedDeck}
+                decksByHandle={state.decksByHandle}
+                dispatch={dispatch}
+              />
+            )}
           />
-          <Route
+          {/* <Route
             path="/deck/:deckId"
             component={(props) => <Deck {...props} />}
           />
           <Route
             path="/flashcard/:flashcardId"
             component={(props) => <Flashcard {...props} />}
-          />
+          /> */}
           <Route
             path="/login"
             component={(props) => (
