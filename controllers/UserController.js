@@ -3,7 +3,7 @@ const { HashPassword } = require('../middleware')
 
 const getOneUser = async (req, res) => {
   try {
-    let handle = parseInt(req.params.handle)
+    let handle = req.params.handle
     const user = await User.findAll({
       where: { handle: handle },
       include: [{ model: Deck, attributes: ['title', 'likeCount'] }]
