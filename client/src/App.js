@@ -21,11 +21,11 @@ import './App.css'
 
 const iState = {
   authenticated: false,
-  allDecks: '',
+  //allDecks: '',
   selectedUser: '',
   selectedDeck: [],
   decksByHandle: [],
-  allFriendsDecks: [],
+  //allFriendsDecks: [],
   currentUser: {}
 }
 
