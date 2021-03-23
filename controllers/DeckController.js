@@ -6,7 +6,15 @@ const getOneDecks = async (req, res) => {
   try {
     const deckId = parseInt(req.params.deck_Id)
     console.log(req.query)
-    const deck = await Deck.findByPk(deckId)
+    const deck = await Deck.findAll({
+      where: { id: deckId },
+      include: [
+        {
+          model: Flashcard,
+          attributes: ['title', 'codeBlock', 'language', 'notes']
+        }
+      ]
+    })
     res.send(deck)
   } catch (error) {
     console.log(error)
