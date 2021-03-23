@@ -58,7 +58,7 @@ const Profile = (props) => {
 
   return (
     <div>
-      <h1>Profile</h1>
+      <h1>Profile: {selectedUser ? selectedUser.handle : null}</h1>
       {switchButton}
       <img
         src={currentUser ? currentUser.avatarUrl : null}
