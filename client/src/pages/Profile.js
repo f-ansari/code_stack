@@ -25,13 +25,10 @@ const reducer = (state, action) => {
     case DECK_FORM:
       return {
         ...state,
-        register: {
-          ...state.register,
-          [action.payload.name]: action.payload.value
-        }
+        deckForm: action.payload
       }
     case SUBMIT_DECK_FORM:
-      return { ...iState, deckSubmitted: action.payload }
+      return { ...iState, deckFormSubmitted: action.payload }
     case SELECT_CREATE:
       return { ...iState, clickedCreate: action.payload }
     default:
@@ -67,7 +64,7 @@ const Profile = (props) => {
 
   const renderProfileButton = () => {
     switch (true) {
-      case currentUser && currentUser.handle === selectedUser.handle:
+      case currentUser && currentUser.handle !== selectedUser.handle:
         return (
           <div>
             {state.clickedCreate && renderDeckForm()}
@@ -101,13 +98,22 @@ const Profile = (props) => {
     props.history.push(`/deck/${deckId}`)
   }
 
+  const handleDeckFormSubmit = async (e) => {
+    try {
+      const res = await axios.post(
+        `${BASE_URL}/decks/${state.currentUser.id}`,
+        state.deckForm
+      )
+      console.log(res)
+      dispatch({ type: SUBMIT_DECK_FORM, payload: true })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const renderDeckForm = () => {
     return (
-      <form
-        onSubmit={(event) =>
-          dispatch({ type: DECK_FORM, payload: event.target.value })
-        }
-      >
+      <form onSubmit={(event) => handleDeckFormSubmit(event)}>
         <input
           name="deckForm"
           placeholder="Create a new deck"
