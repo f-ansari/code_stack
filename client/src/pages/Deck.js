@@ -32,7 +32,7 @@ const Deck = (props) => {
   console.log('1st props', props)
 
   //this is suppose to get the flashcards by deckId, however it is not working
-  //in insomnia
+  //in insomnia...sorry i intruded :)
   const getFlashcardsByUsersDeck = async () => {
     try {
       const res = await axios.get(
