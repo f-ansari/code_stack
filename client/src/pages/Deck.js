@@ -100,7 +100,7 @@ const Deck = (props) => {
 
   useEffect(() => {
     getFlashcardsByDeck()
-  }, [])
+  }, [deckTitle])
 
   return (
     <div>
@@ -126,11 +126,15 @@ const Deck = (props) => {
                 onChange={(e) => updateTitleState(e)}
               />
               <input type="submit" value="Submit" />
+              <button onClick={toggleEdit}>Cancel</button>
             </form>
           ) : (
             <div>
               <h1>{deckTitle}</h1>
               <button onClick={toggleEdit}>Edit</button>
+              <button>
+                <a href={`/user/${selectedUser.handle}`}>Return to profile</a>
+              </button>
             </div>
           )}
 
