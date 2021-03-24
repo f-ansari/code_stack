@@ -52,22 +52,25 @@ const Deck = (props) => {
 
   const history = useHistory()
 
-  const redirectToFlashcardPage = async (id) => {
+  // FUNCTIONS TO HANDLE FLASHCARD SELECTION
+
+  const handleFlashcardClick = (id) => {
+    setFlashcardState(id)
+    redirectToFlashcardPage(id)
+  }
+
+  const redirectToFlashcardPage = (id) => {
+    history.push(`/flashcard/${id}`)
+  }
+
+  const setFlashcardState = async (id) => {
     const res = await axios.get(`${BASE_URL}/flashcards/${id}`)
     console.log(res.data)
-    // props.dispatch({ type: SET_SELECTED_FLASHCARD, payload: res.data })
-    // history.push(`/flashcard/${id}`)
+    props.dispatch({ type: SET_SELECTED_FLASHCARD, payload: res.data })
   }
 
   const toggleEdit = () => {
     setEditing(!isEditing)
-  }
-
-  const submitUpdate = async () => {
-    await axios.put(`${BASE_URL}/decks/${props.match.params.deckId}`, {
-      title: deckTitle
-    })
-    toggleEdit()
   }
 
   const getFlashcardsByDeck = async () => {
@@ -76,9 +79,20 @@ const Deck = (props) => {
     setFlashcards(response.data)
   }
 
+  //FUNCTIONS TO UPDATE DECK TITLE
+
+  const submitUpdate = async () => {
+    await axios.put(`${BASE_URL}/decks/${props.match.params.deckId}`, {
+      title: deckTitle
+    })
+    toggleEdit()
+  }
+
   const updateTitleState = (e) => {
     setTitle(e.target.value)
   }
+
+  //USE EFFECT
 
   useEffect(() => {
     getFlashcardsByDeck()
@@ -111,7 +125,7 @@ const Deck = (props) => {
       <p>Likes: {likeCount}</p>
       {flashcards.length ? (
         flashcards.map((flashcard) => (
-          <div onClick={() => redirectToFlashcardPage(flashcard.id)}>
+          <div onClick={() => handleFlashcardClick(flashcard.id)}>
             <h3>{flashcard.title}</h3>
           </div>
         ))
