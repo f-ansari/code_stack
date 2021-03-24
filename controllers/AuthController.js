@@ -42,7 +42,15 @@ const Register = async (req, res) => {
   }
 }
 
+const GetCurrentUser = async (req, res) => {
+  try {
+    res.send(res.locals.token)
+  } catch (error) {
+    throw error
+  }
+}
 module.exports = {
   Login,
-  Register
+  Register,
+  GetCurrentUser
 }
