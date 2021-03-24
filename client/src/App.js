@@ -63,11 +63,11 @@ function App() {
   const checkStoredToken = async () => {
     let token = localStorage.getItem('token')
     if (token) {
-      const res = await axios.post(`${BASE_URL}/auth/login`)
+      const res = await axios.post(`${BASE_URL}/auth/session`)
       dispatch({ type: SET_CURRENT_USER, payload: res.data })
 
       dispatch({ type: SET_AUTHENTICATED, payload: true })
-      history.push('/feed') //route to profile
+      //history.push('/feed') //route to profile
     }
   }
 
@@ -155,7 +155,7 @@ function App() {
                 {...props}
                 currentUser={state.currentUser}
                 authenticated={state.authenticated}
-                dispatch={dispatch}
+                appDispatch={dispatch}
               />
             )}
           />
