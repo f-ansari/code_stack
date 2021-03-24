@@ -49,7 +49,7 @@ const Deck = (props) => {
 
   const getFlashcardsByDeck = async () => {
     const response = await axios.get(
-      `${BASE_URL}/flashcards/deck/${props.selectedDeck}`
+      `${BASE_URL}/flashcards/deck/${props.selectedDeck.id}`
     )
     setFlashcards(response.data)
   }
