@@ -130,9 +130,6 @@ const Profile = (props) => {
     )
   }
 
-  // console.log(selectedUser)
-
-  // fill profile will props.match.params.handle on mount
   useEffect(() => {
     getProfile()
   }, [selectedUser, getProfile])

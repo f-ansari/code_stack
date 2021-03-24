@@ -20,7 +20,7 @@ import {
   GET_ALL_DECKS,
   SET_CURRENT_USER
 } from './store/types'
-import './App.css'
+import './style/App.css'
 
 const iState = {
   authenticated: false,
@@ -130,6 +130,7 @@ function App() {
                 {...props}
                 dispatch={dispatch}
                 selectedDeck={state.selectedDeck}
+                selectedUser={state.selectedUser}
               />
             )}
           />
@@ -138,6 +139,7 @@ function App() {
             component={(props) => (
               <Flashcard
                 {...props}
+                selectedUser={state.selectedUser}
                 selectedFlashcard={state.selectedFlashcard}
               />
             )}
