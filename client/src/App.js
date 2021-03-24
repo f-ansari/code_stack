@@ -20,7 +20,7 @@ import {
   GET_ALL_DECKS,
   SET_CURRENT_USER
 } from './store/types'
-import './App.css'
+import './style/App.css'
 
 const iState = {
   authenticated: false,
