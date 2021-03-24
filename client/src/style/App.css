@@ -12,13 +12,14 @@
 }
 
 .public-button {
+  font-family: 'Press Start 2P', cursive;
   background-color: #c13aa6;
   border: none;
   color: white;
-  padding: 8px 16px;
+  padding: 8px 20px 8px 20px;
   text-align: center;
-  font-size: 16px;
-  margin: 2px 0 1px 2px;
+  font-size: 12px;
+  margin: 2px 5px 2px 2px;
   opacity: 0.6;
   transition: 0.3s;
   display: inline-block;
@@ -26,6 +27,6 @@
   cursor: pointer;
 }
 
-.public-button {
+.public-button:hover {
   opacity: 1;
 }

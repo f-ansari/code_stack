@@ -7,7 +7,7 @@ const AuthenticatedNav = (props) => {
     <div>
       AuthNav
       {/* <NavLink to="/"> */}
-      <button onClick={() => props.logOut()}>Logout</button>
+      <button className="public-button" onClick={() => props.logOut()}>Logout</button>
       {/* </NavLink> */}
     </div>
   )
