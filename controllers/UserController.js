@@ -7,7 +7,7 @@ const getOneUser = async (req, res) => {
     let handle = req.params.handle
     const user = await User.findOne({
       where: { handle: handle },
-      include: [{ model: Deck, attributes: ['title', 'likeCount'] }]
+      include: [{ model: Deck, attributes: ['id', 'title', 'likeCount'] }]
     }) //have include clause to include decks also
     res.send(user)
   } catch (error) {
