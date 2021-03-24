@@ -15,3 +15,4 @@ export const RESET_LOGIN = 'RESET_LOGIN'
 
 export const DECK_FORM = 'deck_form'
 export const SUBMIT_DECK_FORM = 'submited_deck_form'
+export const SELECT_CREATE = 'select_create'
