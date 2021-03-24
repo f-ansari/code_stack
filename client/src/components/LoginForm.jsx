@@ -1,7 +1,8 @@
 import React, { useState, useReducer } from 'react'
 import { useHistory } from 'react-router-dom'
 import { LOGIN_FORM, RESET_LOGIN, SET_AUTHENTICATED, SET_CURRENT_USER } from '../store/types'
-// import axios from 'axios'
+import axios from 'axios'
+import {BASE_URL} from '../globals'
 
 const iState = {
   login: {
