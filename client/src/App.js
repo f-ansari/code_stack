@@ -97,11 +97,13 @@ function App() {
 
   return (
     <div className="App">
-      <Nav
-        authenticated={state.authenticated}
-        currentUser={state.currentUser}
-        logOut={logOut}
-      />
+      <header className="nav-bar">
+        <Nav
+          authenticated={state.authenticated}
+          currentUser={state.currentUser}
+          logOut={logOut}
+        />
+      </header>
 
       <main>
         <Switch>
