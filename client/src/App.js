@@ -143,6 +143,7 @@ function App() {
             component={(props) => (
               <CreateFlashcard
                 {...props}
+                currentUser={state.currentUser}
                 selectedUser={state.selectedUser}
                 selectedFlashcard={state.selectedFlashcard}
               />
