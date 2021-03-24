@@ -2,9 +2,10 @@ const { User, Deck } = require('../models')
 const { HashPassword } = require('../middleware')
 
 const getOneUser = async (req, res) => {
+  console.log(req)
   try {
     let handle = req.params.handle
-    const user = await User.findAll({
+    const user = await User.findOne({
       where: { handle: handle },
       include: [{ model: Deck, attributes: ['title', 'likeCount'] }]
     }) //have include clause to include decks also

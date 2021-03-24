@@ -52,14 +52,16 @@ const Profile = (props) => {
         `${BASE_URL}/users/${props.match.params.handle}`
       )
       console.log(res)
-      if (!selectedUser && res.data[0]) {
-        appDispatch({ type: SET_SELECTED_USER, payload: res.data[0] })
-      } else if (selectedUser && selectedUser.handle !== res.data[0].handle) {
-        appDispatch({ type: SET_SELECTED_USER, payload: res.data[0] })
+      if (!selectedUser && res.data) {
+        appDispatch({ type: SET_SELECTED_USER, payload: res.data })
+        appDispatch({ type: GET_DECKS_BY_HANDLE, payload: res.data.Decks })
+      } else if (selectedUser && selectedUser.handle !== res.data.handle) {
+        appDispatch({ type: SET_SELECTED_USER, payload: res.data })
       }
     } catch (error) {
       console.log(error)
     }
+    console.log(decksByHandle)
   }
 
   const getDecksByHandle = async () => {
@@ -108,17 +110,18 @@ const Profile = (props) => {
   // fill profile will props.match.params.handle on mount
   useEffect(() => {
     getProfile()
+    // renderDecksByHandle()
   }, [selectedUser, getProfile])
 
   return (
     <div>
-      <h1>Profile: {selectedUser ? selectedUser.handle : null}</h1>
+      <h1>Profile: {selectedUser ? selectedUser.handle : `Loading...`}</h1>
       {/* {renderProfileButton} */}
       <img
         src={selectedUser ? selectedUser.avatarUrl : null}
         alt={`avatar for ${selectedUser ? selectedUser.handle : null}`}
       />
-      {/* <div>{renderDecksByHandle}</div> */}
+      <div>{renderDecksByHandle()}</div>
     </div>
   )
 }
