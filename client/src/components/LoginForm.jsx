@@ -1,6 +1,6 @@
 import React, { useState, useReducer } from 'react'
 import { useHistory } from 'react-router-dom'
-import { LOGIN_FORM, RESET_LOGIN, SET_AUTHENTICATED } from '../store/types'
+import { LOGIN_FORM, RESET_LOGIN, SET_AUTHENTICATED, SET_CURRENT_USER } from '../store/types'
 // import axios from 'axios'
 
 const iState = {
@@ -29,19 +29,19 @@ const LoginForm = (props) => {
   const history = useHistory()
 
 const redirectToProfiles = () => {
-    history.push("/user/:handle")
+    history.push(`/user/${props.currentUser.handle}`)
 }
 
   
   const submitLogin = async (e) => {
     try {
       e.preventDefault()
-      // const res = await axios.post(`${BASE_URL}/auth/login`, state.login)
-      // localStorage.setItem('token', res.data.token)
+      const res = await axios.post(`${BASE_URL}/auth/login`, state.login)
+      localStorage.setItem('token', res.data.token)
       dispatch({ type: RESET_LOGIN })
-      // props.currentUser(res.data.user)
-      props.dispatch({ type: SET_AUTHENTICATED, payload: true })
-      // history.push('/user/`${state.handle}`')
+      props.appDispatch({type: SET_CURRENT_USER, payload: res.data.user})
+      props.appDispatch({ type: SET_AUTHENTICATED, payload: true })
+      redirectToProfiles()
     } catch (err) {
       console.log('Error: loginForm in submitLogin()')
     }
@@ -74,7 +74,7 @@ const redirectToProfiles = () => {
           onChange = {handleLoginChange}
           placeholder="jane_doe"
         />
-        <button onClick={() => redirectToProfiles("/user/:handle")} color="black" type="submit">
+        <button  color="black" type="submit">
             Submit
         </button>
       </form>
