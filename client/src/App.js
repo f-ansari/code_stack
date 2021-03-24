@@ -64,10 +64,12 @@ function App() {
     let token = localStorage.getItem('token')
     if (token) {
       const res = await axios.get(`${BASE_URL}/auth/session`)
+      console.log(res.data)
       dispatch({ type: SET_CURRENT_USER, payload: res.data })
-
+      console.log(state.currentUser)
       dispatch({ type: SET_AUTHENTICATED, payload: true })
-      //history.push('/feed') //route to profile
+      console.log(state.authenticated)
+      history.push(`/user/${state.currentUser.handle}`) //route to profile
     }
   }
 
