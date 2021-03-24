@@ -37,17 +37,9 @@ const reducer = (state, action) => {
 
 const Profile = (props) => {
   const [state, action] = useReducer(iState, reducer)
-  const {
-    currentUser,
-    selectedUser,
-    selectedDeck,
-    decksByHandle,
-    appDispatch
-  } = props
+  const { currentUser, selectedUser, decksByHandle, appDispatch } = props
 
   const getProfile = async () => {
-    // fetch profile from db using selectedUser.id or selectedUser.handle??
-    // TODO: to fetch decks with user, we would need to update the getProfile controller
     try {
       const res = await axios.get(
         `${BASE_URL}/users/${props.match.params.handle}`
@@ -61,17 +53,6 @@ const Profile = (props) => {
       }
     } catch (error) {
       console.log(error)
-    }
-  }
-
-  //we do not need getDecksByHandle(). axios above is calling deck and changing state of deckByHandle
-  const getDecksByHandle = async () => {
-    // get decks by handle
-    try {
-      // const res = await axios.get(`${BASE_URL}/users/${/*controller for getDecksByHandle*/}`)
-      // appDispatch({ type: GET_DECKS_BY_HANDLE, payload: res.data })
-    } catch (error) {
-      throw error
     }
   }
 
@@ -104,17 +85,14 @@ const Profile = (props) => {
     props.history.push(`/deck/${deckId}`)
   }
 
-  // console.log(selectedUser)
-  // fill profile will props.match.params.handle on mount
   useEffect(() => {
     getProfile()
-    // renderDecksByHandle()
   }, [selectedUser, getProfile])
 
   return (
     <div>
       <h1>Profile: {selectedUser ? selectedUser.handle : `Loading...`}</h1>
-      {selectedUser ? renderProfileButton : null}
+      {selectedUser ? renderProfileButton() : null}
       <img
         src={selectedUser ? selectedUser.avatarUrl : null}
         alt={`avatar for ${selectedUser ? selectedUser.handle : null}`}
