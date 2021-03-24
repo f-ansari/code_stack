@@ -29,20 +29,16 @@ const LoginForm = (props) => {
   const [state, dispatch] = useReducer(reducer, iState)
   const history = useHistory()
 
-const redirectToProfiles = () => {
-    history.push(`/user/${props.currentUser.handle}`)
-}
-
   
   const submitLogin = async (e) => {
+    e.preventDefault()
     try {
-      e.preventDefault()
       const res = await axios.post(`${BASE_URL}/auth/login`, state.login)
       localStorage.setItem('token', res.data.token)
       dispatch({ type: RESET_LOGIN })
       props.appDispatch({type: SET_CURRENT_USER, payload: res.data.user})
       props.appDispatch({ type: SET_AUTHENTICATED, payload: true })
-      redirectToProfiles()
+      history.push(`/user/${res.data.user.handle}`)
     } catch (err) {
       console.log('Error: loginForm in submitLogin()')
     }
