@@ -1,35 +1,43 @@
-// import React, { useState, useEffect } from 'react'
-// import axios from 'axios'
-// import { BASE_URL } from '../globals'
+import React, { useState, useEffect } from 'react'
 
 const Flashcard = (props) => {
-  //   const Flashcard = (props) => {
-  //     const [getOneCard, setGetOneCard] = useState({})
-  //     const { flashcardId } = props.match.params.id
+  console.log('props', props)
 
-  //     const getCard = async () => {
-  //       try {
-  //         const res = await axios.get(`${BASE_URL}/flashcards/${flashcardId}`)
-  //         setGetOneCard(res.data)
-  //       } catch (error) {
-  //         console.log(error)
-  //       }
-  //     }
+  console.log('props fro App', props.selectedFlashcard)
+  console.log('props user App', props.selectedUser)
 
-  //     useEffect(() => {
-  //       getOneCard()
-  //     }, [flashcardId])
+  const { selectedUser, selectedFlashcard, selectedDeck } = props
+  console.log(selectedDeck)
 
+  const backToUsersDeck = () => {
+    try {
+      props.history.push(`/user/${selectedUser.handle}/{selecetedDeck.id}`)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    // getCard()
+  })
+  //
   return (
     <div>
-      {/* <h1>{getOneCard.title}</h1>
-      <p>{getOneCard.codeBlock}</p>
-      <p>{getOneCard.notes}</p>
-      <p>{getOneCard.language}</p> */}
-      <button>Back to Deck</button>
+      <button onClick={backToUsersDeck}>Back to Deck</button>
+      <h1>Profile: {selectedUser ? selectedUser.handle : null}</h1>
+      <img
+        src={selectedUser ? selectedUser.avatarUrl : null}
+        alt={`avatar for ${selectedUser ? selectedUser.handle : null}`}
+      />
+
+      <section>
+        <h3>Title: {selectedFlashcard.title}</h3>
+        <h4>language: {selectedFlashcard.language}</h4>
+        <pre>codeblock: "some codeblock"{selectedFlashcard.codeblock}</pre>
+        <h4>notes: {selectedFlashcard.notes}</h4>
+      </section>
     </div>
   )
-  // }
 }
 
 export default Flashcard
