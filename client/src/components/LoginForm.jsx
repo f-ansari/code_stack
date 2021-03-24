@@ -26,7 +26,11 @@ const reducer = (state, action) => {
 
 const LoginForm = (props) => {
   const [state, dispatch] = useReducer(reducer, iState)
-  // const history = useHistory()
+  const history = useHistory()
+
+const redirectToProfiles = () => {
+    history.push("/user/:handle")
+}
 
   
   const submitLogin = async (e) => {
@@ -70,7 +74,7 @@ const LoginForm = (props) => {
           onChange = {handleLoginChange}
           placeholder="jane_doe"
         />
-        <button color="black" type="submit">
+        <button onClick={() => redirectToProfiles("/user/:handle")} color="black" type="submit">
             Submit
         </button>
       </form>
