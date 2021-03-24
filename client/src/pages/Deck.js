@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import { BASE_URL } from '../globals'
-import { SET_SELECTED_FLASHCARD } from '../store/types'
+import { SET_SELECTED_FLASHCARD, SET_SELECTED_DECK } from '../store/types'
 import CreateFlashcard from '../components/CreateFlashcard'
 
 const Deck = (props) => {
-  let currentUser = { handle: 'Lloyd77' }
+  let currentUser = { handle: 'bob' }
   const renderProfileButton = () => {
     switch (true) {
       case currentUser && currentUser.handle === selectedUser.handle:
@@ -24,7 +24,7 @@ const Deck = (props) => {
 
   const [isEditing, setEditing] = useState(false)
   const [createFlashcard, setCreateFlashcard] = useState(false)
-  const [deckTitle, setTitle] = useState('')
+  const [deckTitle, setTitle] = useState(selectedDeck.title)
   const [flashcards, setFlashcards] = useState([])
 
   const history = useHistory()
@@ -41,17 +41,25 @@ const Deck = (props) => {
   }
 
   const setFlashcardState = async (id) => {
-    const res = await axios.get(`${BASE_URL}/flashcards/${id}`)
-    props.dispatch({ type: SET_SELECTED_FLASHCARD, payload: res.data })
+    try {
+      const res = await axios.get(`${BASE_URL}/flashcards/${id}`)
+      props.dispatch({ type: SET_SELECTED_FLASHCARD, payload: res.data })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   //AXIOS CALL TO POPULATE FLASHCARDS BY DECK
 
   const getFlashcardsByDeck = async () => {
-    const response = await axios.get(
-      `${BASE_URL}/flashcards/deck/${props.selectedDeck.id}`
-    )
-    setFlashcards(response.data)
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/flashcards/deck/${props.selectedDeck.id}`
+      )
+      setFlashcards(response.data)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   //FUNCTIONS TO UPDATE DECK TITLE
@@ -60,11 +68,20 @@ const Deck = (props) => {
     setEditing(!isEditing)
   }
 
-  const submitUpdate = async () => {
-    await axios.put(`${BASE_URL}/decks/${props.match.params.deckId}`, {
-      title: deckTitle
-    })
-    toggleEdit()
+  const submitUpdate = async (e) => {
+    e.preventDefault()
+    try {
+      await axios.put(`${BASE_URL}/decks/${props.match.params.deckId}`, {
+        title: deckTitle
+      })
+      props.dispatch({
+        type: SET_SELECTED_DECK,
+        payload: { ...selectedDeck, title: deckTitle }
+      })
+      toggleEdit()
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const updateTitleState = (e) => {
@@ -94,7 +111,7 @@ const Deck = (props) => {
             }`}
           />
           {isEditing ? (
-            <form onSubmit={submitUpdate}>
+            <form onSubmit={(e) => submitUpdate(e)}>
               <input
                 type="text"
                 placeholder="Enter a new title"
@@ -104,7 +121,7 @@ const Deck = (props) => {
             </form>
           ) : (
             <div>
-              <h1>{selectedDeck.title}</h1>
+              <h1>{deckTitle}</h1>
               <button onClick={toggleEdit}>Edit</button>
             </div>
           )}
