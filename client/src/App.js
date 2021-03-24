@@ -134,6 +134,7 @@ function App() {
                 selectedUser={state.selectedUser}
                 selectedFlashcard={state.selectedFlashcard}
                 currentUser={state.currentUser}
+                selectedDeck={state.selectedDeck}
               />
             )}
           />
