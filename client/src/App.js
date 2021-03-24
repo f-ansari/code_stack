@@ -5,6 +5,7 @@ import Profile from './pages/Profile'
 import Deck from './pages/Deck'
 import HomePage from './pages/HomePage'
 import Flashcard from './pages/Flashcard'
+import CreateFlashcard from './components/CreateFlashcard'
 import LoginForm from './components/LoginForm'
 import SignUp from './components/SignUp'
 import axios from 'axios'
@@ -140,6 +141,16 @@ function App() {
             path="/flashcard/:flashcardId"
             component={(props) => (
               <Flashcard
+                {...props}
+                selectedUser={state.selectedUser}
+                selectedFlashcard={state.selectedFlashcard}
+              />
+            )}
+          />
+          <Route
+            path="/create"
+            component={(props) => (
+              <CreateFlashcard
                 {...props}
                 selectedUser={state.selectedUser}
                 selectedFlashcard={state.selectedFlashcard}
