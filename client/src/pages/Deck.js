@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import { BASE_URL } from '../globals'
-import { SET_SELECTED_FLASHCARD, SET_SELECTED_DECK } from '../store/types'
+import {
+  SET_SELECTED_FLASHCARD,
+  SET_SELECTED_DECK,
+  GET_DECKS_BY_HANDLE
+} from '../store/types'
 import CreateFlashcard from '../components/CreateFlashcard'
 
 const Deck = (props) => {
@@ -20,7 +24,7 @@ const Deck = (props) => {
     }
   }
 
-  const { selectedUser, selectedDeck } = props
+  const { selectedUser, selectedDeck, decksByHandle } = props
 
   const [isEditing, setEditing] = useState(false)
   const [createFlashcard, setCreateFlashcard] = useState(false)
@@ -78,6 +82,10 @@ const Deck = (props) => {
         type: SET_SELECTED_DECK,
         payload: { ...selectedDeck, title: deckTitle }
       })
+      // props.dispatch({
+      //   type: GET_DECKS_BY_HANDLE,
+      //   payload: [...decksByHandle, (decksByHandle[2] = { title: deckTitle })]
+      // })
       toggleEdit()
     } catch (error) {
       console.log(error)
