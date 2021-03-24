@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 const Flashcard = (props) => {
   console.log('props', props)
@@ -17,10 +17,6 @@ const Flashcard = (props) => {
     }
   }
 
-  useEffect(() => {
-    // getCard()
-  })
-  //
   return (
     <div>
       <button onClick={backToUsersDeck}>Back to Deck</button>
