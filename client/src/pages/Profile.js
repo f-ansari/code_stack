@@ -92,6 +92,7 @@ const Profile = (props) => {
     ))
   }
 
+  //handled on renderDeckByHandle
   // route user to deck page to view deck details
   const targetDeck = (deckId) => {
     appDispatch({ type: SET_SELECTED_DECK, payload: deckId })
@@ -129,6 +130,9 @@ const Profile = (props) => {
     )
   }
 
+  // console.log(selectedUser)
+
+  // fill profile will props.match.params.handle on mount
   useEffect(() => {
     getProfile()
   }, [selectedUser, getProfile])
