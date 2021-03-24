@@ -7,7 +7,8 @@ import {
   SET_SELECTED_USER,
   DECK_FORM,
   SUBMIT_DECK_FORM,
-  GET_DECKS_BY_HANDLE
+  GET_DECKS_BY_HANDLE,
+  SELECT_CREATE
 } from '../store/types'
 import { BASE_URL } from '../globals'
 import axios from 'axios'
@@ -15,7 +16,8 @@ import axios from 'axios'
 // useReduce handles DeckForm state
 const iState = {
   deckForm: '',
-  deckFormSubmitted: false
+  deckFormSubmitted: false,
+  clickedCreate: false
 }
 
 const reducer = (state, action) => {
@@ -30,15 +32,18 @@ const reducer = (state, action) => {
       }
     case SUBMIT_DECK_FORM:
       return { ...iState, deckSubmitted: action.payload }
+    case SELECT_CREATE:
+      return { ...iState, clickedCreate: action.payload }
     default:
       return state
   }
 }
 
 const Profile = (props) => {
-  const [state, action] = useReducer(iState, reducer)
+  const [state, dispatch] = useReducer(reducer, iState)
   const { currentUser, selectedUser, decksByHandle, appDispatch } = props
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const getProfile = async () => {
     try {
       const res = await axios.get(
@@ -63,7 +68,18 @@ const Profile = (props) => {
   const renderProfileButton = () => {
     switch (true) {
       case currentUser && currentUser.handle === selectedUser.handle:
-        return <button>+ Create Deck</button>
+        return (
+          <div>
+            {state.clickedCreate && renderDeckForm()}
+            <button
+              onClick={() =>
+                dispatch({ type: SELECT_CREATE, payload: !state.clickedCreate })
+              }
+            >
+              {state.clickedCreate ? `Cancel` : `+ Create Deck`}
+            </button>
+          </div>
+        )
 
       default:
         return <button>Follow</button>
@@ -83,6 +99,28 @@ const Profile = (props) => {
   const targetDeck = (deckId) => {
     appDispatch({ type: SET_SELECTED_DECK, payload: deckId })
     props.history.push(`/deck/${deckId}`)
+  }
+
+  const renderDeckForm = () => {
+    return (
+      <form
+        onSubmit={(event) =>
+          dispatch({ type: DECK_FORM, payload: event.target.value })
+        }
+      >
+        <input
+          name="deckForm"
+          placeholder="Create a new deck"
+          type="text"
+          value={state.deckForm}
+          onChange={(event) =>
+            dispatch({ type: DECK_FORM, payload: event.target.value })
+          }
+        />
+
+        <input type="submit" value="Submit" />
+      </form>
+    )
   }
 
   useEffect(() => {
