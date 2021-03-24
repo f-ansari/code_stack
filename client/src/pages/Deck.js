@@ -2,13 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import { BASE_URL } from '../globals'
+import { SET_SELECTED_FLASHCARD } from '../store/types'
 
 const Deck = (props) => {
-  let flashcards = [
-    { title: 'Classes', id: 1 },
-    { title: 'Functions', id: 2 },
-    { title: 'HOF', id: 3 }
-  ]
   let likeCount = 10
   let selectedUser = { handle: 'luke', avatarUrl: 'url' }
   let currentUser = { handle: 'luke' }
@@ -25,52 +21,59 @@ const Deck = (props) => {
     }
   }
 
-  // ^^^ SHOULD BE PASSED IN AS PROPS, HARD CODED FOR DEMO
-
-  // FARYAL'S SANDBOX AREA STARTS
-
-  console.log('1st props', props)
-
-  //this is suppose to get the flashcards by deckId, however it is not working
-  //in insomnia...sorry i intruded :)
-  const getFlashcardsByUsersDeck = async () => {
-    try {
-      const res = await axios.get(
-        `${BASE_URL}/decks/view/${props.match.params.deckId}`
-      )
-      console.log('axios res', res)
-    } catch (error) {
-      throw error
-    }
-  }
-
-  useEffect(() => {
-    getFlashcardsByUsersDeck()
-  })
-
-  // FARYAL'S SANDBOX AREA ENDS
-
   const [isEditing, setEditing] = useState(false)
   const [deckTitle, setTitle] = useState('')
+  const [flashcards, setFlashcards] = useState([])
 
   const history = useHistory()
+
+  // FUNCTIONS TO HANDLE FLASHCARD SELECTION
+
+  const handleFlashcardClick = (id) => {
+    setFlashcardState(id)
+    redirectToFlashcardPage(id)
+  }
 
   const redirectToFlashcardPage = (id) => {
     history.push(`/flashcard/${id}`)
   }
 
+  const setFlashcardState = async (id) => {
+    const res = await axios.get(`${BASE_URL}/flashcards/${id}`)
+    props.dispatch({ type: SET_SELECTED_FLASHCARD, payload: res.data })
+  }
+
+  //AXIOS CALL TO POPULATE FLASHCARDS BY DECK
+
+  const getFlashcardsByDeck = async () => {
+    const response = await axios.get(
+      `${BASE_URL}/flashcards/deck/${props.selectedDeck.id}`
+    )
+    setFlashcards(response.data)
+  }
+
+  //FUNCTIONS TO UPDATE DECK TITLE
+
   const toggleEdit = () => {
     setEditing(!isEditing)
   }
 
-  const submitUpdate = () => {
-    //axios updateDeck call
+  const submitUpdate = async () => {
+    await axios.put(`${BASE_URL}/decks/${props.match.params.deckId}`, {
+      title: deckTitle
+    })
     toggleEdit()
   }
 
   const updateTitleState = (e) => {
     setTitle(e.target.value)
   }
+
+  //USE EFFECT
+
+  useEffect(() => {
+    getFlashcardsByDeck()
+  }, [])
 
   return (
     <div>
@@ -99,12 +102,12 @@ const Deck = (props) => {
       <p>Likes: {likeCount}</p>
       {flashcards.length ? (
         flashcards.map((flashcard) => (
-          <div onClick={() => redirectToFlashcardPage(flashcard.id)}>
+          <div onClick={() => handleFlashcardClick(flashcard.id)}>
             <h3>{flashcard.title}</h3>
           </div>
         ))
       ) : (
-        <div>You don't have any decks yet!</div>
+        <div>You don't have any flashcards in this deck yet!</div>
       )}
     </div>
   )
