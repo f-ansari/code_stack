@@ -119,7 +119,13 @@ const Profile = (props) => {
         src={selectedUser ? selectedUser.avatarUrl : null}
         alt={`avatar for ${selectedUser ? selectedUser.handle : null}`}
       />
-      <div>{renderDecksByHandle()}</div>
+      <div>
+        {decksByHandle.length > 0 ? (
+          renderDecksByHandle()
+        ) : (
+          <h3>No decks yet.</h3>
+        )}
+      </div>
     </div>
   )
 }
