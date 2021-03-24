@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
+import { BASE_URL } from '../globals'
+import axios from 'axios'
 
 const Deck = (props) => {
   let flashcards = [
@@ -38,8 +40,8 @@ const Deck = (props) => {
     setEditing(!isEditing)
   }
 
-  const submitUpdate = () => {
-    //axios updateDeck call
+  const submitUpdate = async () => {
+    await axios.put(`${BASE_URL}/decks/1`, { title: deckTitle })
     toggleEdit()
   }
 
