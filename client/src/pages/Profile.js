@@ -95,20 +95,17 @@ const Profile = (props) => {
   // map through all of the decks owned by selectedUser
   const renderDecksByHandle = () => {
     return decksByHandle.map((deck, idx) => (
-      <div
-        key={`${idx}`}
-        onClick={() => props.history.push(`/deck/${deck.id}`)}
-      >
+      <div key={`${idx}`} onClick={() => targetDeck(deck.id)}>
         <h3>Deck Title: {deck.title}</h3>
       </div>
     ))
   }
 
   // route user to deck page to view deck details
-  // const targetDeck = (deckId) => {
-  //   appDispatch({ type: SET_SELECTED_DECK, payload: deckId })
-  //   props.history.push(`/deck/${deckId}`)
-  // }
+  const targetDeck = (deckId) => {
+    appDispatch({ type: SET_SELECTED_DECK, payload: deckId })
+    props.history.push(`/deck/${deckId}`)
+  }
 
   // console.log(selectedUser)
   // fill profile will props.match.params.handle on mount
