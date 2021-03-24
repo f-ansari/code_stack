@@ -5,6 +5,7 @@ import Profile from './pages/Profile'
 import Deck from './pages/Deck'
 import HomePage from './pages/HomePage'
 import Flashcard from './pages/Flashcard'
+import CreateFlashcard from './components/CreateFlashcard'
 import LoginForm from './components/LoginForm'
 import SignUp from './components/SignUp'
 import axios from 'axios'
@@ -62,11 +63,11 @@ function App() {
   const checkStoredToken = async () => {
     let token = localStorage.getItem('token')
     if (token) {
-      // const res = await axios.get(`${BASE_URL}/auth/session`) for us to keep
-      // dispatch({ type: SET_CURRENT_USER, payload: res.data }) for us to keep
-      // setUser(res.data) delete later
+      const res = await axios.post(`${BASE_URL}/auth/login`)
+      dispatch({ type: SET_CURRENT_USER, payload: res.data })
+
       dispatch({ type: SET_AUTHENTICATED, payload: true })
-      // history.push('/feed') //route to profile
+      history.push('/feed') //route to profile
     }
   }
 
@@ -78,22 +79,9 @@ function App() {
     history.push('/')
   }
 
-  // const getProfile = async () => {
-  //   // fetch profile from db using selectedUser.id or selectedUser.handle??
-  //   // TODO: to fetch decks with user, we would need to update the getProfile controller
-  //   try {
-  //     const res = await axios.get(`${BASE_URL}/users/Alisa.Gaylord35`)
-  //     console.log(res)
-  //     dispatch({ type: SET_SELECTED_USER, payload: res.data[0] })
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   checkStoredToken()
-  //   // getProfile()
-  // }, [])
+  useEffect(() => {
+    checkStoredToken()
+  }, [])
 
   return (
     <div className="App">
@@ -133,13 +121,27 @@ function App() {
                 dispatch={dispatch}
                 selectedDeck={state.selectedDeck}
                 selectedUser={state.selectedUser}
+                currentUser={state.currentUser}
               />
             )}
           />
           <Route
+            exact
             path="/flashcard/:flashcardId"
             component={(props) => (
               <Flashcard
+                {...props}
+                selectedUser={state.selectedUser}
+                selectedFlashcard={state.selectedFlashcard}
+                currentUser={state.currentUser}
+                selectedDeck={state.selectedDeck}
+              />
+            )}
+          />
+          <Route
+            path="/flashcard"
+            component={(props) => (
+              <CreateFlashcard
                 {...props}
                 selectedUser={state.selectedUser}
                 selectedFlashcard={state.selectedFlashcard}
