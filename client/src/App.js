@@ -14,6 +14,7 @@ import {
   SET_AUTHENTICATED,
   SET_SELECTED_USER,
   SET_SELECTED_DECK,
+  SET_SELECTED_FLASHCARD,
   GET_DECKS_BY_HANDLE,
   GET_FRIENDS_DECKS,
   GET_ALL_DECKS,
@@ -26,6 +27,7 @@ const iState = {
   //allDecks: '',
   selectedUser: null,
   selectedDeck: [],
+  selectedFlashcard: [],
   decksByHandle: [],
   //allFriendsDecks: [],
   currentUser: {}
@@ -39,6 +41,8 @@ const reducer = (state, action) => {
       return { ...state, selectedUser: action.payload }
     case SET_SELECTED_DECK:
       return { ...state, selectedDeck: action.payload }
+    case SET_SELECTED_FLASHCARD:
+      return { ...state, selectedFlashcard: action.payload }
     case GET_DECKS_BY_HANDLE:
       return { ...state, decksByHandle: action.payload }
     case GET_FRIENDS_DECKS:
@@ -121,11 +125,22 @@ function App() {
           />
           <Route
             path="/deck/:deckId"
-            component={(props) => <Deck {...props} />}
+            component={(props) => (
+              <Deck
+                {...props}
+                dispatch={dispatch}
+                selectedDeck={state.selectedDeck}
+              />
+            )}
           />
           <Route
             path="/flashcard/:flashcardId"
-            component={(props) => <Flashcard {...props} />}
+            component={(props) => (
+              <Flashcard
+                {...props}
+                selectedFlashcard={state.selectedFlashcard}
+              />
+            )}
           />
           <Route
             path="/login"

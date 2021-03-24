@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import { BASE_URL } from '../globals'
 import axios from 'axios'
+import { BASE_URL } from '../globals'
 
 const Deck = (props) => {
   let likeCount = 10
@@ -21,6 +21,29 @@ const Deck = (props) => {
   }
 
   // ^^^ SHOULD BE PASSED IN AS PROPS, HARD CODED FOR DEMO
+
+  // FARYAL'S SANDBOX AREA STARTS
+
+  console.log('1st props', props)
+
+  //this is suppose to get the flashcards by deckId, however it is not working
+  //in insomnia...sorry i intruded :)
+  const getFlashcardsByUsersDeck = async () => {
+    try {
+      const res = await axios.get(
+        `${BASE_URL}/decks/view/${props.match.params.deckId}`
+      )
+      console.log('axios res', res)
+    } catch (error) {
+      throw error
+    }
+  }
+
+  useEffect(() => {
+    getFlashcardsByUsersDeck()
+  })
+
+  // FARYAL'S SANDBOX AREA ENDS
 
   const [isEditing, setEditing] = useState(false)
   const [deckTitle, setTitle] = useState('')
