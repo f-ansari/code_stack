@@ -21,31 +21,6 @@ const Deck = (props) => {
     }
   }
 
-  // ^^^ SHOULD BE PASSED IN AS PROPS, HARD CODED FOR DEMO
-
-  // FARYAL'S SANDBOX AREA STARTS
-
-  // console.log('1st props', props)
-
-  //this is suppose to get the flashcards by deckId, however it is not working
-  //in insomnia...sorry i intruded :)
-  // const getFlashcardsByUsersDeck = async () => {
-  //   try {
-  //     const res = await axios.get(
-  //       `${BASE_URL}/decks/view/${props.match.params.deckId}`
-  //     )
-  //     console.log('axios res', res)
-  //   } catch (error) {
-  //     throw error
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   getFlashcardsByUsersDeck()
-  // }, [])
-
-  // FARYAL'S SANDBOX AREA ENDS
-
   const [isEditing, setEditing] = useState(false)
   const [deckTitle, setTitle] = useState('')
   const [flashcards, setFlashcards] = useState([])
@@ -65,21 +40,23 @@ const Deck = (props) => {
 
   const setFlashcardState = async (id) => {
     const res = await axios.get(`${BASE_URL}/flashcards/${id}`)
-    console.log(res.data)
     props.dispatch({ type: SET_SELECTED_FLASHCARD, payload: res.data })
   }
 
-  const toggleEdit = () => {
-    setEditing(!isEditing)
-  }
+  //AXIOS CALL TO POPULATE FLASHCARDS BY DECK
 
   const getFlashcardsByDeck = async () => {
-    const response = await axios.get(`${BASE_URL}/flashcards/deck/2`)
-    console.log(response)
+    const response = await axios.get(
+      `${BASE_URL}/flashcards/deck/${props.selectedDeck.id}`
+    )
     setFlashcards(response.data)
   }
 
   //FUNCTIONS TO UPDATE DECK TITLE
+
+  const toggleEdit = () => {
+    setEditing(!isEditing)
+  }
 
   const submitUpdate = async () => {
     await axios.put(`${BASE_URL}/decks/${props.match.params.deckId}`, {
