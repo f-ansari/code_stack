@@ -1,8 +1,8 @@
 import React, { useReducer } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import { SIGNUP_FORM, SUBMIT_SIGNUP } from '../store/types'
-// import { BASE_URL } from '../globals'
-// import axios from 'axios'
+import { BASE_URL } from '../globals'
+import axios from 'axios'
 
 const iState = {
   register: {
@@ -34,6 +34,7 @@ const reducer = (state, action) => {
 
 const SignUp = () => {
   const [state, dispatch] = useReducer(reducer, iState)
+  const history = useHistory()
 
   const handleChange = (event) => {
     dispatch({
@@ -45,9 +46,9 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      // await axios.post(`${BASE_URL}/auth/register`, state.register)
+      await axios.post(`${BASE_URL}/auth/register`, state.register)
       dispatch({ type: SUBMIT_SIGNUP, payload: true })
-      // history.push('/login')
+      history.push('/login')
     } catch (err) {
       console.log(err)
     }
