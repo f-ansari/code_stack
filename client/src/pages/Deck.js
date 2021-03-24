@@ -6,9 +6,7 @@ import { SET_SELECTED_FLASHCARD } from '../store/types'
 import CreateFlashcard from '../components/CreateFlashcard'
 
 const Deck = (props) => {
-  let likeCount = 10
-  let currentUser = { handle: 'luke' }
-  const selectedUser = { handle: 'luke', avatarUrl: 'url' }
+  let currentUser = { handle: 'Lloyd77' }
   const renderProfileButton = () => {
     switch (true) {
       case currentUser && currentUser.handle === selectedUser.handle:
@@ -17,16 +15,12 @@ const Deck = (props) => {
             + Create Flashcard
           </button>
         )
-      // case currentUser &&
-      //   currentUser.handle !== selectedUser.handle &&
-      //   checkFollowing() === false:
-      //   return <button>+ Create Deck</button>
       default:
         return <button>Follow</button>
     }
   }
 
-  // const { selectedUser, selectedDeck } = props
+  const { selectedUser, selectedDeck } = props
 
   const [isEditing, setEditing] = useState(false)
   const [createFlashcard, setCreateFlashcard] = useState(false)
@@ -110,12 +104,12 @@ const Deck = (props) => {
             </form>
           ) : (
             <div>
-              <h1>Deck</h1>
+              <h1>{selectedDeck.title}</h1>
               <button onClick={toggleEdit}>Edit</button>
             </div>
           )}
 
-          <p>Likes: {likeCount}</p>
+          <p>Likes: {selectedDeck.likeCount}</p>
           {flashcards.length ? (
             flashcards.map((flashcard) => (
               <div onClick={() => handleFlashcardClick(flashcard.id)}>
@@ -123,7 +117,7 @@ const Deck = (props) => {
               </div>
             ))
           ) : (
-            <div>You don't have any flashcards in this deck yet!</div>
+            <div>There aren't any flashcards in this deck yet!</div>
           )}
         </div>
       )}
