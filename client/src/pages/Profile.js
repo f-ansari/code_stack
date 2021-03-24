@@ -1,5 +1,5 @@
 import React, { useReducer, useEffect } from 'react'
-// import DeckForm from '../components/CreateDeck'
+import DeckForm from '../components/CreateDeck'
 import {
   // TODO update store types
   SET_SELECTED_DECK,
@@ -104,6 +104,7 @@ const Profile = (props) => {
     props.history.push(`/deck/${deckId}`)
   }
 
+  // console.log(selectedUser)
   // fill profile will props.match.params.handle on mount
   useEffect(() => {
     getProfile()
@@ -111,19 +112,13 @@ const Profile = (props) => {
 
   return (
     <div>
-      {selectedUser ? (
-        <div>
-          <h1>Profile: {selectedUser.handle}</h1>
-          <img
-            src={selectedUser.avatarUrl}
-            alt={`avatar for ${selectedUser.handle}`}
-          />
-        </div>
-      ) : (
-        <div>
-          <h1>Profile Not Found</h1>
-        </div>
-      )}
+      <h1>Profile: {selectedUser ? selectedUser.handle : null}</h1>
+      {/* {renderProfileButton} */}
+      <img
+        src={selectedUser ? selectedUser.avatarUrl : null}
+        alt={`avatar for ${selectedUser ? selectedUser.handle : null}`}
+      />
+      {/* <div>{renderDecksByHandle}</div> */}
     </div>
   )
 }
