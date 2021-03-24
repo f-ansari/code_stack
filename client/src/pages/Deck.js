@@ -4,11 +4,6 @@ import { BASE_URL } from '../globals'
 import axios from 'axios'
 
 const Deck = (props) => {
-  let flashcards = [
-    { title: 'Classes', id: 1 },
-    { title: 'Functions', id: 2 },
-    { title: 'HOF', id: 3 }
-  ]
   let likeCount = 10
   let selectedUser = { handle: 'luke', avatarUrl: 'url' }
   let currentUser = { handle: 'luke' }
@@ -29,6 +24,7 @@ const Deck = (props) => {
 
   const [isEditing, setEditing] = useState(false)
   const [deckTitle, setTitle] = useState('')
+  const [flashcards, setFlashcards] = useState([])
 
   const history = useHistory()
 
@@ -41,13 +37,25 @@ const Deck = (props) => {
   }
 
   const submitUpdate = async () => {
-    await axios.put(`${BASE_URL}/decks/1`, { title: deckTitle })
+    await axios.put(`${BASE_URL}/decks/${props.match.params.deckId}`, {
+      title: deckTitle
+    })
     toggleEdit()
+  }
+
+  const getFlashcardsByDeck = async () => {
+    const response = await axios.get(`${BASE_URL}/flashcards/deck/2`)
+    console.log(response)
+    setFlashcards(response.data)
   }
 
   const updateTitleState = (e) => {
     setTitle(e.target.value)
   }
+
+  useEffect(() => {
+    getFlashcardsByDeck()
+  })
 
   return (
     <div>
