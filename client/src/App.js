@@ -63,7 +63,7 @@ function App() {
   const checkStoredToken = async () => {
     let token = localStorage.getItem('token')
     if (token) {
-      const res = await axios.post(`${BASE_URL}/auth/session`)
+      const res = await axios.get(`${BASE_URL}/auth/session`)
       dispatch({ type: SET_CURRENT_USER, payload: res.data })
 
       dispatch({ type: SET_AUTHENTICATED, payload: true })
