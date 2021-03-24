@@ -83,10 +83,7 @@ const Profile = (props) => {
     switch (true) {
       case currentUser && currentUser.handle === selectedUser.handle:
         return <button>+ Create Deck</button>
-      // case currentUser &&
-      //   currentUser.handle !== selectedUser.handle &&
-      //   checkFollowing() === false:
-      //   return <button>+ Create Deck</button>
+
       default:
         return <button>Follow</button>
     }
@@ -117,7 +114,7 @@ const Profile = (props) => {
   return (
     <div>
       <h1>Profile: {selectedUser ? selectedUser.handle : `Loading...`}</h1>
-      {/* {renderProfileButton} */}
+      {selectedUser ? renderProfileButton : null}
       <img
         src={selectedUser ? selectedUser.avatarUrl : null}
         alt={`avatar for ${selectedUser ? selectedUser.handle : null}`}
