@@ -46,12 +46,13 @@ const Profile = (props) => {
       const res = await axios.get(
         `${BASE_URL}/users/${props.match.params.handle}`
       )
-      console.log(res)
+      console.log('profile is called!')
       if (!selectedUser && res.data) {
         appDispatch({ type: SET_SELECTED_USER, payload: res.data })
         appDispatch({ type: GET_DECKS_BY_HANDLE, payload: res.data.Decks })
       } else if (selectedUser && selectedUser.handle !== res.data.handle) {
         appDispatch({ type: SET_SELECTED_USER, payload: res.data })
+        appDispatch({ type: GET_DECKS_BY_HANDLE, payload: res.data.Decks })
       }
     } catch (error) {
       console.log(error)
@@ -100,13 +101,25 @@ const Profile = (props) => {
   }
 
   const handleDeckFormSubmit = async (e) => {
+    e.preventDefault()
     try {
-      const res = await axios.post(
-        `${BASE_URL}/decks/${state.currentUser.id}`,
-        state.deckForm
-      )
-      console.log(res)
+      const res = await axios.post(`${BASE_URL}/decks/${2}`, {
+        title: state.deckForm,
+        userId: 2
+      })
+      console.log('Deck form submitted', res.data)
       dispatch({ type: SUBMIT_DECK_FORM, payload: true })
+      appDispatch({
+        type: GET_DECKS_BY_HANDLE,
+        payload: [
+          ...decksByHandle,
+          {
+            id: res.data.id,
+            likeCount: res.data.likeCount,
+            title: res.data.title
+          }
+        ]
+      })
     } catch (error) {
       console.log(error)
     }
@@ -132,7 +145,7 @@ const Profile = (props) => {
 
   useEffect(() => {
     getProfile()
-  }, [selectedUser, getProfile])
+  }, [selectedUser, decksByHandle])
 
   return (
     <div>
