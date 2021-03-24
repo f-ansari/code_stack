@@ -60,19 +60,19 @@ const redirectToProfiles = () => {
     <div>
       <h1>Login Form</h1>
 
-      <form onSubmit={submitLogin}>
+      <form onSubmit={(e)=>submitLogin}>
         <input 
           type = "text"
           name = "handle"
           value = {state.handle}
-          onChange = {handleLoginChange}
+          onChange = {(e)=>handleLoginChange}
           placeholder="jane_doe"
         />
         <input
           type = "text"
           name = "password"
           value = {state.password}
-          onChange = {handleLoginChange}
+          onChange = {(e)=>handleLoginChange}
           placeholder="jane_doe"
         />
         <button  color="black" type="submit">
