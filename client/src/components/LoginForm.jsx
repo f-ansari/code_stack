@@ -1,5 +1,5 @@
-import React, { useState, useReducer } from 'react'
-import { useHistory } from 'react-router-dom'
+import React, { useReducer } from 'react'
+// import { useHistory } from 'react-router-dom'
 import { LOGIN_FORM, RESET_LOGIN, SET_AUTHENTICATED } from '../store/types'
 // import axios from 'axios'
 
