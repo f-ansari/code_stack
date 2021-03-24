@@ -103,9 +103,9 @@ const Profile = (props) => {
   const handleDeckFormSubmit = async (e) => {
     e.preventDefault()
     try {
-      const res = await axios.post(`${BASE_URL}/decks/${2}`, {
+      const res = await axios.post(`${BASE_URL}/decks/${currentUser.id}`, {
         title: state.deckForm,
-        userId: 2
+        userId: currentUser.id
       })
       console.log('Deck form submitted', res.data)
       dispatch({ type: SUBMIT_DECK_FORM, payload: true })
