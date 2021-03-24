@@ -87,7 +87,7 @@ const Profile = (props) => {
   // map through all of the decks owned by selectedUser
   const renderDecksByHandle = () => {
     return decksByHandle.map((deck, idx) => (
-      <div key={`${idx}`} onClick={() => targetDeck(deck.id)}>
+      <div key={`${idx}`} onClick={() => targetDeck(deck)}>
         <h3>Deck Title: {deck.title}</h3>
       </div>
     ))
@@ -95,9 +95,9 @@ const Profile = (props) => {
 
   //handled on renderDeckByHandle
   // route user to deck page to view deck details
-  const targetDeck = (deckId) => {
-    appDispatch({ type: SET_SELECTED_DECK, payload: deckId })
-    props.history.push(`/deck/${deckId}`)
+  const targetDeck = (deck) => {
+    appDispatch({ type: SET_SELECTED_DECK, payload: deck })
+    props.history.push(`/deck/${deck.id}`)
   }
 
   const handleDeckFormSubmit = async (e) => {
