@@ -107,7 +107,7 @@ const Deck = (props) => {
           </div>
         ))
       ) : (
-        <div>You don't have any decks yet!</div>
+        <div>You don't have any flashcards in this deck yet!</div>
       )}
     </div>
   )
