@@ -1,5 +1,16 @@
 /*NAV BAR*/
 
+/*
+main
+font-family: 'Open Sans', sans-serif;
+
+sub
+font-family: 'Chivo', sans-serif;
+
+paragraphy
+font-family: 'Overpass', sans-serif;
+*/
+
 .nav-bar {
   display: flex;
   justify-content: flex-end;
@@ -12,7 +23,7 @@
 }
 
 .public-button {
-  font-family: 'Press Start 2P', cursive;
+  font-family: 'Chivo', sans-serif;
   background-color: #c13aa6;
   border: none;
   color: white;
