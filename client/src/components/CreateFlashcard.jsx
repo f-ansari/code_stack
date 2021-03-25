@@ -105,7 +105,7 @@ const CreateFlashcard = (props) => {
             <option key={idx}>{deck.title}</option>
           ))} */}
         </select>
-        <Editor
+        {/* <Editor
           value={state.flashcard.codeBlock}
           onValueChange={(code) => setCodeBlock(code)}
           highlight={(code) => highlight(code, languages.js)}
@@ -114,7 +114,7 @@ const CreateFlashcard = (props) => {
             fontFamily: '"Fira code", "Fira Mono", monospace',
             fontSize: 12
           }}
-        />
+        /> */}
         <textarea
           name="notes"
           type="text"
@@ -127,9 +127,9 @@ const CreateFlashcard = (props) => {
       <div>
         <h3>{state.flashcard.title}</h3>
         <p>{state.flashcard.language}</p>
-        <pre>
+        {/* <pre>
           <code>{state.flashcard.codeBlock}</code>
-        </pre>
+        </pre> */}
         <p>{state.flashcard.notes}</p>
       </div>
     </div>
