@@ -5,10 +5,10 @@ const PublicNav = () => {
   return (
     <div>
       <NavLink to="/login">
-        <button className="public-button">Login</button>
+        <button className="nav-buttons">Login</button>
       </NavLink>
       <NavLink to="/register">
-        <button className="public-button">Sign Up</button>
+        <button className="nav-buttons">Sign Up</button>
       </NavLink>
     </div>
   )
