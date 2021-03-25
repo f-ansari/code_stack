@@ -67,10 +67,12 @@ const Deck = (props) => {
   //AXIOS CALL TO POPULATE FLASHCARDS BY DECK
 
   const getFlashcardsByDeck = async () => {
+    console.log('props.selectedDeck.id:', props.selectedDeck.id)
     try {
       const response = await axios.get(
         `${BASE_URL}/flashcards/deck/${props.selectedDeck.id}`
       )
+      console.log('res for getFlashcardsByDeck', response.data)
       setFlashcards(response.data)
     } catch (error) {
       console.log(error)
