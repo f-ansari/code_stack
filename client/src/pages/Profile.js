@@ -8,7 +8,8 @@ import {
   DECK_FORM,
   SUBMIT_DECK_FORM,
   GET_DECKS_BY_HANDLE,
-  SELECT_CREATE
+  SELECT_CREATE,
+  SET_CURRENT_USER_SELECTED_DECK
 } from '../store/types'
 import { BASE_URL } from '../globals'
 import axios from 'axios'
@@ -96,7 +97,7 @@ const Profile = (props) => {
   //handled on renderDeckByHandle
   // route user to deck page to view deck details
   const targetDeck = (deck) => {
-    appDispatch({ type: SET_SELECTED_DECK, payload: deck })
+    appDispatch({ type: SET_CURRENT_USER_SELECTED_DECK, payload: deck })
     props.history.push(`/deck/${deck.id}`)
   }
 
