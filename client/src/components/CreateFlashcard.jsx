@@ -135,8 +135,8 @@ const CreateFlashcard = (props) => {
     </div>
   ) : (
     <h2>
-      Your flashcard has been published to the
-      {/* {props.selectedDeck.title}*/} ___ deck.
+      Your flashcard has been published to the{' '}
+      <strong>{props.currentUserSelectedDeck.title}</strong> deck.
     </h2>
   )
 }
