@@ -5,10 +5,11 @@ const AuthenticatedNav = (props) => {
   // console.log(props.logOut)
   return (
     <div>
-      AuthNav
-      {/* <NavLink to="/"> */}
-      <button className="public-button" onClick={() => props.logOut()}>Logout</button>
-      {/* </NavLink> */}
+      <NavLink to="/">
+        <button className="nav-buttons">HOME</button>
+      </NavLink>
+      <button className="nav-buttons" onClick={() => props.logOut()}>Logout</button>
+
     </div>
   )
 }
