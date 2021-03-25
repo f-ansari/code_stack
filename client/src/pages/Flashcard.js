@@ -1,12 +1,8 @@
 import React from 'react'
 import axios from 'axios'
-<<<<<<< HEAD
-import {BASE_URL} from '../globals'
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { nightOwl } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-=======
 import { BASE_URL } from '../globals'
->>>>>>> 517cdd825da17d920ef773bd6c6ab545bd665806
 
 const Flashcard = (props) => {
   console.log('props', props)
