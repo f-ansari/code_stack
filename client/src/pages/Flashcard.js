@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import {BASE_URL} from '../globals'
+import { BASE_URL } from '../globals'
 
 const Flashcard = (props) => {
   console.log('props', props)
@@ -19,10 +19,12 @@ const Flashcard = (props) => {
     }
   }
 
-  const deleteFlashcard = async (e) =>{
+  const deleteFlashcard = async (e) => {
     e.preventDefault()
     try {
-      const res = await axios.delete(`${BASE_URL}/flashcards/${selectedFlashcard.id}`)
+      const res = await axios.delete(
+        `${BASE_URL}/flashcards/${selectedFlashcard.id}`
+      )
       history.push(`/deck/${selectedDeck.id}`)
       console.log(res)
     } catch (error) {
@@ -42,10 +44,10 @@ const Flashcard = (props) => {
       <section>
         <h3>Title: {selectedFlashcard.title}</h3>
         <h4>language: {selectedFlashcard.language}</h4>
-        <pre>codeblock: "some codeblock"{selectedFlashcard.codeblock}</pre>
+        <pre>codeblock: "some codeblock"{selectedFlashcard.codeBlock}</pre>
         <h4>notes: {selectedFlashcard.notes}</h4>
       </section>
-      <button onClick={(e)=>deleteFlashcard(e)}>Delete Flashcard</button>
+      <button onClick={(e) => deleteFlashcard(e)}>Delete Flashcard</button>
     </div>
   )
 }

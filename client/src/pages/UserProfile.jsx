@@ -45,12 +45,14 @@ const UserProfile = (props) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const getProfile = async () => {
     try {
+      console.log('currentUser.handle', currentUser.handle)
       const res = await axios.get(`${BASE_URL}/users/${currentUser.handle}`)
 
       if (!currentUserData && res.data) {
         appDispatch({ type: SET_CURRENT_USER_DATA, payload: res.data })
         appDispatch({ type: SET_SELECTED_DECK, payload: res.data })
         // appDispatch({ type: GET_DECKS_BY_HANDLE, payload: res.data.Decks })
+        console.log('getProfile res', res.data)
       }
     } catch (error) {
       console.log(error)
@@ -88,6 +90,7 @@ const UserProfile = (props) => {
   //handled on renderDeckByHandle
   // route user to deck page to view deck details
   const targetDeck = (deck) => {
+    console.log('deck', deck)
     appDispatch({ type: SET_CURRENT_USER_SELECTED_DECK, payload: deck })
     props.history.push(`/deck/${deck.id}`)
   }
