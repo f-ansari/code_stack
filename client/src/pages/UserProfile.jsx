@@ -9,6 +9,7 @@ import {
   GET_DECKS_BY_HANDLE,
   ADD_TO_CURRENT_USER_DECK,
   SELECT_CREATE,
+  SET_SELECTED_DECK,
   SET_CURRENT_USER_SELECTED_DECK
 } from '../store/types'
 import { BASE_URL } from '../globals'
@@ -48,6 +49,7 @@ const UserProfile = (props) => {
 
       if (!currentUserData && res.data) {
         appDispatch({ type: SET_CURRENT_USER_DATA, payload: res.data })
+        appDispatch({ type: SET_SELECTED_DECK, payload: res.data })
         // appDispatch({ type: GET_DECKS_BY_HANDLE, payload: res.data.Decks })
       }
     } catch (error) {
