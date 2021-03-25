@@ -62,7 +62,7 @@ function App() {
   const history = useHistory()
   const checkStoredToken = async () => {
     let token = localStorage.getItem('token')
-    if (token && !state.currentUser) {
+    if (token) {
       const res = await axios.get(`${BASE_URL}/auth/session`)
       dispatch({ type: SET_CURRENT_USER, payload: res.data })
       dispatch({ type: SET_AUTHENTICATED, payload: true })
@@ -80,7 +80,7 @@ function App() {
 
   useEffect(() => {
     checkStoredToken()
-  }, [])
+  }, [state.authenticated])
 
   return (
     <div className="App">
