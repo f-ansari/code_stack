@@ -1,8 +1,12 @@
 import React from 'react'
 import axios from 'axios'
+<<<<<<< HEAD
 import {BASE_URL} from '../globals'
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { nightOwl } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+=======
+import { BASE_URL } from '../globals'
+>>>>>>> 517cdd825da17d920ef773bd6c6ab545bd665806
 
 const Flashcard = (props) => {
   console.log('props', props)
@@ -21,10 +25,12 @@ const Flashcard = (props) => {
     }
   }
 
-  const deleteFlashcard = async (e) =>{
+  const deleteFlashcard = async (e) => {
     e.preventDefault()
     try {
-      const res = await axios.delete(`${BASE_URL}/flashcards/${selectedFlashcard.id}`)
+      const res = await axios.delete(
+        `${BASE_URL}/flashcards/${selectedFlashcard.id}`
+      )
       history.push(`/deck/${selectedDeck.id}`)
       console.log(res)
     } catch (error) {
@@ -51,9 +57,10 @@ const Flashcard = (props) => {
         style={nightOwl}>
           {selectedFlashcard.codeblock ? selectedFlashcard.codeblock : 'no code' }
         </SyntaxHighlighter>
+        <pre>codeblock: "some codeblock"{selectedFlashcard.codeBlock}</pre>
         <h4>notes: {selectedFlashcard.notes}</h4>
       </section>
-      <button onClick={(e)=>deleteFlashcard(e)}>Delete Flashcard</button>
+      <button onClick={(e) => deleteFlashcard(e)}>Delete Flashcard</button>
     </div>
   )
 }
