@@ -10,6 +10,7 @@ import Flashcard from './pages/Flashcard'
 import CreateFlashcard from './components/CreateFlashcard'
 import LoginForm from './components/LoginForm'
 import SignUp from './components/SignUp'
+import UserList from './pages/UserList'
 import axios from 'axios'
 import { BASE_URL } from './globals'
 
@@ -97,7 +98,7 @@ function App() {
     console.log('clicked logout!')
     localStorage.clear()
     dispatch({ type: SET_AUTHENTICATED, payload: false })
-    dispatch({ type: SET_CURRENT_USER, payload: null })
+    dispatch({ type: SET_CURRENT_USER, payload: {} })
     history.push('/')
   }
 
@@ -122,6 +123,10 @@ function App() {
             exact
             path="/"
             component={(props) => <HomePage {...props} dispatch={dispatch} />}
+          />
+          <Route
+            path="/userlist"
+            component={(props) => <UserList {...props} dispatch={dispatch} />}
           />
           <Route
             path="/selected/:handle"
