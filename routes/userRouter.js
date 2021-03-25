@@ -4,10 +4,12 @@ const { StripToken, VerifyToken } = require('../middleware')
 
 Router.get('/:handle', controller.getOneUser)
 
+Router.get('/', controller.getAllUsers)
+
 Router.post('/', StripToken, VerifyToken, controller.createUser)
 
-Router.put('/:handle', StripToken, VerifyToken,controller.updateUser)
+Router.put('/:handle', StripToken, VerifyToken, controller.updateUser)
 
-Router.delete('/:handle', StripToken,VerifyToken,controller.deleteUser)
+Router.delete('/:handle', StripToken, VerifyToken, controller.deleteUser)
 
 module.exports = Router

@@ -2,14 +2,25 @@ const { User, Deck } = require('../models')
 const { HashPassword } = require('../middleware')
 
 const getOneUser = async (req, res) => {
-  console.log(req)
   try {
     let handle = req.params.handle
     const user = await User.findOne({
+      attributes: ['id', 'handle', 'avatarUrl'],
       where: { handle: handle },
       include: [{ model: Deck, attributes: ['id', 'title', 'likeCount'] }]
     }) //have include clause to include decks also
     res.send(user)
+  } catch (error) {
+    throw error
+  }
+}
+
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.findAll({
+      attributes: ['id', 'handle', 'avatarUrl']
+    })
+    res.send(users)
   } catch (error) {
     throw error
   }
@@ -75,5 +86,6 @@ module.exports = {
   getOneUser,
   createUser,
   updateUser,
-  deleteUser
+  deleteUser,
+  getAllUsers
 }
