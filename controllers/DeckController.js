@@ -12,7 +12,7 @@ const getOneDecks = async (req, res) => {
       include: [
         {
           model: Flashcard,
-          attributes: ['title', 'codeBlock', 'language', 'notes']
+          attributes: ['id', 'title', 'codeBlock', 'language', 'notes']
         }
       ]
     })
