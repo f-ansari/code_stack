@@ -2,6 +2,8 @@ import React, { useReducer, useEffect } from 'react'
 import { Route, useHistory, Switch } from 'react-router-dom'
 import Nav from './components/Nav'
 import Profile from './pages/Profile'
+
+import UserProfile from './pages/UserProfile'
 import Deck from './pages/Deck'
 import HomePage from './pages/HomePage'
 import Flashcard from './pages/Flashcard'
@@ -18,8 +20,12 @@ import {
   SET_SELECTED_FLASHCARD,
   GET_DECKS_BY_HANDLE,
   GET_FRIENDS_DECKS,
+  SET_CURRENT_USER_DATA,
+  SET_CURRENT_USER_FLASHCARD,
   GET_ALL_DECKS,
-  SET_CURRENT_USER
+  SET_CURRENT_USER,
+  ADD_TO_CURRENT_USER_DECK,
+  SET_CURRENT_USER_SELECTED_DECK
 } from './store/types'
 import './style/App.css'
 
@@ -30,8 +36,11 @@ const iState = {
   selectedDeck: [],
   selectedFlashcard: [],
   decksByHandle: [],
-  //allFriendsDecks: [],
-  currentUser: {}
+  allUsers: [],
+  currentUser: {},
+  currentUserData: null,
+  currentUserSelectedDeck: [],
+  currentUserFlashcard: []
 }
 
 const reducer = (state, action) => {
@@ -52,6 +61,20 @@ const reducer = (state, action) => {
       return { ...state, allDecks: action.payload }
     case SET_CURRENT_USER:
       return { ...state, currentUser: action.payload }
+    case SET_CURRENT_USER_DATA:
+      return { ...state, currentUserData: action.payload }
+    case SET_CURRENT_USER_FLASHCARD:
+      return { ...state, currentUserFlashcard: action.payload }
+    case SET_CURRENT_USER_SELECTED_DECK:
+      return { ...state, currentUserSelectedDeck: action.payload }
+    case ADD_TO_CURRENT_USER_DECK:
+      return {
+        ...state,
+        currentUserData: {
+          ...state.currentUserData,
+          Decks: [...state.currentUserData.Decks, action.payload]
+        }
+      }
     default:
       return state
   }
@@ -80,7 +103,8 @@ function App() {
 
   useEffect(() => {
     checkStoredToken()
-  }, [state.authenticated])
+    // eslint-disable-next-line
+  }, [state.authenticated, state.currentUser.handle])
 
   return (
     <div className="App">
@@ -100,13 +124,25 @@ function App() {
             component={(props) => <HomePage {...props} />}
           />
           <Route
-            path="/user/:handle"
+            path="/selected/:handle"
             component={(props) => (
               <Profile
                 {...props}
                 currentUser={state.currentUser}
                 selectedUser={state.selectedUser}
                 selectedDeck={state.selectedDeck}
+                decksByHandle={state.decksByHandle}
+                appDispatch={dispatch}
+              />
+            )}
+          />
+          <Route
+            path="/user/:handle"
+            component={(props) => (
+              <UserProfile
+                {...props}
+                currentUser={state.currentUser}
+                currentUserData={state.currentUserData}
                 decksByHandle={state.decksByHandle}
                 appDispatch={dispatch}
               />
