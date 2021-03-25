@@ -1,4 +1,4 @@
-const { Deck, Flashcard } = require('../models')
+const { Deck, Flashcard, User } = require('../models')
 const { op } = require('sequelize')
 // const decks = require('./model')
 
@@ -25,7 +25,8 @@ const getOneDecks = async (req, res) => {
 const getAllDecks = async (req, res) => {
   try {
     const deck = await Deck.findAll({
-      attributes: ['id', 'title', 'likeCount']
+      attributes: ['id', 'title', 'likeCount'],
+      include: [{ model: User, attributes: ['id', 'handle', 'avatarUrl'] }]
     })
     res.send(deck)
   } catch (error) {
