@@ -1,22 +1,14 @@
 import axios from 'axios'
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { BASE_URL } from '../globals'
 import { SET_CURRENT_USER } from '../store/types'
 
 const UserList = (props) => {
-  const [users, setUsers] = useState({})
+  const [users, setUsers] = useState([])
   const getAllUsers = async () => {
     const res = await axios.get(`${BASE_URL}/users`)
+    console.log(res.data)
     setUsers(res.data)
-  }
-
-  const mapUsers = () => {
-    users.map((user) => (
-      <div onClick={() => targetUser(user)}>
-        <h3>{user.handle}</h3>
-      </div>
-    ))
   }
 
   const targetUser = (user) => {
@@ -31,7 +23,11 @@ const UserList = (props) => {
   return (
     <div>
       <h2>Find Users:</h2>
-      {mapUsers()}
+      {users.map((user) => (
+        <div onClick={() => targetUser(user)}>
+          <h3>{user.handle}</h3>
+        </div>
+      ))}
     </div>
   )
 }
