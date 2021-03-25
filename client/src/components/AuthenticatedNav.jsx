@@ -2,10 +2,9 @@ import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
 const AuthenticatedNav = (props) => {
-  // console.log(props.logOut)
-  
+
   const myProfile = props.currentUser.handle
-  // console.log(myProfile)
+  
   return (
     
     <div>
