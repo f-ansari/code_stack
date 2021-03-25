@@ -34,7 +34,7 @@ const Deck = (props) => {
       case storedSelectedUser === currentUser:
         return (
           <div>
-            <button onClick={() => history.push('/flashcard')}>
+            <button onClick={() => history.push('/editor')}>
               + Create Flashcard
             </button>
           </div>

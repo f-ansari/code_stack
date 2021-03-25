@@ -182,7 +182,7 @@ function App() {
             )}
           />
           <Route
-            path="/flashcard"
+            path="/editor"
             component={(props) => (
               <CreateFlashcard
                 {...props}
