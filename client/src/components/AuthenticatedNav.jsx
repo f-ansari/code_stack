@@ -8,6 +8,9 @@ const AuthenticatedNav = (props) => {
       <NavLink to="/">
         <button className="nav-buttons">HOME</button>
       </NavLink>
+      <NavLink to="/user/{props.currentUser}">
+        <button className="nav-buttons">myProfile</button>
+      </NavLink>
       <button className="nav-buttons" onClick={() => props.logOut()}>Logout</button>
 
     </div>
