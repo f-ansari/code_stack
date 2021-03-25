@@ -38,7 +38,7 @@ const reducer = (state, action) => {
 
 const Profile = (props) => {
   const [state, dispatch] = useReducer(reducer, iState)
-  const { currentUser, selectedUser, decksByHandle, appDispatch } = props
+  const { selectedUser, decksByHandle, appDispatch } = props
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const getProfile = async () => {
@@ -63,26 +63,26 @@ const Profile = (props) => {
     // axios call that returns a boolean
   }
 
-  const renderProfileButton = () => {
-    switch (true) {
-      case currentUser && currentUser.handle == selectedUser.handle:
-        return (
-          <div>
-            {state.clickedCreate && renderDeckForm()}
-            <button
-              onClick={() =>
-                dispatch({ type: SELECT_CREATE, payload: !state.clickedCreate })
-              }
-            >
-              {state.clickedCreate ? `Cancel` : `+ Create Deck`}
-            </button>
-          </div>
-        )
+  // const renderProfileButton = () => {
+  //   switch (true) {
+  //     case currentUser && currentUser.handle == selectedUser.handle:
+  //       return (
+  //         <div>
+  //           {state.clickedCreate && renderDeckForm()}
+  //           <button
+  //             onClick={() =>
+  //               dispatch({ type: SELECT_CREATE, payload: !state.clickedCreate })
+  //             }
+  //           >
+  //             {state.clickedCreate ? `Cancel` : `+ Create Deck`}
+  //           </button>
+  //         </div>
+  //       )
 
-      default:
-        return <button>Follow</button>
-    }
-  }
+  //     default:
+  //       return <button>Follow</button>
+  //   }
+  // }
 
   // map through all of the decks owned by selectedUser
   const renderDecksByHandle = () => {
@@ -103,9 +103,9 @@ const Profile = (props) => {
   const handleDeckFormSubmit = async (e) => {
     e.preventDefault()
     try {
-      const res = await axios.post(`${BASE_URL}/decks/${currentUser.id}`, {
+      const res = await axios.post(`${BASE_URL}/decks/${selectedUser.id}`, {
         title: state.deckForm,
-        userId: currentUser.id
+        userId: selectedUser.id
       })
       console.log('Deck form submitted', res.data)
       dispatch({ type: SUBMIT_DECK_FORM, payload: true })
@@ -125,40 +125,42 @@ const Profile = (props) => {
     }
   }
 
-  const renderDeckForm = () => {
-    return (
-      <form onSubmit={(event) => handleDeckFormSubmit(event)}>
-        <input
-          name="deckForm"
-          placeholder="Create a new deck"
-          type="text"
-          value={state.deckForm}
-          onChange={(event) =>
-            dispatch({ type: DECK_FORM, payload: event.target.value })
-          }
-        />
+  // const renderDeckForm = () => {
+  //   return (
+  //     <form onSubmit={(event) => handleDeckFormSubmit(event)}>
+  //       <input
+  //         name="deckForm"
+  //         placeholder="Create a new deck"
+  //         type="text"
+  //         value={state.deckForm}
+  //         onChange={(event) =>
+  //           dispatch({ type: DECK_FORM, payload: event.target.value })
+  //         }
+  //       />
 
-        <input type="submit" value="Submit" />
-      </form>
-    )
-  }
+  //       <input type="submit" value="Submit" />
+  //     </form>
+  //   )
+  // }
 
   useEffect(() => {
     getProfile()
   }, [selectedUser, decksByHandle])
 
-  return (
+  return selectedUser ? (
     <div>
-      <h1>Profile: {selectedUser ? selectedUser.handle : `Loading...`}</h1>
-      {selectedUser ? renderProfileButton() : null}
+      <h1>Profile: {selectedUser.handle} </h1>
+
       <img
-        src={selectedUser ? selectedUser.avatarUrl : null}
-        alt={`avatar for ${selectedUser ? selectedUser.handle : null}`}
+        src={selectedUser.avatarUrl}
+        alt={`avatar for ${selectedUser.handle}`}
       />
       <div>
         {decksByHandle ? renderDecksByHandle() : <h3>No decks yet.</h3>}
       </div>
     </div>
+  ) : (
+    `Loading...`
   )
 }
 
