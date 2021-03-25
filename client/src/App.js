@@ -62,14 +62,11 @@ function App() {
   const history = useHistory()
   const checkStoredToken = async () => {
     let token = localStorage.getItem('token')
-    if (token) {
+    if (token && !state.currentUser) {
       const res = await axios.get(`${BASE_URL}/auth/session`)
-      console.log(res.data)
       dispatch({ type: SET_CURRENT_USER, payload: res.data })
-      console.log(state.currentUser)
       dispatch({ type: SET_AUTHENTICATED, payload: true })
-      console.log(state.authenticated)
-      history.push(`/user/${state.currentUser.handle}`) //route to profile
+      history.push(`/user/${state.currentUser.handle}`)
     }
   }
 
@@ -124,6 +121,7 @@ function App() {
                 selectedDeck={state.selectedDeck}
                 selectedUser={state.selectedUser}
                 currentUser={state.currentUser}
+                decksByHandle={state.decksByHandle}
               />
             )}
           />

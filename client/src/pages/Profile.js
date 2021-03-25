@@ -65,7 +65,7 @@ const Profile = (props) => {
 
   const renderProfileButton = () => {
     switch (true) {
-      case currentUser && currentUser.handle !== selectedUser.handle:
+      case currentUser && currentUser.handle == selectedUser.handle:
         return (
           <div>
             {state.clickedCreate && renderDeckForm()}
@@ -156,11 +156,7 @@ const Profile = (props) => {
         alt={`avatar for ${selectedUser ? selectedUser.handle : null}`}
       />
       <div>
-        {decksByHandle.length > 0 ? (
-          renderDecksByHandle()
-        ) : (
-          <h3>No decks yet.</h3>
-        )}
+        {decksByHandle.length ? renderDecksByHandle() : <h3>No decks yet.</h3>}
       </div>
     </div>
   )
