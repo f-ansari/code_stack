@@ -7,6 +7,7 @@ const getOneDecks = async (req, res) => {
     const deckId = parseInt(req.params.deck_Id)
     console.log(req.query)
     const deck = await Deck.findAll({
+      attributes: ['id', 'title', 'likeCount'],
       where: { id: deckId },
       include: [
         {
@@ -23,7 +24,9 @@ const getOneDecks = async (req, res) => {
 
 const getAllDecks = async (req, res) => {
   try {
-    const deck = await Deck.findAll()
+    const deck = await Deck.findAll({
+      attributes: ['id', 'title', 'likeCount']
+    })
     res.send(deck)
   } catch (error) {
     throw error
@@ -69,7 +72,10 @@ const addLike = async (req, res) => {
     const deck = await Deck.findByPk(deckId)
     const updatedDeck = await Deck.update(
       { likeCount: deck.likeCount + 1 },
-      { where: { id: deckId }, returning: true }
+      {
+        where: { id: deckId },
+        returning: true
+      }
     )
     res.send(updatedDeck)
   } catch (error) {

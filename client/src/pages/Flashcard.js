@@ -11,7 +11,7 @@ const Flashcard = (props) => {
 
   const backToUsersDeck = () => {
     try {
-      props.history.push(`/user/${selectedUser.handle}/{selecetedDeck.id}`)
+      props.history.push(`/deck/${selectedDeck.id}`)
     } catch (error) {
       console.log(error)
     }
