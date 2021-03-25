@@ -51,6 +51,7 @@ const CreateFlashcard = (props) => {
 
   const handleFlashcardSubmit = async (e) => {
     e.preventDefault()
+    console.log('publish button clicked')
     try {
       const res = await axios.post(
         `${BASE_URL}/flashcards/${props.currentUserSelectedDeck.id}`,
@@ -81,7 +82,7 @@ const CreateFlashcard = (props) => {
 
   return !state.flashcardPublished ? (
     <div>
-      <form>
+      <form onSubmit={(e) => handleFlashcardSubmit(e)}>
         <input
           name="title"
           type="text"
@@ -102,7 +103,6 @@ const CreateFlashcard = (props) => {
         <Editor
           value={state.flashcard.codeBlock}
           onValueChange={(code) => setCodeBlock(code)}
-          onSubmit={(e) => handleFlashcardSubmit(e)}
           highlight={(code) => highlight(code, languages.js)}
           padding={10}
           style={{
