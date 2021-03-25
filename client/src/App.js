@@ -147,6 +147,7 @@ function App() {
               <UserProfile
                 {...props}
                 currentUser={state.currentUser}
+                selectedDeck={state.selectedDeck}
                 currentUserData={state.currentUserData}
                 currentUserSelectedDeck={state.currentUserSelectedDeck}
                 decksByHandle={state.decksByHandle}
