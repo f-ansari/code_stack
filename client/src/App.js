@@ -148,6 +148,7 @@ function App() {
                 {...props}
                 currentUser={state.currentUser}
                 currentUserData={state.currentUserData}
+                currentUserSelectedDeck={state.currentUserSelectedDeck}
                 decksByHandle={state.decksByHandle}
                 appDispatch={dispatch}
               />
@@ -162,6 +163,7 @@ function App() {
                 selectedDeck={state.selectedDeck}
                 selectedUser={state.selectedUser}
                 currentUser={state.currentUser}
+                currentUserData={state.currentUserData}
                 decksByHandle={state.decksByHandle}
                 currentUserSelectedDeck={state.currentUserSelectedDeck}
               />
@@ -187,6 +189,7 @@ function App() {
               <CreateFlashcard
                 {...props}
                 currentUser={state.currentUser}
+                currentUserData={state.currentUserData}
                 selectedUser={state.selectedUser}
                 selectedFlashcard={state.selectedFlashcard}
                 currentUserSelectedDeck={state.currentUserSelectedDeck}
