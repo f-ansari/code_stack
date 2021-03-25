@@ -100,6 +100,19 @@ const Deck = (props) => {
     setTitle(e.target.value)
   }
 
+  //UPDATE LIKES
+
+  const updateLikes = async () => {
+    try {
+      const res = await axios.put(`${BASE_URL}/decks/likes/${selectedDeck.id}`)
+      console.log(res.data[1][0])
+      console.log(selectedDeck)
+      props.dispatch({ type: SET_SELECTED_DECK, payload: res.data[1][0] })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   //USE EFFECT
 
   useEffect(() => {
@@ -136,7 +149,10 @@ const Deck = (props) => {
         </div>
       )}
 
-      <p>Likes: {selectedDeck.likeCount}</p>
+      <p>
+        <button onClick={updateLikes}>Like</button>
+        {selectedDeck.likeCount}
+      </p>
       {flashcards.length ? (
         flashcards.map((flashcard) => (
           <div onClick={() => handleFlashcardClick(flashcard.id)}>
