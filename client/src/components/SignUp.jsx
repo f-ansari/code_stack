@@ -6,10 +6,10 @@ import axios from 'axios'
 
 const iState = {
   register: {
-    firstname: '',
+    name: '',
     handle: '',
     email: '',
-    avatar: '',
+    avatarUrl: '',
     password: ''
   },
   signupSubmitted: false
@@ -71,7 +71,7 @@ const SignUp = () => {
               name="name"
               placeholder="First Name"
               type="text"
-              value={state.firstname}
+              value={state.name}
               onChange={(event) => handleChange(event)}
             />
             <input
@@ -98,7 +98,7 @@ const SignUp = () => {
             <input
               name="avatarUrl"
               placeholder="Add an image URL to use for your profile"
-              type="avatar"
+              type="text"
               value={state.avatarUrl}
               onChange={(event) => handleChange(event)}
             />
