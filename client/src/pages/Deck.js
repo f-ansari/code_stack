@@ -11,6 +11,7 @@ import {
 import CreateFlashcard from '../components/CreateFlashcard'
 
 const Deck = (props) => {
+  console.log(props)
   const {
     selectedUser,
     selectedDeck,
@@ -68,10 +69,12 @@ const Deck = (props) => {
   //AXIOS CALL TO POPULATE FLASHCARDS BY DECK
 
   const getFlashcardsByDeck = async () => {
+    console.log('props.selectedDeck.id:', props.currentUserSelectedDeck.id)
     try {
       const response = await axios.get(
-        `${BASE_URL}/flashcards/deck/${props.selectedDeck.id}`
+        `${BASE_URL}/flashcards/deck/${props.currentUserSelectedDeck.id}`
       )
+      console.log('res for getFlashcardsByDeck', response.data)
       setFlashcards(response.data)
     } catch (error) {
       console.log(error)
