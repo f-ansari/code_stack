@@ -48,7 +48,7 @@ const reducer = (state, action) => {
 
 const CreateFlashcard = (props) => {
   const [state, dispatch] = useReducer(reducer, iState)
-  console.log(props)
+  console.log(props.selectedDeck.id)
 
   const handleFlashcardSubmit = async (e) => {
     e.preventDefault()
