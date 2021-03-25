@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      User.hasMany(models.Deck, { foreignKey: 'userId'})
+      User.hasMany(models.Deck, { foreignKey: 'userId' })
     }
   }
   User.init(
@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       avatarUrl: {
         type: DataTypes.STRING,
-        defaultValue: '../assets/default-avatar.png'
+        defaultValue: 'https://i.imgur.com/od6ga6F.png'
       }
     },
     {
