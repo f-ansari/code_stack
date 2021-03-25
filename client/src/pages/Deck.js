@@ -13,7 +13,6 @@ const Deck = (props) => {
   const { selectedUser, selectedDeck, decksByHandle, currentUser } = props
 
   const [isEditing, setEditing] = useState(false)
-  const [createFlashcard, setCreateFlashcard] = useState(false)
   const [deckTitle, setTitle] = useState(selectedDeck.title)
   const [flashcards, setFlashcards] = useState([])
   const [storedDecksByHandle, setDecksByHandle] = useState(decksByHandle)
@@ -28,7 +27,7 @@ const Deck = (props) => {
       case currentUser && currentUser.handle === selectedUser.handle:
         return (
           <div>
-            <button onClick={() => setCreateFlashcard(true)}>
+            <button onClick={() => history.push('/flashcard')}>
               + Create Flashcard
             </button>
           </div>
@@ -111,51 +110,41 @@ const Deck = (props) => {
 
   return (
     <div>
-      {createFlashcard ? (
-        <div>
-          <CreateFlashcard selectedDeck={props.selectedDeck} />
-        </div>
+      <h1>Profile: {selectedUser ? selectedUser.handle : null}</h1>
+      {renderProfileButton()}
+      <img
+        src={selectedUser ? selectedUser.avatarUrl : null}
+        alt={`avatar for ${selectedUser ? selectedUser.handle : 'undefined'}`}
+      />
+      {isEditing ? (
+        <form onSubmit={(e) => submitUpdate(e)}>
+          <input
+            type="text"
+            placeholder="Enter a new title"
+            onChange={(e) => updateTitleState(e)}
+          />
+          <input type="submit" value="Submit" />
+          <button onClick={toggleEdit}>Cancel</button>
+        </form>
       ) : (
         <div>
-          <h1>Profile: {selectedUser ? selectedUser.handle : null}</h1>
-          {renderProfileButton()}
-          <img
-            src={selectedUser ? selectedUser.avatarUrl : null}
-            alt={`avatar for ${
-              selectedUser ? selectedUser.handle : 'undefined'
-            }`}
-          />
-          {isEditing ? (
-            <form onSubmit={(e) => submitUpdate(e)}>
-              <input
-                type="text"
-                placeholder="Enter a new title"
-                onChange={(e) => updateTitleState(e)}
-              />
-              <input type="submit" value="Submit" />
-              <button onClick={toggleEdit}>Cancel</button>
-            </form>
-          ) : (
-            <div>
-              <h1>{deckTitle}</h1>
-              <button onClick={toggleEdit}>Edit</button>
-              <button>
-                <a href={`/user/${selectedUser.handle}`}>Return to profile</a>
-              </button>
-            </div>
-          )}
-
-          <p>Likes: {selectedDeck.likeCount}</p>
-          {flashcards.length ? (
-            flashcards.map((flashcard) => (
-              <div onClick={() => handleFlashcardClick(flashcard.id)}>
-                <h3>{flashcard.title}</h3>
-              </div>
-            ))
-          ) : (
-            <div>There aren't any flashcards in this deck yet!</div>
-          )}
+          <h1>{deckTitle}</h1>
+          <button onClick={toggleEdit}>Edit</button>
+          <button>
+            <a href={`/user/${selectedUser.handle}`}>Return to profile</a>
+          </button>
         </div>
+      )}
+
+      <p>Likes: {selectedDeck.likeCount}</p>
+      {flashcards.length ? (
+        flashcards.map((flashcard) => (
+          <div onClick={() => handleFlashcardClick(flashcard.id)}>
+            <h3>{flashcard.title}</h3>
+          </div>
+        ))
+      ) : (
+        <div>There aren't any flashcards in this deck yet!</div>
       )}
     </div>
   )
