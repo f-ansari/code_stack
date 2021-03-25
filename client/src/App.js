@@ -121,6 +121,7 @@ function App() {
                 selectedDeck={state.selectedDeck}
                 selectedUser={state.selectedUser}
                 currentUser={state.currentUser}
+                decksByHandle={state.decksByHandle}
               />
             )}
           />
