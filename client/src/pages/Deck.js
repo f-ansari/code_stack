@@ -5,18 +5,25 @@ import { BASE_URL } from '../globals'
 import {
   SET_SELECTED_FLASHCARD,
   SET_SELECTED_DECK,
-  GET_DECKS_BY_HANDLE
+  GET_DECKS_BY_HANDLE,
+  SET_CURRENT_USER_SELECTED_DECK
 } from '../store/types'
 import CreateFlashcard from '../components/CreateFlashcard'
 
 const Deck = (props) => {
-  const { selectedUser, selectedDeck, decksByHandle, currentUser } = props
+  const {
+    selectedUser,
+    selectedDeck,
+    decksByHandle,
+    currentUser,
+    currentUserSelectedDeck
+  } = props
 
   const [isEditing, setEditing] = useState(false)
-  const [deckTitle, setTitle] = useState(selectedDeck.title)
+  const [deckTitle, setTitle] = useState(currentUserSelectedDeck.title)
   const [flashcards, setFlashcards] = useState([])
   const [storedDecksByHandle, setDecksByHandle] = useState(decksByHandle)
-  const [storedSelectedUser, setSelectedUser] = useState(selectedUser)
+  const [storedSelectedUser, setSelectedUser] = useState(currentUser)
 
   const history = useHistory()
 
@@ -24,7 +31,7 @@ const Deck = (props) => {
 
   const renderProfileButton = () => {
     switch (true) {
-      case currentUser && currentUser.handle === selectedUser.handle:
+      case storedSelectedUser === currentUser:
         return (
           <div>
             <button onClick={() => history.push('/flashcard')}>
@@ -104,9 +111,11 @@ const Deck = (props) => {
 
   const updateLikes = async () => {
     try {
-      const res = await axios.put(`${BASE_URL}/decks/likes/${selectedDeck.id}`)
+      const res = await axios.put(
+        `${BASE_URL}/decks/likes/${currentUserSelectedDeck.id}`
+      )
       console.log(res.data[1][0])
-      console.log(selectedDeck)
+      console.log(currentUserSelectedDeck)
       props.dispatch({ type: SET_SELECTED_DECK, payload: res.data[1][0] })
     } catch (error) {
       console.log(error)
@@ -123,11 +132,11 @@ const Deck = (props) => {
 
   return (
     <div>
-      <h1>Profile: {selectedUser ? selectedUser.handle : null}</h1>
+      <h1>Profile: {currentUser.handle}</h1>
       {renderProfileButton()}
       <img
-        src={selectedUser ? selectedUser.avatarUrl : null}
-        alt={`avatar for ${selectedUser ? selectedUser.handle : 'undefined'}`}
+        src={currentUser ? currentUser.avatarUrl : null}
+        alt={`avatar for ${currentUser ? currentUser.handle : 'undefined'}`}
       />
       {isEditing ? (
         <form onSubmit={(e) => submitUpdate(e)}>
@@ -144,7 +153,7 @@ const Deck = (props) => {
           <h1>{deckTitle}</h1>
           <button onClick={toggleEdit}>Edit</button>
           <button>
-            <a href={`/user/${selectedUser.handle}`}>Return to profile</a>
+            <a href={`/user/${currentUser.handle}`}>Return to profile</a>
           </button>
         </div>
       )}
