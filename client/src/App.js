@@ -158,6 +158,7 @@ function App() {
                 selectedUser={state.selectedUser}
                 currentUser={state.currentUser}
                 decksByHandle={state.decksByHandle}
+                currentUserSelectedDeck={state.currentUserSelectedDeck}
               />
             )}
           />
@@ -171,6 +172,7 @@ function App() {
                 selectedFlashcard={state.selectedFlashcard}
                 currentUser={state.currentUser}
                 selectedDeck={state.selectedDeck}
+                currentUserSelectedDeck={state.currentUserSelectedDeck}
               />
             )}
           />
@@ -182,6 +184,7 @@ function App() {
                 currentUser={state.currentUser}
                 selectedUser={state.selectedUser}
                 selectedFlashcard={state.selectedFlashcard}
+                currentUserSelectedDeck={state.currentUserSelectedDeck}
               />
             )}
           />

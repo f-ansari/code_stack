@@ -22,7 +22,7 @@ const iState = {
         <h1>all the codes</h1>
       );
     }`,
-    deckId: `1`,
+    deckId: 31,
     language: `css`
   },
   flashcardPublished: false
@@ -48,13 +48,12 @@ const reducer = (state, action) => {
 
 const CreateFlashcard = (props) => {
   const [state, dispatch] = useReducer(reducer, iState)
-  console.log(props.selectedDeck.id)
 
   const handleFlashcardSubmit = async (e) => {
     e.preventDefault()
     try {
       const res = await axios.post(
-        `${BASE_URL}/flashcards/${props.selectedDeck.id}`,
+        `${BASE_URL}/flashcards/${props.currentUserSelectedDeck.id}`,
         state.flashcard
       )
       console.log(res)
