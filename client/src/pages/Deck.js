@@ -14,10 +14,13 @@ const Deck = (props) => {
   const renderProfileButton = () => {
     switch (true) {
       case currentUser && currentUser.handle === selectedUser.handle:
+        console.log('code is reachable')
         return (
-          <button onClick={() => setCreateFlashcard(true)}>
-            + Create Flashcard
-          </button>
+          <div>
+            <button onClick={() => setCreateFlashcard(true)}>
+              + Create Flashcard
+            </button>
+          </div>
         )
       default:
         return <button>Follow</button>
@@ -30,6 +33,8 @@ const Deck = (props) => {
   const [createFlashcard, setCreateFlashcard] = useState(false)
   const [deckTitle, setTitle] = useState(selectedDeck.title)
   const [flashcards, setFlashcards] = useState([])
+  const [storedDecksByHandle, setDecksByHandle] = useState(decksByHandle)
+  const [storedSelectedUser, setSelectedUser] = useState(selectedUser)
 
   const history = useHistory()
 
@@ -82,10 +87,10 @@ const Deck = (props) => {
         type: SET_SELECTED_DECK,
         payload: { ...selectedDeck, title: deckTitle }
       })
-      // props.dispatch({
-      //   type: GET_DECKS_BY_HANDLE,
-      //   payload: [...decksByHandle, (decksByHandle[2] = { title: deckTitle })]
-      // })
+      props.dispatch({
+        type: GET_DECKS_BY_HANDLE,
+        payload: { ...storedDecksByHandle }
+      })
       toggleEdit()
     } catch (error) {
       console.log(error)
@@ -100,7 +105,9 @@ const Deck = (props) => {
 
   useEffect(() => {
     getFlashcardsByDeck()
-  }, [deckTitle])
+    setDecksByHandle(storedDecksByHandle)
+    setSelectedUser(storedSelectedUser)
+  }, [])
 
   return (
     <div>
