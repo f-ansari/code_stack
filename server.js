@@ -17,8 +17,6 @@ app.use(bodyParser.json())
 
 app.use('/api', AppRouter)
 
-app.get('/', (req, res) => res.json({ message: 'Server Works' }))
-
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'client/build')))
   app.get('*', (req, res) => {
