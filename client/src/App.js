@@ -104,7 +104,7 @@ function App() {
   useEffect(() => {
     checkStoredToken()
     // eslint-disable-next-line
-  }, [state.authenticated, state.currentUser.handle])
+  }, [state.authenticated])
 
   return (
     <div className="App">
