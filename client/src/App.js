@@ -97,7 +97,7 @@ function App() {
           <Route
             exact
             path="/"
-            component={(props) => <HomePage {...props} />}
+            component={(props) => <HomePage {...props} dispatch={dispatch} />}
           />
           <Route
             path="/user/:handle"
