@@ -26,7 +26,6 @@ const Deck = (props) => {
   const renderProfileButton = () => {
     switch (true) {
       case currentUser && currentUser.handle === selectedUser.handle:
-        console.log('code is reachable')
         return (
           <div>
             <button onClick={() => setCreateFlashcard(true)}>
