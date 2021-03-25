@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 import {BASE_URL} from '../globals'
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { nightOwl } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 const Flashcard = (props) => {
   console.log('props', props)
@@ -42,7 +44,13 @@ const Flashcard = (props) => {
       <section>
         <h3>Title: {selectedFlashcard.title}</h3>
         <h4>language: {selectedFlashcard.language}</h4>
-        <pre>codeblock: "some codeblock"{selectedFlashcard.codeblock}</pre>
+        <SyntaxHighlighter
+        customStyle={{borderRadius:"0.5em", padding:"10px", textAlign:"left"}}
+        wrapLines={true}
+        language="javascript" 
+        style={nightOwl}>
+          {selectedFlashcard.codeblock ? selectedFlashcard.codeblock : 'no code' }
+        </SyntaxHighlighter>
         <h4>notes: {selectedFlashcard.notes}</h4>
       </section>
       <button onClick={(e)=>deleteFlashcard(e)}>Delete Flashcard</button>
