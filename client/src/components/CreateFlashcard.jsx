@@ -30,7 +30,10 @@ const iState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case SET_CODEBLOCK:
-      return { ...state, flashcard: { ...state, codeBlock: action.payload } }
+      return {
+        ...state,
+        flashcard: { ...state.flashcard, codeBlock: action.payload }
+      }
     case SET_FLASHCARD_PREFS:
       return {
         ...state,
@@ -48,6 +51,7 @@ const reducer = (state, action) => {
 
 const CreateFlashcard = (props) => {
   const [state, dispatch] = useReducer(reducer, iState)
+  console.log(props)
 
   const handleFlashcardSubmit = async (e) => {
     e.preventDefault()
@@ -57,10 +61,11 @@ const CreateFlashcard = (props) => {
         `${BASE_URL}/flashcards/${props.currentUserSelectedDeck.id}`,
         state.flashcard
       )
-      console.log(res)
-      if (res) {
-        dispatch({ type: SET_FLASHCARD_PUBLISHED, payload: true })
-      } else console.log(res)
+      console.log('response', res)
+      dispatch({ type: SET_FLASHCARD_PUBLISHED, payload: true })
+      // if (res) {
+      //   dispatch({ type: SET_FLASHCARD_PUBLISHED, payload: true })
+      // } else console.log(res)
     } catch (err) {
       console.log(err)
     }
