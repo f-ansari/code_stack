@@ -156,7 +156,7 @@ const Profile = (props) => {
         alt={`avatar for ${selectedUser ? selectedUser.handle : null}`}
       />
       <div>
-        {decksByHandle.length ? renderDecksByHandle() : <h3>No decks yet.</h3>}
+        {decksByHandle ? renderDecksByHandle() : <h3>No decks yet.</h3>}
       </div>
     </div>
   )
