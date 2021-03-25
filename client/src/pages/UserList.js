@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { BASE_URL } from '../globals'
-import { SET_CURRENT_USER } from '../store/types'
+import { SET_SELECTED_USER } from '../store/types'
 
 const UserList = (props) => {
   const [users, setUsers] = useState([])
@@ -12,8 +12,8 @@ const UserList = (props) => {
   }
 
   const targetUser = (user) => {
-    props.dispatch({ type: SET_CURRENT_USER, payload: user })
-    props.history.push(`/user/${user.handle}`)
+    props.dispatch({ type: SET_SELECTED_USER, payload: user })
+    props.history.push(`/selected/${user.handle}`)
   }
 
   useEffect(() => {

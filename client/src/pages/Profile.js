@@ -9,7 +9,8 @@ import {
   SUBMIT_DECK_FORM,
   GET_DECKS_BY_HANDLE,
   SELECT_CREATE,
-  SET_CURRENT_USER_SELECTED_DECK
+  SET_CURRENT_USER_SELECTED_DECK,
+  SET_USER_DECKS
 } from '../store/types'
 import { BASE_URL } from '../globals'
 import axios from 'axios'
@@ -18,7 +19,8 @@ import axios from 'axios'
 const iState = {
   deckForm: '',
   deckFormSubmitted: false,
-  clickedCreate: false
+  clickedCreate: false,
+  userDecks: []
 }
 
 const reducer = (state, action) => {
@@ -32,6 +34,8 @@ const reducer = (state, action) => {
       return { ...iState, deckFormSubmitted: action.payload }
     case SELECT_CREATE:
       return { ...iState, clickedCreate: action.payload }
+    case SET_USER_DECKS:
+      return { ...iState, userDecks: action.payload }
     default:
       return state
   }
@@ -58,6 +62,11 @@ const Profile = (props) => {
     } catch (error) {
       console.log(error)
     }
+  }
+
+  const getDecksByHandle = async () => {
+    const res = await axios.get(`${BASE_URL}/users/${selectedUser.handle}`)
+    dispatch({ type: SET_USER_DECKS, payload: res.data.Decks })
   }
 
   const checkFollowing = () => {
@@ -87,7 +96,7 @@ const Profile = (props) => {
 
   // map through all of the decks owned by selectedUser
   const renderDecksByHandle = () => {
-    return decksByHandle.map((deck, idx) => (
+    return state.userDecks.map((deck, idx) => (
       <div key={`${idx}`} onClick={() => targetDeck(deck)}>
         <h3>Deck Title: {deck.title}</h3>
       </div>
@@ -146,6 +155,7 @@ const Profile = (props) => {
 
   useEffect(() => {
     getProfile()
+    getDecksByHandle()
   }, [selectedUser, decksByHandle])
 
   return selectedUser ? (

@@ -17,6 +17,7 @@ const Deck = (props) => {
     selectedDeck,
     decksByHandle,
     currentUser,
+    currentUserData,
     currentUserSelectedDeck
   } = props
 
@@ -24,7 +25,7 @@ const Deck = (props) => {
   const [deckTitle, setTitle] = useState(currentUserSelectedDeck.title)
   const [flashcards, setFlashcards] = useState([])
   const [storedDecksByHandle, setDecksByHandle] = useState(decksByHandle)
-  const [storedSelectedUser, setSelectedUser] = useState(currentUser)
+  const [storedSelectedUser, setSelectedUser] = useState(currentUserData)
 
   const history = useHistory()
 
@@ -32,7 +33,7 @@ const Deck = (props) => {
 
   const renderProfileButton = () => {
     switch (true) {
-      case storedSelectedUser === currentUser:
+      case storedSelectedUser === currentUserData:
         return (
           <div>
             <button onClick={() => history.push('/editor')}>
@@ -135,11 +136,13 @@ const Deck = (props) => {
 
   return (
     <div>
-      <h1>Profile: {currentUser.handle}</h1>
+      <h1>Profile: {currentUserData.handle}</h1>
       {renderProfileButton()}
       <img
-        src={currentUser ? currentUser.avatarUrl : null}
-        alt={`avatar for ${currentUser ? currentUser.handle : 'undefined'}`}
+        src={currentUserData ? currentUserData.avatarUrl : null}
+        alt={`avatar for ${
+          currentUserData ? currentUserData.handle : 'undefined'
+        }`}
       />
       {isEditing ? (
         <form onSubmit={(e) => submitUpdate(e)}>
@@ -156,7 +159,7 @@ const Deck = (props) => {
           <h1>{deckTitle}</h1>
           <button onClick={toggleEdit}>Edit</button>
           <button>
-            <a href={`/user/${currentUser.handle}`}>Return to profile</a>
+            <a href={`/user/${currentUserData.handle}`}>Return to profile</a>
           </button>
         </div>
       )}
