@@ -68,7 +68,7 @@ const SignUp = () => {
           <h1>SignUp</h1>
           <form onSubmit={(event) => handleSubmit(event)}>
             <input
-              name="firstname"
+              name="name"
               placeholder="First Name"
               type="text"
               value={state.firstname}
@@ -96,10 +96,10 @@ const SignUp = () => {
               onChange={(event) => handleChange(event)}
             />
             <input
-              name="avatar"
+              name="avatarUrl"
               placeholder="Add an image URL to use for your profile"
               type="avatar"
-              value={state.avatar}
+              value={state.avatarUrl}
               onChange={(event) => handleChange(event)}
             />
 
