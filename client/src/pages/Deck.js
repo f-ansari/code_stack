@@ -35,7 +35,7 @@ const Deck = (props) => {
       case storedSelectedUser === currentUserData:
         return (
           <div>
-            <button onClick={() => history.push('/flashcard')}>
+            <button onClick={() => history.push('/editor')}>
               + Create Flashcard
             </button>
           </div>
@@ -70,7 +70,7 @@ const Deck = (props) => {
   const getFlashcardsByDeck = async () => {
     try {
       const response = await axios.get(
-        `${BASE_URL}/flashcards/deck/${props.currentUserSelectedDeck.id}`
+        `${BASE_URL}/flashcards/deck/${props.selectedDeck.id}`
       )
       setFlashcards(response.data)
     } catch (error) {
@@ -163,7 +163,7 @@ const Deck = (props) => {
 
       <p>
         <button onClick={updateLikes}>Like</button>
-        {currentUserSelectedDeck.likeCount}
+        {selectedDeck.likeCount}
       </p>
       {flashcards.length ? (
         flashcards.map((flashcard) => (
