@@ -1,5 +1,8 @@
 import axios from 'axios'
-export const BASE_URL = 'http://localhost:3001/api'
+export const BASE_URL =
+  process.env.NODE_ENV === 'production'
+    ? `${window.location.origin}/api`
+    : 'http://localhost:3001/api'
 
 axios.interceptors.request.use(
   (config) => {
