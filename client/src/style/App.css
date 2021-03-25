@@ -1,5 +1,18 @@
-/*NAV BAR*/
+/*
+main
+font-family: 'Open Sans', sans-serif;
 
+sub
+font-family: 'Chivo', sans-serif;
+
+paragraphs
+font-family: 'Overpass', sans-serif;
+*/
+main {
+  font-family: 'Overpass', sans-serif;
+}
+
+/*NAV BAR*/
 .nav-bar {
   display: flex;
   justify-content: flex-end;
@@ -11,8 +24,8 @@
   background-color: black;
 }
 
-.public-button {
-  font-family: 'Press Start 2P', cursive;
+.nav-buttons {
+  font-family: 'Chivo', sans-serif;
   background-color: #c13aa6;
   border: none;
   color: white;
@@ -27,6 +40,6 @@
   cursor: pointer;
 }
 
-.public-button:hover {
+.nav-buttons:hover {
   opacity: 1;
 }
