@@ -7,6 +7,9 @@ const PublicNav = () => {
       <NavLink to="/">
         <button className="nav-buttons">HOME</button>
       </NavLink>
+      <NavLink to="/userlist">
+        <button className="nav-buttons">All Users</button>
+      </NavLink>
       <NavLink to="/login">
         <button className="nav-buttons">Login</button>
       </NavLink>
