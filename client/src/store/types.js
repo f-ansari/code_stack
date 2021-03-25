@@ -3,6 +3,11 @@ export const SET_SELECTED_USER = 'set_selected_user'
 export const SET_SELECTED_DECK = 'set_selected_deck'
 export const SET_SELECTED_FLASHCARD = 'set_selected_flashcard'
 export const SET_CURRENT_USER = 'set_current_user'
+export const ADD_TO_CURRENT_USER_DECK = 'update_current_deck'
+export const SET_CURRENT_USER_SELECTED_DECK = 'set_current_user_selected_deck'
+
+export const SET_CURRENT_USER_DATA = 'set_current_user_data'
+export const SET_CURRENT_USER_FLASHCARD = 'set_current_user_flashcard'
 
 export const GET_DECKS_BY_HANDLE = 'get_decks_by_handle'
 export const GET_FRIENDS_DECKS = 'get_friends_decks'
