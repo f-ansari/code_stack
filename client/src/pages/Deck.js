@@ -10,7 +10,19 @@ import {
 import CreateFlashcard from '../components/CreateFlashcard'
 
 const Deck = (props) => {
-  let currentUser = { handle: 'bob' }
+  const { selectedUser, selectedDeck, decksByHandle, currentUser } = props
+
+  const [isEditing, setEditing] = useState(false)
+  const [createFlashcard, setCreateFlashcard] = useState(false)
+  const [deckTitle, setTitle] = useState(selectedDeck.title)
+  const [flashcards, setFlashcards] = useState([])
+  const [storedDecksByHandle, setDecksByHandle] = useState(decksByHandle)
+  const [storedSelectedUser, setSelectedUser] = useState(selectedUser)
+
+  const history = useHistory()
+
+  // RENDER BUTTONS CONDITIONALLY
+
   const renderProfileButton = () => {
     switch (true) {
       case currentUser && currentUser.handle === selectedUser.handle:
@@ -26,17 +38,6 @@ const Deck = (props) => {
         return <button>Follow</button>
     }
   }
-
-  const { selectedUser, selectedDeck, decksByHandle } = props
-
-  const [isEditing, setEditing] = useState(false)
-  const [createFlashcard, setCreateFlashcard] = useState(false)
-  const [deckTitle, setTitle] = useState(selectedDeck.title)
-  const [flashcards, setFlashcards] = useState([])
-  const [storedDecksByHandle, setDecksByHandle] = useState(decksByHandle)
-  const [storedSelectedUser, setSelectedUser] = useState(selectedUser)
-
-  const history = useHistory()
 
   // FUNCTIONS TO HANDLE FLASHCARD SELECTION
 
