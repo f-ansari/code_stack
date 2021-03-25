@@ -56,6 +56,7 @@ const CreateFlashcard = (props) => {
   const handleFlashcardSubmit = async (e) => {
     e.preventDefault()
     console.log('publish button clicked')
+    console.log(state.flashcard)
     try {
       const res = await axios.post(
         `${BASE_URL}/flashcards/${props.currentUserSelectedDeck.id}`,
@@ -135,8 +136,8 @@ const CreateFlashcard = (props) => {
     </div>
   ) : (
     <h2>
-      Your flashcard has been published to the
-      {/* {props.selectedDeck.title}*/} ___ deck.
+      Your flashcard has been published to the{' '}
+      <strong>{props.currentUserSelectedDeck.title}</strong> deck.
     </h2>
   )
 }
