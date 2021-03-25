@@ -63,10 +63,25 @@ const updateDecks = async (req, res) => {
   }
 }
 
+const addLike = async (req, res) => {
+  try {
+    let deckId = parseInt(req.params.deck_Id)
+    const deck = await Deck.findByPk(deckId)
+    const updatedDeck = await Deck.update(
+      { likeCount: deck.likeCount + 1 },
+      { where: { id: deckId }, returning: true }
+    )
+    res.send(updatedDeck)
+  } catch (error) {
+    throw error
+  }
+}
+
 module.exports = {
   getOneDecks,
   createDecks,
   deleteDecks,
   updateDecks,
-  getAllDecks
+  getAllDecks,
+  addLike
 }
