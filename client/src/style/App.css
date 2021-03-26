@@ -8,6 +8,7 @@ font-family: 'Chivo', sans-serif;
 paragraphs
 font-family: 'Overpass', sans-serif;
 */
+/*APP.JS*/
 main {
   font-family: 'Overpass', sans-serif;
 }
@@ -46,7 +47,7 @@ main {
 
 /*HOMEPAGE*/
 
-.homepage {
+.main-container {
   margin-top: 3em;
   margin-left: 10vw;
   margin-right: 10vw;
@@ -71,6 +72,7 @@ main {
 
 .cards {
   max-width: 30em;
+  min-height: 10em;
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.2s;
@@ -86,4 +88,59 @@ main {
   -webkit-backdrop-filter: blur(7.5px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
+
+  animation: fadeIn ease 1s;
+  -webkit-animation: fadeIn ease 1s;
+  -moz-animation: fadeIn ease 1s;
+  -o-animation: fadeIn ease 1s;
+  -ms-animation: fadeIn ease 1s;
+}
+
+.cards:hover {
+  opacity: 1;
+  background-color: #48c13a;
+  color: #c13aa6;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.deck-title-home {
+  margin-top: 2em;
+}
+
+/*PROFILE-PAGE*/
+.profile-img {
+  max-width: 5em;
+}
+
+.deck-title {
+  margin-top: 3em;
+}
+
+.page-buttons {
+  font-family: 'Chivo', sans-serif;
+  background-color: #c13aa6;
+  border: none;
+  color: white;
+  padding: 8px 20px 8px 20px;
+  text-align: center;
+  font-size: 12px;
+  margin: 2px 5px 2px 2px;
+  opacity: 0.6;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.page-buttons:hover {
+  opacity: 1;
+  background-color: #48c13a;
 }
