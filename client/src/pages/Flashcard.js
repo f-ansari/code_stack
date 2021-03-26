@@ -1,6 +1,17 @@
 import React from 'react'
 import axios from 'axios'
 import { BASE_URL } from '../globals'
+
+import Editor from 'react-simple-code-editor'
+import { highlight, languages } from 'prismjs/components/prism-core'
+import 'prismjs/components/prism-clike'
+import 'prismjs/components/prism-javascript'
+import 'prismjs/components/prism-git'
+import 'prismjs/components/prism-css'
+
+// import 'prismjs/themes/prism-tomorrow.css'
+import '../style/CreateFlashcard.css'
+import 'prism-theme-night-owl/build/style.css'
 // import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'      // if all crash and burn. use this line of code
 // import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
@@ -35,6 +46,10 @@ const Flashcard = (props) => {
     }
   }
 
+  const setCodeBlock = (code) => {
+    console.log(code)
+  }
+
   return (
     <div>
       <button onClick={backToUsersDeck}>Back to Deck</button>
@@ -52,7 +67,19 @@ const Flashcard = (props) => {
             {codeString}
           </SyntaxHighlighter>
         </pre> */}
-        <pre>codeblock: "some codeblock"{selectedFlashcard.codeBlock}</pre>
+        <div className="editor">
+          <pre>
+            <code>{selectedFlashcard.codeBlock}</code>
+          </pre>
+
+          {/* <Editor
+            className="editor"
+            value={selectedFlashcard.codeBlock}
+            onValueChange={(code) => setCodeBlock(code)}
+            highlight={(code) => highlight(code, languages.js)}
+            padding={30}
+          /> */}
+        </div>
         <h4>notes: {selectedFlashcard.notes}</h4>
       </section>
       <button onClick={(e) => deleteFlashcard(e)}>Delete Flashcard</button>

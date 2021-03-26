@@ -5,20 +5,28 @@ import 'prismjs/components/prism-clike'
 import 'prismjs/components/prism-javascript'
 import 'prismjs/components/prism-git'
 import 'prismjs/components/prism-css'
-import 'prism-theme-night-owl/build/style.css'
+
 // import 'prismjs/themes/prism-tomorrow.css'
 import '../style/CreateFlashcard.css'
-
+import 'prism-theme-night-owl/build/style.css'
 // import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'      // if all crash and burn. use this line of code
 // import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import {
   SET_CODEBLOCK,
   SET_FLASHCARD_PREFS,
   SET_FLASHCARD_PUBLISHED,
-  SET_FLASHCARD_DECK_ID
+  SET_FLASHCARD_DECK_ID,
+  SET_FLASHCARD_LANG
 } from '../store/types'
 import { BASE_URL } from '../globals'
 import axios from 'axios'
+
+const langs = ['javascript', 'python', 'json', 'css']
+
+langs.forEach((lang) => {
+  console.log(langs)
+  return import(`prismjs/components/prism-${lang}`)
+})
 
 const iState = {
   flashcard: {
@@ -58,6 +66,11 @@ const reducer = (state, action) => {
         ...state,
         flashcard: { ...state.flashcard, deckId: action.payload.deckId },
         deckName: action.payload.deckName
+      }
+    case SET_FLASHCARD_LANG:
+      return {
+        ...state,
+        flashcard: { ...state.flashcard, language: action.payload }
       }
     default:
       return state
@@ -112,6 +125,13 @@ const CreateFlashcard = (props) => {
     })
   }
 
+  const setLang = (lang) => {
+    dispatch({
+      type: SET_FLASHCARD_LANG,
+      payload: lang
+    })
+  }
+
   const initFlashcardDeckState = () => {
     dispatch({
       type: SET_FLASHCARD_DECK_ID,
@@ -137,6 +157,16 @@ const CreateFlashcard = (props) => {
           <option>HTML</option>
           <option>Javascript</option>
           <option>CSS</option>
+          {langs.map((lang, idx) => (
+            <option
+              key={idx}
+              name={lang}
+              value={state.flashcard.language}
+              onClick={() => setLang(lang)}
+            >
+              {lang}
+            </option>
+          ))}
         </select>
 
         <select>
@@ -191,10 +221,7 @@ const CreateFlashcard = (props) => {
       </div>*/}
     </div>
   ) : (
-    <h2>
-      Your flashcard has been published to the <strong>{state.deckName}</strong>{' '}
-      deck.
-    </h2>
+    <h2>Your flashcard has been published to the {state.deckName} deck.</h2>
   )
 }
 
