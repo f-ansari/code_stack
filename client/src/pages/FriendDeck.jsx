@@ -10,9 +10,9 @@ import {
   SET_SELECTED_USER
 } from '../store/types'
 
-const Deck = (props) => {
+const FriendDeck = (props) => {
   console.log(props)
-  const { selectedUser, selectedDeck, decksByHandle } = props
+  const { selectedUser, selectedDeck, decksByHandle, currentUserSelectedDeck } = props
 
   const [deckTitle, setTitle] = useState(selectedDeck.title)
   const [flashcards, setFlashcards] = useState([])
@@ -47,7 +47,7 @@ const Deck = (props) => {
     console.log('props.selectedDeck.id:', props.selectedDeck.id)
     try {
       const response = await axios.get(
-        `${BASE_URL}/flashcards/deck/${props.selectedDeck.id}`
+        `${BASE_URL}/flashcards/deck/${selectedDeck.id}`
       )
       console.log('res for getFlashcardsByDeck', response.data)
       setFlashcards(response.data)
@@ -62,7 +62,7 @@ const Deck = (props) => {
     try {
       const res = await axios.put(`${BASE_URL}/decks/likes/${selectedDeck.id}`)
 
-      console.log(selectedDeck)
+      console.log(res.data)
       props.dispatch({ type: SET_SELECTED_DECK, payload: res.data[1][0] })
     } catch (error) {
       console.log(error)
@@ -85,7 +85,7 @@ const Deck = (props) => {
         src={selectedUser ? selectedUser.avatarUrl : null}
         alt={`avatar for ${selectedUser ? selectedUser.handle : null}`}
       />
-
+      <h3>{deckTitle}</h3>
       <p>
         <button onClick={updateLikes}>Like</button>
         {selectedDeck.likeCount}
@@ -97,10 +97,10 @@ const Deck = (props) => {
           </div>
         ))
       ) : (
-        <div>There aren't any flashcards in this deck yet!</div>
+        <div>Hmm... It looks like {selectedUser ? `@${selectedUser.handle}` : 'this user'} is still working on making some great flashcards for this deck.</div>
       )}
     </div>
   )
 }
 
-export default Deck
+export default FriendDeck
