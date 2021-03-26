@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react'
+import React, {useReducer } from 'react'
 import { useHistory } from 'react-router-dom'
 import {
   LOGIN_FORM,
@@ -91,5 +91,3 @@ const LoginForm = (props) => {
 }
 
 export default LoginForm
-
-//test
