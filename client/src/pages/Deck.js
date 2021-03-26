@@ -33,7 +33,7 @@ const Deck = (props) => {
 
   const renderProfileButton = () => {
     switch (true) {
-      case storedSelectedUser === currentUserData:
+      case selectedUser === currentUserData:
         return (
           <div>
             <button onClick={() => history.push('/editor')}>
@@ -138,7 +138,9 @@ const Deck = (props) => {
     <div>
       <h1>
         Profile:{' '}
-        {currentUserData ? currentUserData.handle : selectedUser.handle}
+        {currentUserData && selectedUser.handle === currentUserData.handle
+          ? currentUserData.handle
+          : selectedUser.handle}
       </h1>
       {renderProfileButton()}
       <img
