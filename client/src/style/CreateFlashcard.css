@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap');
+
+.container {
+  /* background-color: #1f1e21; */
+  width: 70ch;
+  margin: 4em auto;
+}
+
+.container__editor {
+  margin: 30px auto;
+  padding: 30px 20px;
+  /* background-color: #1f1e21; */
+  width: 60ch;
+}
+
+.editor {
+  font-size: 18px;
+  /* font-variant-ligatures: common-ligatures; */
+  background-color: #011627;
+  border-radius: 3px;
+  width: 55ch;
+
+  padding: 18px;
+  text-align: left;
+  tab-size: 4ch;
+  min-height: 300px;
+  max-height: 800px;
+  overflow-y: scroll;
+  margin: 4em auto;
+  font-family: 'Fira code', 'Fira Mono', Consolas, Menlo, Courier, monospace;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-weight: 500;
+  border-radius: 0.3em;
+}
+
+.container__editor textarea {
+  /* outline: 0; */
+  padding: 30px;
+  margin: 10px;
+}
+textarea {
+  /* outline: 0; */
+  padding: 30px;
+  margin: 10px;
+}
