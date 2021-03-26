@@ -72,8 +72,7 @@ const Deck = (props) => {
     console.log('props.selectedDeck.id:', props.currentUserSelectedDeck.id)
     try {
       const response = await axios.get(
-        // `${BASE_URL}/flashcards/deck/${props.currentUserSelectedDeck.id}`
-        `${BASE_URL}/flashcards/deck/34`
+        `${BASE_URL}/flashcards/deck/${props.currentUserSelectedDeck.id}`
       )
       console.log('res for getFlashcardsByDeck', response.data)
       setFlashcards(response.data)
@@ -137,7 +136,10 @@ const Deck = (props) => {
   console.log(flashcards)
   return (
     <div>
-      <h1>Profile: {currentUserData.handle}</h1>
+      <h1>
+        Profile:{' '}
+        {currentUserData ? currentUserData.handle : selectedUser.handle}
+      </h1>
       {renderProfileButton()}
       <img
         src={currentUserData ? currentUserData.avatarUrl : null}
@@ -160,7 +162,13 @@ const Deck = (props) => {
           <h1>{deckTitle}</h1>
           <button onClick={toggleEdit}>Edit</button>
           <button>
-            <a href={`/user/${currentUserData.handle}`}>Return to profile</a>
+            <a
+              href={`/user/${
+                currentUserData ? currentUserData.handle : selectedUser.handle
+              }`}
+            >
+              Return to profile
+            </a>
           </button>
         </div>
       )}
