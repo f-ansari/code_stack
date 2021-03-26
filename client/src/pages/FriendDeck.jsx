@@ -78,22 +78,23 @@ const FriendDeck = (props) => {
   }, [])
   console.log(flashcards)
   return (
-    <div>
+    <div className="main-container">
       <h1>Profile: {selectedUser ? selectedUser.handle : null}</h1>
 
       <img
+       className="profile-img"
         src={selectedUser ? selectedUser.avatarUrl : null}
         alt={`avatar for ${selectedUser ? selectedUser.handle : null}`}
       />
       <h3>{deckTitle}</h3>
       <p>
-        <button onClick={updateLikes}>Like</button>
+        <button className="page-buttons" onClick={updateLikes}>👍</button>
         {selectedDeck.likeCount}
       </p>
       {flashcards.length ? (
         flashcards.map((flashcard, idx) => (
-          <div key={`${idx}`} onClick={() => handleFlashcardClick(flashcard.id)}>
-            <h3>{flashcard.title}</h3>
+          <div className="cards" key={`${idx}`} onClick={() => handleFlashcardClick(flashcard.id)}>
+            <h3 className="deck-title">{flashcard.title}</h3>
           </div>
         ))
       ) : (
