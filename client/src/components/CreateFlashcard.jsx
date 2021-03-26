@@ -184,6 +184,7 @@ const CreateFlashcard = (props) => {
     </h2>
   )
 }
+}
 export default CreateFlashcard
 
 // const CreateFlashcard = (props) => {
