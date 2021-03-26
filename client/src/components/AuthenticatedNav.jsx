@@ -4,7 +4,10 @@ import { NavLink } from 'react-router-dom'
 const AuthenticatedNav = (props) => {
 
   const myProfile = props.currentUser.handle
-  
+
+  console.log('myProfile:', myProfile)
+
+
   return (
     
     <div>
