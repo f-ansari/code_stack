@@ -58,6 +58,7 @@ const reducer = (state, action) => {
 }
 
 const CreateFlashcard = (props) => {
+  console.log(props.currentUserSelectedDeck.id)
   const [state, dispatch] = useReducer(reducer, iState)
   console.log(props)
 
@@ -65,6 +66,7 @@ const CreateFlashcard = (props) => {
     e.preventDefault()
     console.log('publish button clicked')
     console.log(state.flashcard)
+
     if (props.currentUserSelectedDeck.id)
       try {
         const res = await axios.post(
@@ -79,7 +81,7 @@ const CreateFlashcard = (props) => {
       } catch (err) {
         console.log(err)
       }
-  }
+
 
   const setCodeBlock = (e) => {
     console.log(e)
