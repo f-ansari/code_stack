@@ -144,3 +144,20 @@ main {
   opacity: 1;
   background-color: #48c13a;
 }
+
+/*FORMS*/
+form {
+  margin-bottom: 3em;
+}
+
+.input-feild {
+  background: rgba(155, 155, 155, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  backdrop-filter: blur(17.5px);
+  -webkit-backdrop-filter: blur(17.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  padding: 1vh 10vw;
+  margin-bottom: 2em;
+}
