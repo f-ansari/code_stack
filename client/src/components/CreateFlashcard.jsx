@@ -1,19 +1,32 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useEffect } from 'react'
 import Editor from 'react-simple-code-editor'
 import { highlight, languages } from 'prismjs/components/prism-core'
 import 'prismjs/components/prism-clike'
 import 'prismjs/components/prism-javascript'
-import 'prismjs/themes/prism.css'
+import 'prismjs/components/prism-git'
+import 'prismjs/components/prism-css'
+
+// import 'prismjs/themes/prism-tomorrow.css'
+import '../style/CreateFlashcard.css'
+import 'prism-theme-night-owl/build/style.css'
 // import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'      // if all crash and burn. use this line of code
 // import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import {
   SET_CODEBLOCK,
   SET_FLASHCARD_PREFS,
   SET_FLASHCARD_PUBLISHED,
-  SET_FLASHCARD_DECK_ID
+  SET_FLASHCARD_DECK_ID,
+  SET_FLASHCARD_LANG
 } from '../store/types'
 import { BASE_URL } from '../globals'
 import axios from 'axios'
+
+const langs = ['javascript', 'python', 'json', 'css']
+
+langs.forEach((lang) => {
+  console.log(langs)
+  return import(`prismjs/components/prism-${lang}`)
+})
 
 const iState = {
   flashcard: {
@@ -25,7 +38,7 @@ const iState = {
         <h1>all the codes</h1>
       );
     }`,
-    deckId: 5,   /// comeback to add useEffect to set inital value 
+    deckId: 5, /// comeback to add useEffect to set inital value
     language: `css`
   },
   flashcardPublished: false,
@@ -53,6 +66,11 @@ const reducer = (state, action) => {
         ...state,
         flashcard: { ...state.flashcard, deckId: action.payload.deckId },
         deckName: action.payload.deckName
+      }
+    case SET_FLASHCARD_LANG:
+      return {
+        ...state,
+        flashcard: { ...state.flashcard, language: action.payload }
       }
     default:
       return state
@@ -82,7 +100,7 @@ const CreateFlashcard = (props) => {
       } catch (err) {
         console.log(err)
       }
-    }
+  }
 
   const setCodeBlock = (e) => {
     console.log(e)
@@ -98,30 +116,35 @@ const CreateFlashcard = (props) => {
     })
   }
 
-  const setDeckId = (e) => {
-    const { name, value } = e.target
-    console.log(e.target.dataset.txt)
-    console.log('deckName', name, value)
-
+  const setDeck = (title, id) => {
+    console.log('deckName', title, id)
     dispatch({
       type: SET_FLASHCARD_DECK_ID,
-      payload: { deckId: e.target.value }
+      payload: { deckName: title, deckId: id }
     })
   }
 
-  const setDeckName = (title) => {
-    console.log('deckName', title)
+  const setLang = (lang) => {
     dispatch({
-      type: SET_FLASHCARD_DECK_ID,
-      payload: { deckName: title }
+      type: SET_FLASHCARD_LANG,
+      payload: lang
     })
   }
+
+  const initFlashcardDeckState = () => {
+    dispatch({
+      type: SET_FLASHCARD_DECK_ID,
+      payload: { deckId: props.currentUserSelectedDeck.id }
+    })
+  }
+
+  useEffect(() => {
+    initFlashcardDeckState()
+  }, [state.deckId])
 
   return !state.flashcardPublished ? (
     <div>
-      <form onChange={(event) => setDeckId(event)}></form>
-
-      <form onSubmit={(e) => handleFlashcardSubmit(e)}>
+      <form onSubmit={(e) => handleFlashcardSubmit(e)} className="container">
         <input
           name="title"
           type="text"
@@ -133,33 +156,41 @@ const CreateFlashcard = (props) => {
           <option>HTML</option>
           <option>Javascript</option>
           <option>CSS</option>
+          {langs.map((lang, idx) => (
+            <option
+              key={idx}
+              name={lang}
+              value={state.flashcard.language}
+              onClick={() => setLang(lang)}
+            >
+              {lang}
+            </option>
+          ))}
         </select>
-        <select
-        // onChange={(event) => setDeckName(event)}
-        >
+
+        <select>
           {props.currentUserData
             ? props.currentUserData.Decks.map((deck, idx) => (
                 <option
                   key={idx}
                   name={deck.id}
                   value={deck.title}
-                  onClick={() => setDeckName(deck.title)}
+                  onClick={() => setDeck(deck.title, deck.id)}
                 >
                   {deck.title}
                 </option>
               ))
             : null}
         </select>
-        <Editor
-          value={state.flashcard.codeBlock}
-          onValueChange={(code) => setCodeBlock(code)}
-          highlight={(code) => highlight(code, languages.js)}
-          padding={10}
-          style={{
-            fontFamily: '"Fira code", "Fira Mono", monospace',
-            fontSize: 12
-          }}
-        />
+        <div className="container__editor">
+          <Editor
+            className="editor"
+            value={state.flashcard.codeBlock}
+            onValueChange={(code) => setCodeBlock(code)}
+            highlight={(code) => highlight(code, languages.js)}
+            padding={30}
+          />
+        </div>
         {/* <textarea
           name="codeBlock"
           type="text"             // if all crash and burn. use this line of code
@@ -176,23 +207,20 @@ const CreateFlashcard = (props) => {
         />
         <button>Publish flashcard</button>
       </form>
-      <div>
+      {/* <div>
         <h3>{state.flashcard.title}</h3>
-        <p>{state.flashcard.language}</p>
-        {/* <pre>
+        <p>{state.flashcard.language}</p> */}
+      {/* <pre>
         <SyntaxHighlighter language="javascript" style={dark}>
           {state.flashcard.codeBlock} // if all crash and burn. use this line of code
         </SyntaxHighlighter>
         </pre> */}
-        <code>{state.flashcard.codeBlock}</code>
+      {/* <code>{state.flashcard.codeBlock}</code>
         <p>{state.flashcard.notes}</p>
-      </div>
+      </div>*/}
     </div>
   ) : (
-    <h2>
-      Your flashcard has been published to the <strong>{state.deckName}</strong>{' '}
-      deck.
-    </h2>
+    <h2>Your flashcard has been published to the {state.deckName} deck.</h2>
   )
 }
 export default CreateFlashcard
