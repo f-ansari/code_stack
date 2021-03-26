@@ -26,7 +26,7 @@ const UserList = (props) => {
         <h1>Welcome to the Jungle</h1>
         <h2>Go ahead and find a user</h2>
         {users.map((user) => (
-          <div className="cards" onClick={() => targetUser(user)}>
+          <div className="cards" key={`${user}`}  onClick={() => targetUser(user)}>
             <h3 className="deck-title">{user.handle}</h3>
           </div>
         ))}
