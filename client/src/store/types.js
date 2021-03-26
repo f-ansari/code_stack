@@ -25,5 +25,6 @@ export const SELECT_CREATE = 'select_create'
 export const SET_CODEBLOCK = 'set_codeblock'
 export const SET_FLASHCARD_PREFS = 'set_flashcard_prefs'
 export const SET_FLASHCARD_PUBLISHED = 'set_flashcard_published'
+export const SET_FLASHCARD_DECK_ID = 'set_flashcard_deck_id'
 
 export const SET_USER_DECKS = 'set_user_decks'

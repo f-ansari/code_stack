@@ -10,7 +10,8 @@ import {
   GET_DECKS_BY_HANDLE,
   SELECT_CREATE,
   SET_CURRENT_USER_SELECTED_DECK,
-  SET_USER_DECKS
+  SET_USER_DECKS,
+  SET_CURRENT_USER_DATA
 } from '../store/types'
 import { BASE_URL } from '../globals'
 import axios from 'axios'
@@ -43,7 +44,7 @@ const reducer = (state, action) => {
 
 const Profile = (props) => {
   const [state, dispatch] = useReducer(reducer, iState)
-  const { selectedUser, decksByHandle, appDispatch } = props
+  const { selectedUser, decksByHandle, appDispatch, currentUserData } = props
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const getProfile = async () => {
@@ -73,26 +74,39 @@ const Profile = (props) => {
     // axios call that returns a boolean
   }
 
-  // const renderProfileButton = () => {
-  //   switch (true) {
-  //     case currentUser && currentUser.handle == selectedUser.handle:
-  //       return (
-  //         <div>
-  //           {state.clickedCreate && renderDeckForm()}
-  //           <button
-  //             onClick={() =>
-  //               dispatch({ type: SELECT_CREATE, payload: !state.clickedCreate })
-  //             }
-  //           >
-  //             {state.clickedCreate ? `Cancel` : `+ Create Deck`}
-  //           </button>
-  //         </div>
-  //       )
+  const renderProfileButton = () => {
+    switch (true) {
+      // case currentUser && currentUser.handle == selectedUser.handle:
+      //   return (
+      //     <div>
+      //       {state.clickedCreate && renderDeckForm()}
+      //       <button
+      //         onClick={() =>
+      //           dispatch({ type: SELECT_CREATE, payload: !state.clickedCreate })
+      //         }
+      //       >
+      //         {state.clickedCreate ? `Cancel` : `+ Create Deck`}
+      //       </button>
+      //     </div>
+      //   )
+      case currentUserData && currentUserData.handle === selectedUser.handle:
+        return (
+          <div>
+            {state.clickedCreate}
+            <button
+              onClick={() =>
+                dispatch({ type: SELECT_CREATE, payload: !state.clickedCreate })
+              }
+            >
+              {state.clickedCreate ? `Cancel` : `+ Create Deck`}
+            </button>
+          </div>
+        )
 
-  //     default:
-  //       return <button>Follow</button>
-  //   }
-  // }
+      default:
+        return <button>Follow</button>
+    }
+  }
 
   // map through all of the decks owned by selectedUser
   const renderDecksByHandle = () => {
@@ -161,7 +175,7 @@ const Profile = (props) => {
   return selectedUser ? (
     <div>
       <h1>Profile: {selectedUser.handle} </h1>
-
+      {renderProfileButton()}
       <img
         src={selectedUser.avatarUrl}
         alt={`avatar for ${selectedUser.handle}`}
