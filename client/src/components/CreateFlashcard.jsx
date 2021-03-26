@@ -4,6 +4,8 @@ import { highlight, languages } from 'prismjs/components/prism-core'
 import 'prismjs/components/prism-clike'
 import 'prismjs/components/prism-javascript'
 import 'prismjs/themes/prism.css'
+// import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'      // if all crash and burn. use this line of code
+// import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import {
   SET_CODEBLOCK,
   SET_FLASHCARD_PREFS,
@@ -149,7 +151,7 @@ const CreateFlashcard = (props) => {
               ))
             : null}
         </select>
-        {/* <Editor
+        <Editor
           value={state.flashcard.codeBlock}
           onValueChange={(code) => setCodeBlock(code)}
           highlight={(code) => highlight(code, languages.js)}
@@ -158,14 +160,14 @@ const CreateFlashcard = (props) => {
             fontFamily: '"Fira code", "Fira Mono", monospace',
             fontSize: 12
           }}
-        /> */}
-        <textarea
+        />
+        {/* <textarea
           name="codeBlock"
-          type="text"
+          type="text"             // if all crash and burn. use this line of code
           value={state.codeBlock}
           onChange={(event) => handleFieldsChange(event)}
           placeholder="write a code"
-        />
+        /> */}
         <textarea
           name="notes"
           type="text"
@@ -178,9 +180,12 @@ const CreateFlashcard = (props) => {
       <div>
         <h3>{state.flashcard.title}</h3>
         <p>{state.flashcard.language}</p>
-        <pre>
-          <code>{state.flashcard.codeBlock}</code>
-        </pre>
+        {/* <pre>
+        <SyntaxHighlighter language="javascript" style={dark}>
+          {state.flashcard.codeBlock} // if all crash and burn. use this line of code
+        </SyntaxHighlighter>
+        </pre> */}
+        <code>{state.flashcard.codeBlock}</code>
         <p>{state.flashcard.notes}</p>
       </div>
     </div>
