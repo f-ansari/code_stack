@@ -104,15 +104,15 @@ const Profile = (props) => {
         )
 
       default:
-        return <button>Follow</button>
+        return <button className="page-buttons">Follow</button>
     }
   }
 
   // map through all of the decks owned by selectedUser
   const renderDecksByHandle = () => {
     return state.userDecks.map((deck, idx) => (
-      <div key={`${idx}`} onClick={() => targetDeck(deck)}>
-        <h3>Deck Title: {deck.title}</h3>
+      <div className="cards" key={`${idx}`} onClick={() => targetDeck(deck)}>
+        <h3 className="deck-title">{deck.title}</h3>
       </div>
     ))
   }
@@ -174,15 +174,25 @@ const Profile = (props) => {
 
   return selectedUser ? (
     <div>
-      <h1>Profile: {selectedUser.handle} </h1>
-      {renderProfileButton()}
-      <img
-        src={selectedUser.avatarUrl}
-        alt={`avatar for ${selectedUser.handle}`}
-      />
-      <div>
-        {decksByHandle ? renderDecksByHandle() : <h3>No decks yet.</h3>}
-      </div>
+      <section className="main-container">
+        <h1>@{selectedUser.handle}</h1>
+        <div className="user-info">
+          <img
+            className="profile-img"
+            src={selectedUser.avatarUrl}
+            alt={`avatar for ${selectedUser.handle}`}
+          />
+          <br></br>
+          {renderProfileButton()}
+        </div>
+
+        <br></br>
+
+        <h3>Decks</h3>
+        <div>
+          {decksByHandle ? renderDecksByHandle() : <h3>No decks yet.</h3>}
+        </div>
+      </section>
     </div>
   ) : (
     `Loading...`
