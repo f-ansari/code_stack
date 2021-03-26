@@ -1,15 +1,9 @@
 import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
-
+import { NavLink, useHistory } from 'react-router-dom'
 const AuthenticatedNav = (props) => {
-
   const myProfile = props.currentUser.handle
-
-  console.log('myProfile:', myProfile)
-
-
+  const history = useHistory()
   return (
-    
     <div>
       <NavLink to="/">
         <button className="nav-buttons">HOME</button>
@@ -17,13 +11,16 @@ const AuthenticatedNav = (props) => {
       <NavLink to="/userlist">
         <button className="nav-buttons">All Users</button>
       </NavLink>
-      <NavLink to="/user/{myProfile}">
-        <button className="nav-buttons">myProfile</button>
-      </NavLink>
-      <button className="nav-buttons" onClick={() => props.logOut()}>Logout</button>
-
+      <button
+        className="nav-buttons"
+        onClick={() => history.push(`/user/${myProfile}`)}
+      >
+        myProfile
+      </button>
+      <button className="nav-buttons" onClick={() => props.logOut()}>
+        Logout
+      </button>
     </div>
   )
 }
-
 export default AuthenticatedNav
