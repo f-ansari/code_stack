@@ -92,7 +92,7 @@ const UserProfile = (props) => {
   const targetDeck = (deck) => {
     console.log('deck', deck)
     appDispatch({ type: SET_CURRENT_USER_SELECTED_DECK, payload: deck })
-    props.history.push(`/deck/${deck.id}`)
+    props.history.push(`/myDeck/${deck.id}`)
   }
 
   const handleDeckFormSubmit = async (e) => {
