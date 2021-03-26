@@ -6,20 +6,22 @@ import {
   SET_SELECTED_FLASHCARD,
   SET_SELECTED_DECK,
   GET_DECKS_BY_HANDLE,
+  SET_CURRENT_USER_DATA,
   SET_CURRENT_USER_SELECTED_DECK,
-  SET_SELECTED_USER
+  SET_CURRENT_USER_SELECTED_DECK_IDX,
+  SET_SELECTED_USER,
+  ADD_TO_CURRENT_USER_DECK,
+  UPDATE_CURRENT_USER_DECK
 } from '../store/types'
-import CreateFlashcard from '../components/CreateFlashcard'
 
 const Deck = (props) => {
   console.log(props)
   const {
-    selectedUser,
     selectedDeck,
     decksByHandle,
-    currentUser,
     currentUserData,
-    currentUserSelectedDeck
+    currentUserSelectedDeck,
+    currentUserDeckIdx
   } = props
 
   const [isEditing, setEditing] = useState(false)
@@ -65,10 +67,10 @@ const Deck = (props) => {
   //AXIOS CALL TO POPULATE FLASHCARDS BY DECK
 
   const getFlashcardsByDeck = async () => {
-    console.log('props.selectedDeck.id:', props.currentUserSelectedDeck.id)
+    console.log('props.selectedDeck.id:', currentUserSelectedDeck)
     try {
       const response = await axios.get(
-        `${BASE_URL}/flashcards/deck/${props.currentUserSelectedDeck.id}`
+        `${BASE_URL}/flashcards/deck/${currentUserSelectedDeck.id}`
       )
       console.log('res for getFlashcardsByDeck', response.data)
       setFlashcards(response.data)
@@ -85,17 +87,32 @@ const Deck = (props) => {
 
   const submitUpdate = async (e) => {
     e.preventDefault()
+
+    // const updatedDeckIndex = currentUserSelectedDeck.index
+
+    // console.log(
+    //   currentUserData.Decks[currentUserDeckIdx]
+    //   // currentUserData.Decks[currentUserSelectedDeck.index].title
+    // )
     try {
-      await axios.put(`${BASE_URL}/decks/${props.match.params.deckId}`, {
-        title: deckTitle
+      const res = await axios.put(
+        `${BASE_URL}/decks/${props.match.params.deckId}`,
+        {
+          title: deckTitle
+        }
+      )
+      console.log('res', res.data[1])
+      const deck = res.data[1][0]
+      props.dispatch({
+        type: UPDATE_CURRENT_USER_DECK,
+        payload: { deck: deck, id: deck.id }
       })
       props.dispatch({
-        type: SET_SELECTED_DECK,
-        payload: { ...selectedDeck, title: deckTitle }
-      })
-      props.dispatch({
-        type: GET_DECKS_BY_HANDLE,
-        payload: { ...storedDecksByHandle }
+        type: SET_CURRENT_USER_SELECTED_DECK,
+        payload: {
+          ...currentUserSelectedDeck,
+          title: deckTitle
+        }
       })
       toggleEdit()
     } catch (error) {
@@ -116,7 +133,10 @@ const Deck = (props) => {
       )
       console.log(res.data[1][0])
       console.log(currentUserSelectedDeck)
-      props.dispatch({ type: SET_SELECTED_DECK, payload: res.data[1][0] })
+      props.dispatch({
+        type: SET_CURRENT_USER_SELECTED_DECK,
+        payload: res.data[1][0]
+      })
     } catch (error) {
       console.log(error)
     }
@@ -169,7 +189,7 @@ const Deck = (props) => {
 
       <p>
         <button onClick={updateLikes}>Like</button>
-        {selectedDeck.likeCount}
+        {currentUserSelectedDeck.likeCount}
       </p>
       {flashcards.length ? (
         flashcards.map((flashcard) => (

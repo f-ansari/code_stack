@@ -10,7 +10,8 @@ import {
   ADD_TO_CURRENT_USER_DECK,
   SELECT_CREATE,
   SET_SELECTED_DECK,
-  SET_CURRENT_USER_SELECTED_DECK
+  SET_CURRENT_USER_SELECTED_DECK,
+  SET_CURRENT_USER_SELECTED_DECK_IDX
 } from '../store/types'
 import { BASE_URL } from '../globals'
 import axios from 'axios'
@@ -81,7 +82,7 @@ const UserProfile = (props) => {
   // map through all of the decks owned by selectedUser
   const renderDecksByHandle = () => {
     return currentUserData.Decks.map((deck, idx) => (
-      <div key={`${idx}`} onClick={() => targetDeck(deck)}>
+      <div key={`${idx}`} onClick={() => targetDeck(deck, idx)}>
         <h3>Deck Title: {deck.title}</h3>
       </div>
     ))
@@ -89,10 +90,14 @@ const UserProfile = (props) => {
 
   //handled on renderDeckByHandle
   // route user to deck page to view deck details
-  const targetDeck = (deck) => {
-    console.log('deck', deck)
+  const targetDeck = (deck, deckIndex) => {
+    console.log('deck', deck, deckIndex)
     appDispatch({ type: SET_CURRENT_USER_SELECTED_DECK, payload: deck })
-    props.history.push(`/deck/${deck.id}`)
+    // appDispatch({
+    //   type: SET_CURRENT_USER_SELECTED_DECK_IDX,
+    //   payload: deckIndex
+    // })
+    props.history.push(`/myDeck/${deck.id}`)
   }
 
   const handleDeckFormSubmit = async (e) => {
