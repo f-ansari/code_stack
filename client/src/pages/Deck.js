@@ -6,18 +6,17 @@ import {
   SET_SELECTED_FLASHCARD,
   SET_SELECTED_DECK,
   GET_DECKS_BY_HANDLE,
+  SET_CURRENT_USER_DATA,
   SET_CURRENT_USER_SELECTED_DECK,
-  SET_SELECTED_USER
+  SET_SELECTED_USER,
+  ADD_TO_CURRENT_USER_DECK
 } from '../store/types'
-import CreateFlashcard from '../components/CreateFlashcard'
 
 const Deck = (props) => {
   console.log(props)
   const {
-    selectedUser,
     selectedDeck,
     decksByHandle,
-    currentUser,
     currentUserData,
     currentUserSelectedDeck
   } = props
@@ -85,17 +84,24 @@ const Deck = (props) => {
 
   const submitUpdate = async (e) => {
     e.preventDefault()
+
+    const updatedDeckId = currentUserSelectedDeck.id
+
     try {
       await axios.put(`${BASE_URL}/decks/${props.match.params.deckId}`, {
         title: deckTitle
       })
+      // props.dispatch({
+      //   type: SET_CURRENT_USER_DATA,
+      //   payload: { ...currentUserData, currentUserData.Decks[1][`${updatedDeckId}`]: deckTitle }
+      // })
       props.dispatch({
-        type: SET_SELECTED_DECK,
-        payload: { ...selectedDeck, title: deckTitle }
-      })
-      props.dispatch({
-        type: GET_DECKS_BY_HANDLE,
-        payload: { ...storedDecksByHandle }
+        type: SET_CURRENT_USER_SELECTED_DECK,
+        payload: {
+          ...currentUserSelectedDeck,
+          title: deckTitle
+          // [currentUserSelectedDeck[updatedDeckId]]: deckTitle
+        }
       })
       toggleEdit()
     } catch (error) {
@@ -116,7 +122,10 @@ const Deck = (props) => {
       )
       console.log(res.data[1][0])
       console.log(currentUserSelectedDeck)
-      props.dispatch({ type: SET_SELECTED_DECK, payload: res.data[1][0] })
+      props.dispatch({
+        type: SET_CURRENT_USER_SELECTED_DECK,
+        payload: res.data[1][0]
+      })
     } catch (error) {
       console.log(error)
     }
