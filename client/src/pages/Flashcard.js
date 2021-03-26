@@ -51,7 +51,7 @@ const Flashcard = (props) => {
         customStyle={{borderRadius:"0.5em", padding:"10px", textAlign:"left"}}
         wrapLines={true}
         language="javascript" style={docco}>
-      {/* {selectedFlashcard.codeBlock} */}
+      {selectedFlashcard.codeBlock}
       {codeString}
         </SyntaxHighlighter>
         {/* <pre>codeblock: "some codeblock"{selectedFlashcard.codeBlock}</pre> */}

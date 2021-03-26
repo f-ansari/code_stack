@@ -61,7 +61,6 @@ const CreateFlashcard = (props) => {
   console.log(props.currentUserSelectedDeck.id)
   const [state, dispatch] = useReducer(reducer, iState)
   console.log(props)
-  const codeString = "1+1"
   const handleFlashcardSubmit = async (e) => {
     e.preventDefault()
     console.log('publish button clicked')
@@ -159,6 +158,13 @@ const CreateFlashcard = (props) => {
             fontSize: 12
           }}
         />
+        {/* <textarea
+          name="codeBlock"
+          type="text"
+          value={state.codeBlock}
+          onChange={(event) => handleFieldsChange(event)}
+          placeholder="write a piece of code"
+        /> */}
         <textarea
           name="notes"
           type="text"
@@ -183,6 +189,7 @@ const CreateFlashcard = (props) => {
       deck.
     </h2>
   )
+}
 }
 export default CreateFlashcard
 
@@ -211,4 +218,3 @@ export default CreateFlashcard
 //   )
 // }
 
-// export default CreateFlashcard
