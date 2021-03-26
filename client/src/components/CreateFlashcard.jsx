@@ -109,10 +109,10 @@ const CreateFlashcard = (props) => {
 
   const handleFieldsChange = (e) => {
     e.preventDefault()
-    console.log('input entered!', e.target.name)
+    console.log('input entered!', e.target.name, e.target.value)
     dispatch({
       type: SET_FLASHCARD_PREFS,
-      payload: { name: e.target.name, value: e.target.value }
+      payload: { name: 'language', value: e.target.value }
     })
   }
 
@@ -159,8 +159,8 @@ const CreateFlashcard = (props) => {
           {langs.map((lang, idx) => (
             <option
               key={idx}
-              name={lang}
-              value={state.flashcard.language}
+              name="language"
+              value={lang}
               onClick={() => setLang(lang)}
             >
               {lang}
