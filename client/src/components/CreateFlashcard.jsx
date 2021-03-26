@@ -21,7 +21,7 @@ import {
 import { BASE_URL } from '../globals'
 import axios from 'axios'
 
-const langs = [ 'css', 'javascript', 'python', 'json', 'html']
+const langs = [ 'css',  'html', 'javascript',  'json', 'python']
 
 langs.forEach((lang) => {
   console.log(langs)
