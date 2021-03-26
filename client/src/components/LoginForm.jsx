@@ -59,27 +59,33 @@ const LoginForm = (props) => {
 
   return (
     <div>
-      <h1>Login Form</h1>
+      <section className="main-container">
+        <h1>Login Form</h1>
 
-      <form onSubmit={(e) => submitLogin(e)}>
-        <input
-          type="text"
-          name="handle"
-          value={state.handle}
-          onChange={(e) => handleLoginChange(e)}
-          placeholder="jane_doe"
-        />
-        <input
-          type="text"
-          name="password"
-          value={state.password}
-          onChange={(e) => handleLoginChange(e)}
-          placeholder="jane_doe"
-        />
-        <button color="black" type="submit">
-          Submit
-        </button>
-      </form>
+        <form onSubmit={(e) => submitLogin(e)}>
+          <input
+            type="text"
+            name="handle"
+            value={state.handle}
+            onChange={(e) => handleLoginChange(e)}
+            placeholder="jane_doe"
+            className="input-feild"
+          />
+          <br></br>
+          <input
+            type="text"
+            name="password"
+            value={state.password}
+            onChange={(e) => handleLoginChange(e)}
+            placeholder="jane_doe"
+            className="input-feild"
+          />
+          <br></br>
+          <button className="page-buttons" type="submit">
+            Submit
+          </button>
+        </form>
+      </section>
     </div>
   )
 }
