@@ -120,7 +120,7 @@ const Profile = (props) => {
   //handled on renderDeckByHandle
   // route user to deck page to view deck details
   const targetDeck = (deck) => {
-    appDispatch({ type: SET_CURRENT_USER_SELECTED_DECK, payload: deck })
+    appDispatch({ type: SET_SELECTED_DECK, payload: deck })
     props.history.push(`/deck/${deck.id}`)
   }
 
