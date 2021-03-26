@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       codeBlock: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       deckId: {
         type: Sequelize.INTEGER,

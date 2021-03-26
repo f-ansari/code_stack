@@ -81,7 +81,6 @@ const CreateFlashcard = (props) => {
   console.log(props.currentUserSelectedDeck.id)
   const [state, dispatch] = useReducer(reducer, iState)
   console.log(props)
-
   const handleFlashcardSubmit = async (e) => {
     e.preventDefault()
     console.log('publish button clicked')
@@ -224,7 +223,6 @@ const CreateFlashcard = (props) => {
     <h2>Your flashcard has been published to the {state.deckName} deck.</h2>
   )
 }
-
 export default CreateFlashcard
 
 // const CreateFlashcard = (props) => {
@@ -252,4 +250,3 @@ export default CreateFlashcard
 //   )
 // }
 
-// export default CreateFlashcard
