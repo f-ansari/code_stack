@@ -31,6 +31,11 @@ const UserList = (props) => {
             key={`${idx}`}
             onClick={() => targetUser(user)}
           >
+            <img
+              className="profile-img"
+              src={user.avatarUrl}
+              alt={`avatar for ${user.handle}`}
+            />
             <h3 className="deck-title">{user.handle}</h3>
           </div>
         ))}
