@@ -117,7 +117,7 @@ main {
 
 /*PROFILE-PAGE*/
 .profile-img {
-  max-width: 5em;
+  max-width: 20em;
 }
 
 .deck-title {
@@ -139,6 +139,7 @@ main {
   text-decoration: none;
   cursor: pointer;
   margin-top: 3em;
+  margin-bottom: 2em;
 }
 
 .page-buttons:hover {
@@ -171,7 +172,6 @@ form {
   max-width: 40em;
   min-height: 28em;
   border-radius: 4px;
-  cursor: pointer;
   transition: all 0.2s;
   justify-self: center;
 
