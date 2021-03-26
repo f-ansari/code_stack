@@ -47,7 +47,7 @@ const FriendDeck = (props) => {
     console.log('props.selectedDeck.id:', props.selectedDeck.id)
     try {
       const response = await axios.get(
-        `${BASE_URL}/flashcards/deck/${currentUserSelectedDeck.id}`
+        `${BASE_URL}/flashcards/deck/${selectedDeck.id}`
       )
       console.log('res for getFlashcardsByDeck', response.data)
       setFlashcards(response.data)
