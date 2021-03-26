@@ -108,10 +108,10 @@ const CreateFlashcard = (props) => {
 
   const setDeckName = (title) => {
     console.log('deckName', title)
-    // dispatch({
-    //   type: SET_FLASHCARD_DECK_ID,
-    //   payload: { deckName: e.target.name }
-    // })
+    dispatch({
+      type: SET_FLASHCARD_DECK_ID,
+      payload: { deckName: title }
+    })
   }
 
   return !state.flashcardPublished ? (
@@ -177,8 +177,8 @@ const CreateFlashcard = (props) => {
     </div>
   ) : (
     <h2>
-      Your flashcard has been published to the{' '}
-      <strong>{state.currentUserSelectedDeck.title}</strong> deck.
+      Your flashcard has been published to the <strong>{state.deckName}</strong>{' '}
+      deck.
     </h2>
   )
 }
