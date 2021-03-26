@@ -81,7 +81,7 @@ const CreateFlashcard = (props) => {
       } catch (err) {
         console.log(err)
       }
-
+    }
 
   const setCodeBlock = (e) => {
     console.log(e)
@@ -149,7 +149,7 @@ const CreateFlashcard = (props) => {
               ))
             : null}
         </select>
-        <Editor
+        {/* <Editor
           value={state.flashcard.codeBlock}
           onValueChange={(code) => setCodeBlock(code)}
           highlight={(code) => highlight(code, languages.js)}
@@ -158,6 +158,13 @@ const CreateFlashcard = (props) => {
             fontFamily: '"Fira code", "Fira Mono", monospace',
             fontSize: 12
           }}
+        /> */}
+        <textarea
+          name="codeBlock"
+          type="text"
+          value={state.codeBlock}
+          onChange={(event) => handleFieldsChange(event)}
+          placeholder="write a code"
         />
         <textarea
           name="notes"
@@ -184,7 +191,7 @@ const CreateFlashcard = (props) => {
     </h2>
   )
 }
-}
+
 export default CreateFlashcard
 
 // const CreateFlashcard = (props) => {
