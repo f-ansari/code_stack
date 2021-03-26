@@ -33,18 +33,13 @@ const Deck = (props) => {
   // RENDER BUTTONS CONDITIONALLY
 
   const renderProfileButton = () => {
-    switch (true) {
-      case selectedUser.handle === currentUserData.handle:
-        return (
-          <div>
-            <button onClick={() => history.push('/editor')}>
-              + Create Flashcard
-            </button>
-          </div>
-        )
-      default:
-        return <button>Follow</button>
-    }
+    return (
+      <div>
+        <button onClick={() => history.push('/editor')}>
+          + Create Flashcard
+        </button>
+      </div>
+    )
   }
 
   // FUNCTIONS TO HANDLE FLASHCARD SELECTION
@@ -139,9 +134,9 @@ const Deck = (props) => {
     <div>
       <h1>
         Profile:{' '}
-        {currentUserData && selectedUser.handle === currentUserData.handle
+        {currentUserData && currentUserData.handle
           ? currentUserData.handle
-          : selectedUser.handle}
+          : null}
       </h1>
       {renderProfileButton()}
       <img
@@ -165,13 +160,7 @@ const Deck = (props) => {
           <h1>{deckTitle}</h1>
           <button onClick={toggleEdit}>Edit</button>
           <button
-            onClick={() =>
-              history.push(
-                `/user/${
-                  currentUserData ? currentUserData.handle : selectedUser.handle
-                }`
-              )
-            }
+            onClick={() => history.push(`/user/${currentUserData.handle}`)}
           >
             Return to profile
           </button>
