@@ -5,12 +5,9 @@ import 'prismjs/components/prism-clike'
 import 'prismjs/components/prism-javascript'
 import 'prismjs/components/prism-git'
 import 'prismjs/components/prism-css'
-
-// import 'prismjs/themes/prism-tomorrow.css'
 import '../style/CreateFlashcard.css'
 import 'prism-theme-night-owl/build/style.css'
-// import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'      // if all crash and burn. use this line of code
-// import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+
 import {
   SET_CODEBLOCK,
   SET_FLASHCARD_PREFS,
@@ -94,9 +91,6 @@ const CreateFlashcard = (props) => {
         )
         console.log('response', res)
         dispatch({ type: SET_FLASHCARD_PUBLISHED, payload: true })
-        // if (res) {
-        //   dispatch({ type: SET_FLASHCARD_PUBLISHED, payload: true })
-        // } else console.log(res)
       } catch (err) {
         console.log(err)
       }
@@ -215,13 +209,6 @@ const CreateFlashcard = (props) => {
             padding={30}
           />
         </div>
-        {/* <textarea
-          name="codeBlock"
-          type="text"             // if all crash and burn. use this line of code
-          value={state.codeBlock}
-          onChange={(event) => handleFieldsChange(event)}
-          placeholder="write a code"
-        /> */}
         <textarea
           name="notes"
           type="text"
@@ -231,46 +218,10 @@ const CreateFlashcard = (props) => {
         />
         <button>Publish flashcard</button>
       </form>
-      {/* <div>
-        <h3>{state.flashcard.title}</h3>
-        <p>{state.flashcard.language}</p> */}
-      {/* <pre>
-        <SyntaxHighlighter language="javascript" style={dark}>
-          {state.flashcard.codeBlock} // if all crash and burn. use this line of code
-        </SyntaxHighlighter>
-        </pre> */}
-      {/* <code>{state.flashcard.codeBlock}</code>
-        <p>{state.flashcard.notes}</p>
-      </div>*/}
     </div>
   ) : (
     <h2>Your flashcard has been published to the {state.deckName} deck.</h2>
   )
 }
 export default CreateFlashcard
-
-// const CreateFlashcard = (props) => {
-
-//   const {selectedDeck} = props
-
-//   const createFlashcard = async () => {
-//     await axios.create(`${BASE_URL}/flashcards/${selectedDeck.id}`, {})
-//   }
-
-//   return (
-//     <div>
-//       <form onSubmit={createFlashcard}>
-//         <input type='text' placeholder='title'/>
-//         <input type='text' placeholder='notes'/>
-//         <input type='text' placeholder='code'/>
-//         <select>
-//           <option>HTML</option>
-//           <option>Javascript</option>
-//           <option>CSS</option>
-//         </select>
-//         <input type='submit' value='Submit'/>
-//       </form>
-//       </div>
-//   )
-// }
 
