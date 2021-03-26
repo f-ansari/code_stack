@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       title: { type: DataTypes.STRING, allowNull: false },
       notes: DataTypes.STRING,
-      codeBlock: DataTypes.STRING,
+      codeBlock: { type: DataTypes.TEXT, allowNull: false },
       deckId: {
         type: DataTypes.INTEGER,
         onDelete: 'CASCADE',
