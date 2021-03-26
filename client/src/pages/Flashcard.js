@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { BASE_URL } from '../globals'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { synthwave84 } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 const Flashcard = (props) => {
   console.log('props', props)
@@ -47,7 +47,10 @@ const Flashcard = (props) => {
       <section>
         <h3>Title: {selectedFlashcard.title}</h3>
         <h4>language: {selectedFlashcard.language}</h4>
-        <SyntaxHighlighter language="javascript" style={dark}>
+        <SyntaxHighlighter 
+        customStyle={{borderRadius:"0.5em", padding:"10px", textAlign:"left"}}
+        wrapLines={true}
+        language="javascript" style={synthwave84}>
       {/* {selectedFlashcard.codeBlock} */}
       {codeString}
     </SyntaxHighlighter>
