@@ -212,7 +212,7 @@ function App() {
                 {...props}
                 selectedUser={state.selectedUser}
                 selectedFlashcard={state.selectedFlashcard}
-                currentUser={state.currentUser}
+                currentUser={state.currentUserData}
                 selectedDeck={state.selectedDeck}
                 currentUserSelectedDeck={state.currentUserSelectedDeck}
               />
