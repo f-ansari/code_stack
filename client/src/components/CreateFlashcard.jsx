@@ -3,7 +3,12 @@ import Editor from 'react-simple-code-editor'
 import { highlight, languages } from 'prismjs/components/prism-core'
 import 'prismjs/components/prism-clike'
 import 'prismjs/components/prism-javascript'
-import 'prismjs/themes/prism.css'
+import 'prismjs/components/prism-git'
+import 'prismjs/components/prism-css'
+import 'prism-theme-night-owl/build/style.css'
+// import 'prismjs/themes/prism-tomorrow.css'
+import '../style/CreateFlashcard.css'
+
 // import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'      // if all crash and burn. use this line of code
 // import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import {
@@ -120,7 +125,7 @@ const CreateFlashcard = (props) => {
 
   return !state.flashcardPublished ? (
     <div>
-      <form onSubmit={(e) => handleFlashcardSubmit(e)}>
+      <form onSubmit={(e) => handleFlashcardSubmit(e)} className="container">
         <input
           name="title"
           type="text"
@@ -148,16 +153,15 @@ const CreateFlashcard = (props) => {
               ))
             : null}
         </select>
-        <Editor
-          value={state.flashcard.codeBlock}
-          onValueChange={(code) => setCodeBlock(code)}
-          highlight={(code) => highlight(code, languages.js)}
-          padding={10}
-          style={{
-            fontFamily: '"Fira code", "Fira Mono", monospace',
-            fontSize: 12
-          }}
-        />
+        <div className="container__editor">
+          <Editor
+            className="editor"
+            value={state.flashcard.codeBlock}
+            onValueChange={(code) => setCodeBlock(code)}
+            highlight={(code) => highlight(code, languages.js)}
+            padding={30}
+          />
+        </div>
         {/* <textarea
           name="codeBlock"
           type="text"             // if all crash and burn. use this line of code
@@ -174,17 +178,17 @@ const CreateFlashcard = (props) => {
         />
         <button>Publish flashcard</button>
       </form>
-      <div>
+      {/* <div>
         <h3>{state.flashcard.title}</h3>
-        <p>{state.flashcard.language}</p>
-        {/* <pre>
+        <p>{state.flashcard.language}</p> */}
+      {/* <pre>
         <SyntaxHighlighter language="javascript" style={dark}>
           {state.flashcard.codeBlock} // if all crash and burn. use this line of code
         </SyntaxHighlighter>
         </pre> */}
-        <code>{state.flashcard.codeBlock}</code>
+      {/* <code>{state.flashcard.codeBlock}</code>
         <p>{state.flashcard.notes}</p>
-      </div>
+      </div>*/}
     </div>
   ) : (
     <h2>
