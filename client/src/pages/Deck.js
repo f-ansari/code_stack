@@ -85,22 +85,25 @@ const Deck = (props) => {
   const submitUpdate = async (e) => {
     e.preventDefault()
 
-    const updatedDeckId = currentUserSelectedDeck.id
+    // const updatedDeckIndex = currentUserSelectedDeck.index
 
+    console.log(
+      currentUserData.Decks[1],
+      currentUserData.Decks[currentUserSelectedDeck.index].title
+    )
     try {
       await axios.put(`${BASE_URL}/decks/${props.match.params.deckId}`, {
         title: deckTitle
       })
       // props.dispatch({
       //   type: SET_CURRENT_USER_DATA,
-      //   payload: { ...currentUserData, currentUserData.Decks[1][`${updatedDeckId}`]: deckTitle }
+      //   payload: {...currentUserData, currentUserData.Decks[1].id[`${updatedDeckId}`]: deckTitle }
       // })
       props.dispatch({
         type: SET_CURRENT_USER_SELECTED_DECK,
         payload: {
           ...currentUserSelectedDeck,
           title: deckTitle
-          // [currentUserSelectedDeck[updatedDeckId]]: deckTitle
         }
       })
       toggleEdit()
