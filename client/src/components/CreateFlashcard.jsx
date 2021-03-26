@@ -134,6 +134,15 @@ const CreateFlashcard = (props) => {
     })
   }
 
+  const handleNotesChange = (e) => {
+    e.preventDefault()
+    console.log('input entered!', e.target.name, e.target.value)
+    dispatch({
+      type: SET_FLASHCARD_PREFS,
+      payload: { name: 'notes', value: e.target.value }
+    })
+  }
+
   const setDeck = (title, id) => {
     console.log('deckName', title, id)
     dispatch({
@@ -217,7 +226,7 @@ const CreateFlashcard = (props) => {
           name="notes"
           type="text"
           value={state.notes}
-          onChange={(event) => handleFieldsChange(event)}
+          onChange={(event) => handleNotesChange(event)}
           placeholder="write a note"
         />
         <button>Publish flashcard</button>
