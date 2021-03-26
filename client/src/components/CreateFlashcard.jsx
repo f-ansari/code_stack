@@ -21,7 +21,7 @@ import {
 import { BASE_URL } from '../globals'
 import axios from 'axios'
 
-const langs = ['javascript', 'python', 'json', 'css']
+const langs = [ 'css',  'html', 'javascript',  'json', 'python']
 
 langs.forEach((lang) => {
   console.log(langs)
@@ -31,14 +31,14 @@ langs.forEach((lang) => {
 const iState = {
   flashcard: {
     title: `CSS Tricks`,
-    notes: `shorthand for setting margins`,
+    notes: ``,
     codeBlock: `
     const App = () => {
       return (
         <h1>all the codes</h1>
       );
     }`,
-    deckId: 5, /// comeback to add useEffect to set inital value
+    deckId: 1, /// comeback to add useEffect to set inital value
     language: `css`
   },
   flashcardPublished: false,
@@ -109,10 +109,37 @@ const CreateFlashcard = (props) => {
 
   const handleFieldsChange = (e) => {
     e.preventDefault()
-    console.log('input entered!', e.target.name)
+    console.log('input entered!', e.target.name, e.target.value)
     dispatch({
       type: SET_FLASHCARD_PREFS,
-      payload: { name: e.target.name, value: e.target.value }
+      payload: { name: 'language', value: e.target.value }
+    })
+  }
+
+  const handleTitleChange = (e) => {
+    e.preventDefault()
+    console.log('input entered!', e.target.name, e.target.value)
+    dispatch({
+      type: SET_FLASHCARD_PREFS,
+      payload: { name: 'title', value: e.target.value }
+    })
+  }
+
+  const handleDeckChange = (e) => {
+    e.preventDefault()
+    console.log('input entered!', e.target.name, e.target.value)
+    dispatch({
+      type: SET_FLASHCARD_PREFS,
+      payload: { name: 'deckId', value: e.target.value }
+    })
+  }
+
+  const handleNotesChange = (e) => {
+    e.preventDefault()
+    console.log('input entered!', e.target.name, e.target.value)
+    dispatch({
+      type: SET_FLASHCARD_PREFS,
+      payload: { name: 'notes', value: e.target.value }
     })
   }
 
@@ -149,18 +176,15 @@ const CreateFlashcard = (props) => {
           name="title"
           type="text"
           value={state.title}
-          onChange={(event) => handleFieldsChange(event)}
+          onChange={(event) => handleTitleChange(event)}
           placeholder="title"
         />
         <select onChange={(event) => handleFieldsChange(event)}>
-          <option>HTML</option>
-          <option>Javascript</option>
-          <option>CSS</option>
           {langs.map((lang, idx) => (
             <option
               key={idx}
-              name={lang}
-              value={state.flashcard.language}
+              name="language"
+              value={lang}
               onClick={() => setLang(lang)}
             >
               {lang}
@@ -168,13 +192,13 @@ const CreateFlashcard = (props) => {
           ))}
         </select>
 
-        <select>
+        <select onChange={(e)=>handleDeckChange(e)}>
           {props.currentUserData
             ? props.currentUserData.Decks.map((deck, idx) => (
                 <option
                   key={idx}
                   name={deck.id}
-                  value={deck.title}
+                  value={deck.id}
                   onClick={() => setDeck(deck.title, deck.id)}
                 >
                   {deck.title}
@@ -202,7 +226,7 @@ const CreateFlashcard = (props) => {
           name="notes"
           type="text"
           value={state.notes}
-          onChange={(event) => handleFieldsChange(event)}
+          onChange={(event) => handleNotesChange(event)}
           placeholder="write a note"
         />
         <button>Publish flashcard</button>
