@@ -6,7 +6,8 @@ import {
   SET_SELECTED_FLASHCARD,
   SET_SELECTED_DECK,
   GET_DECKS_BY_HANDLE,
-  SET_CURRENT_USER_SELECTED_DECK
+  SET_CURRENT_USER_SELECTED_DECK,
+  SET_SELECTED_USER
 } from '../store/types'
 import CreateFlashcard from '../components/CreateFlashcard'
 
@@ -33,7 +34,7 @@ const Deck = (props) => {
 
   const renderProfileButton = () => {
     switch (true) {
-      case storedSelectedUser === currentUserData:
+      case selectedUser.handle === currentUserData.handle:
         return (
           <div>
             <button onClick={() => history.push('/editor')}>
@@ -133,10 +134,15 @@ const Deck = (props) => {
     setDecksByHandle(storedDecksByHandle)
     setSelectedUser(storedSelectedUser)
   }, [])
-
+  console.log(flashcards)
   return (
     <div>
-      <h1>Profile: {currentUserData.handle}</h1>
+      <h1>
+        Profile:{' '}
+        {currentUserData && selectedUser.handle === currentUserData.handle
+          ? currentUserData.handle
+          : selectedUser.handle}
+      </h1>
       {renderProfileButton()}
       <img
         src={currentUserData ? currentUserData.avatarUrl : null}
@@ -158,8 +164,16 @@ const Deck = (props) => {
         <div>
           <h1>{deckTitle}</h1>
           <button onClick={toggleEdit}>Edit</button>
-          <button>
-            <a href={`/user/${currentUserData.handle}`}>Return to profile</a>
+          <button
+            onClick={() =>
+              history.push(
+                `/user/${
+                  currentUserData ? currentUserData.handle : selectedUser.handle
+                }`
+              )
+            }
+          >
+            Return to profile
           </button>
         </div>
       )}

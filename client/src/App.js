@@ -138,6 +138,7 @@ function App() {
                 selectedDeck={state.selectedDeck}
                 decksByHandle={state.decksByHandle}
                 appDispatch={dispatch}
+                currentUserData={state.currentUserData}
               />
             )}
           />

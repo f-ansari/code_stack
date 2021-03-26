@@ -50,6 +50,7 @@ const reducer = (state, action) => {
 }
 
 const CreateFlashcard = (props) => {
+  console.log(props.currentUserSelectedDeck.id)
   const [state, dispatch] = useReducer(reducer, iState)
   console.log(props)
 
@@ -57,6 +58,7 @@ const CreateFlashcard = (props) => {
     e.preventDefault()
     console.log('publish button clicked')
     console.log(state.flashcard)
+    console.log(props.currentUserSelectedDeck.id)
     try {
       const res = await axios.post(
         `${BASE_URL}/flashcards/${props.currentUserSelectedDeck.id}`,
