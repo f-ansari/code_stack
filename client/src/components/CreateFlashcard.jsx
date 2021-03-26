@@ -7,7 +7,8 @@ import 'prismjs/themes/prism.css'
 import {
   SET_CODEBLOCK,
   SET_FLASHCARD_PREFS,
-  SET_FLASHCARD_PUBLISHED
+  SET_FLASHCARD_PUBLISHED,
+  SET_FLASHCARD_DECK_ID
 } from '../store/types'
 import { BASE_URL } from '../globals'
 import axios from 'axios'
@@ -25,7 +26,8 @@ const iState = {
     deckId: 31,
     language: `css`
   },
-  flashcardPublished: false
+  flashcardPublished: false,
+  deckName: ''
 }
 const reducer = (state, action) => {
   switch (action.type) {
@@ -44,6 +46,12 @@ const reducer = (state, action) => {
       }
     case SET_FLASHCARD_PUBLISHED:
       return { ...state, flashcardPublished: action.payload }
+    case SET_FLASHCARD_DECK_ID:
+      return {
+        ...state,
+        flashcard: { ...state.flashcard, deckId: action.payload.deckId },
+        deckName: action.payload.deckName
+      }
     default:
       return state
   }
@@ -58,21 +66,22 @@ const CreateFlashcard = (props) => {
     e.preventDefault()
     console.log('publish button clicked')
     console.log(state.flashcard)
-    console.log(props.currentUserSelectedDeck.id)
-    try {
-      const res = await axios.post(
-        `${BASE_URL}/flashcards/${props.currentUserSelectedDeck.id}`,
-        state.flashcard
-      )
-      console.log('response', res)
-      dispatch({ type: SET_FLASHCARD_PUBLISHED, payload: true })
-      // if (res) {
-      //   dispatch({ type: SET_FLASHCARD_PUBLISHED, payload: true })
-      // } else console.log(res)
-    } catch (err) {
-      console.log(err)
-    }
-  }
+
+    if (props.currentUserSelectedDeck.id)
+      try {
+        const res = await axios.post(
+          `${BASE_URL}/flashcards/${props.currentUserSelectedDeck.id}`,
+          state.flashcard
+        )
+        console.log('response', res)
+        dispatch({ type: SET_FLASHCARD_PUBLISHED, payload: true })
+        // if (res) {
+        //   dispatch({ type: SET_FLASHCARD_PUBLISHED, payload: true })
+        // } else console.log(res)
+      } catch (err) {
+        console.log(err)
+      }
+
 
   const setCodeBlock = (e) => {
     console.log(e)
@@ -88,8 +97,29 @@ const CreateFlashcard = (props) => {
     })
   }
 
+  const setDeckId = (e) => {
+    const { name, value } = e.target
+    console.log(e.target.dataset.txt)
+    console.log('deckName', name, value)
+
+    dispatch({
+      type: SET_FLASHCARD_DECK_ID,
+      payload: { deckId: e.target.value }
+    })
+  }
+
+  const setDeckName = (title) => {
+    console.log('deckName', title)
+    dispatch({
+      type: SET_FLASHCARD_DECK_ID,
+      payload: { deckName: title }
+    })
+  }
+
   return !state.flashcardPublished ? (
     <div>
+      <form onChange={(event) => setDeckId(event)}></form>
+
       <form onSubmit={(e) => handleFlashcardSubmit(e)}>
         <input
           name="title"
@@ -103,10 +133,21 @@ const CreateFlashcard = (props) => {
           <option>Javascript</option>
           <option>CSS</option>
         </select>
-        <select>
-          {/* {props.decksByHandle.map((deck, idx) => (
-            <option key={idx}>{deck.title}</option>
-          ))} */}
+        <select
+        // onChange={(event) => setDeckName(event)}
+        >
+          {props.currentUserData
+            ? props.currentUserData.Decks.map((deck, idx) => (
+                <option
+                  key={idx}
+                  name={deck.id}
+                  value={deck.title}
+                  onClick={() => setDeckName(deck.title)}
+                >
+                  {deck.title}
+                </option>
+              ))
+            : null}
         </select>
         <Editor
           value={state.flashcard.codeBlock}
@@ -138,8 +179,8 @@ const CreateFlashcard = (props) => {
     </div>
   ) : (
     <h2>
-      Your flashcard has been published to the{' '}
-      <strong>{props.currentUserSelectedDeck.title}</strong> deck.
+      Your flashcard has been published to the <strong>{state.deckName}</strong>{' '}
+      deck.
     </h2>
   )
 }
