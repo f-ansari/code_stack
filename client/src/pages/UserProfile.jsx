@@ -69,6 +69,7 @@ const UserProfile = (props) => {
       <div>
         {state.clickedCreate && renderDeckForm()}
         <button
+          button className="page-buttons"
           onClick={() =>
             dispatch({ type: SELECT_CREATE, payload: !state.clickedCreate })
           }
@@ -82,8 +83,8 @@ const UserProfile = (props) => {
   // map through all of the decks owned by selectedUser
   const renderDecksByHandle = () => {
     return currentUserData.Decks.map((deck, idx) => (
-      <div key={`${idx}`} onClick={() => targetDeck(deck, idx)}>
-        <h3>Deck Title: {deck.title}</h3>
+      <div className="cards" key={`${idx}`} onClick={() => targetDeck(deck, idx)}>
+        <h3 className="deck-title">{deck.title}</h3>
       </div>
     ))
   }
@@ -142,13 +143,16 @@ const UserProfile = (props) => {
 
   return currentUser && currentUserData ? (
     <div>
-      <h1>Profile: {currentUser.handle}</h1>
-      {renderProfileButton()}
-      <img
-        src={currentUserData.avatarUrl}
-        alt={`avatar for ${currentUser.handle}`}
-      />
-      <div>{renderDecksByHandle()}</div>
+      <section className="main-container">
+        <h1>Profile: {currentUser.handle}</h1>
+        <img
+          className="profile-img"
+          src={currentUserData.avatarUrl}
+          alt={`avatar for ${currentUser.handle}`}
+          />
+        {renderProfileButton()}
+        <div>{renderDecksByHandle()}</div>
+        </section>
     </div>
   ) : (
     <h3>No decks yet.</h3>
