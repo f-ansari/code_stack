@@ -32,19 +32,18 @@ const Deck = (props) => {
 
   const history = useHistory()
 
-  // RENDER BUTTONS CONDITIONALLY
-
   const renderProfileButton = () => {
     return (
       <div>
-        <button onClick={() => history.push('/editor')}>
+        <button
+          className="page-buttons"
+          onClick={() => history.push('/editor')}
+        >
           + Create Flashcard
         </button>
       </div>
     )
   }
-
-  // FUNCTIONS TO HANDLE FLASHCARD SELECTION
 
   const handleFlashcardClick = (id) => {
     setFlashcardState(id)
@@ -64,8 +63,6 @@ const Deck = (props) => {
     }
   }
 
-  //AXIOS CALL TO POPULATE FLASHCARDS BY DECK
-
   const getFlashcardsByDeck = async () => {
     console.log('props.selectedDeck.id:', currentUserSelectedDeck)
     try {
@@ -79,21 +76,12 @@ const Deck = (props) => {
     }
   }
 
-  //FUNCTIONS TO UPDATE DECK TITLE
-
   const toggleEdit = () => {
     setEditing(!isEditing)
   }
 
   const submitUpdate = async (e) => {
     e.preventDefault()
-
-    // const updatedDeckIndex = currentUserSelectedDeck.index
-
-    // console.log(
-    //   currentUserData.Decks[currentUserDeckIdx]
-    //   // currentUserData.Decks[currentUserSelectedDeck.index].title
-    // )
     try {
       const res = await axios.put(
         `${BASE_URL}/decks/${props.match.params.deckId}`,
@@ -124,8 +112,6 @@ const Deck = (props) => {
     setTitle(e.target.value)
   }
 
-  //UPDATE LIKES
-
   const updateLikes = async () => {
     try {
       const res = await axios.put(
@@ -141,8 +127,6 @@ const Deck = (props) => {
       console.log(error)
     }
   }
-
-  //USE EFFECT
 
   useEffect(() => {
     getFlashcardsByDeck()
@@ -160,28 +144,35 @@ const Deck = (props) => {
             ? currentUserData.handle
             : null}
         </h1>
-        {renderProfileButton()}
         <img
+          className="profile-img"
           src={currentUserData ? currentUserData.avatarUrl : null}
           alt={`avatar for ${
             currentUserData ? currentUserData.handle : 'undefined'
           }`}
         />
+        {renderProfileButton()}
         {isEditing ? (
           <form onSubmit={(e) => submitUpdate(e)}>
             <input
+              className="input-feild"
               type="text"
               placeholder="Enter a new title"
               onChange={(e) => updateTitleState(e)}
             />
-            <input type="submit" value="Submit" />
-            <button onClick={toggleEdit}>Cancel</button>
+            <input className="page-buttons" type="submit" value="Submit" />
+            <button className="page-buttons" onClick={toggleEdit}>
+              Cancel
+            </button>
           </form>
         ) : (
           <div>
             <h1>{deckTitle}</h1>
-            <button onClick={toggleEdit}>Edit</button>
+            <button className="page-buttons" onClick={toggleEdit}>
+              Edit
+            </button>
             <button
+              className="page-buttons"
               onClick={() => history.push(`/user/${currentUserData.handle}`)}
             >
               Return to profile
@@ -190,7 +181,9 @@ const Deck = (props) => {
         )}
 
         <p>
-          <button onClick={updateLikes}>Like</button>
+          <button className="page-buttons" onClick={updateLikes}>
+            👍
+          </button>
           {currentUserSelectedDeck.likeCount}
         </p>
         {flashcards.length ? (

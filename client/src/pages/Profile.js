@@ -16,7 +16,6 @@ import {
 import { BASE_URL } from '../globals'
 import axios from 'axios'
 
-// useReduce handles DeckForm state
 const iState = {
   deckForm: '',
   deckFormSubmitted: false,
@@ -46,7 +45,6 @@ const Profile = (props) => {
   const [state, dispatch] = useReducer(reducer, iState)
   const { selectedUser, decksByHandle, appDispatch, currentUserData } = props
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const getProfile = async () => {
     try {
       const res = await axios.get(
@@ -70,25 +68,8 @@ const Profile = (props) => {
     dispatch({ type: SET_USER_DECKS, payload: res.data.Decks })
   }
 
-  const checkFollowing = () => {
-    // axios call that returns a boolean
-  }
-
   const renderProfileButton = () => {
     switch (true) {
-      // case currentUser && currentUser.handle == selectedUser.handle:
-      //   return (
-      //     <div>
-      //       {state.clickedCreate && renderDeckForm()}
-      //       <button
-      //         onClick={() =>
-      //           dispatch({ type: SELECT_CREATE, payload: !state.clickedCreate })
-      //         }
-      //       >
-      //         {state.clickedCreate ? `Cancel` : `+ Create Deck`}
-      //       </button>
-      //     </div>
-      //   )
       case currentUserData && currentUserData.handle === selectedUser.handle:
         return (
           <div>
@@ -108,7 +89,6 @@ const Profile = (props) => {
     }
   }
 
-  // map through all of the decks owned by selectedUser
   const renderDecksByHandle = () => {
     return state.userDecks.map((deck, idx) => (
       <div className="cards" key={`${idx}`} onClick={() => targetDeck(deck)}>
@@ -117,10 +97,8 @@ const Profile = (props) => {
     ))
   }
 
-  //handled on renderDeckByHandle
-  // route user to deck page to view deck details
   const targetDeck = (deck) => {
-    appDispatch({ type: SET_SELECTED_DECK, payload: deck })
+    appDispatch({ type: SET_CURRENT_USER_SELECTED_DECK, payload: deck })
     props.history.push(`/deck/${deck.id}`)
   }
 
@@ -148,24 +126,6 @@ const Profile = (props) => {
       console.log(error)
     }
   }
-
-  // const renderDeckForm = () => {
-  //   return (
-  //     <form onSubmit={(event) => handleDeckFormSubmit(event)}>
-  //       <input
-  //         name="deckForm"
-  //         placeholder="Create a new deck"
-  //         type="text"
-  //         value={state.deckForm}
-  //         onChange={(event) =>
-  //           dispatch({ type: DECK_FORM, payload: event.target.value })
-  //         }
-  //       />
-
-  //       <input type="submit" value="Submit" />
-  //     </form>
-  //   )
-  // }
 
   useEffect(() => {
     getProfile()
