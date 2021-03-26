@@ -91,8 +91,8 @@ const FriendDeck = (props) => {
         {selectedDeck.likeCount}
       </p>
       {flashcards.length ? (
-        flashcards.map((flashcard) => (
-          <div onClick={() => handleFlashcardClick(flashcard.id)}>
+        flashcards.map((flashcard, idx) => (
+          <div key={`${idx}`} onClick={() => handleFlashcardClick(flashcard.id)}>
             <h3>{flashcard.title}</h3>
           </div>
         ))
