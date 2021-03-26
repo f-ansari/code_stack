@@ -164,7 +164,7 @@ const CreateFlashcard = (props) => {
   }, [state.deckId])
 
   return !state.flashcardPublished ? (
-    <div>
+    <div className="main-container">
       <form onSubmit={(e) => handleFlashcardSubmit(e)} className="container">
         <input
           name="title"
@@ -172,21 +172,24 @@ const CreateFlashcard = (props) => {
           value={state.title}
           onChange={(event) => handleTitleChange(event)}
           placeholder="title"
+          className="input-feild"
         />
-        <select onChange={(event) => handleFieldsChange(event)}>
+        <br></br>
+        <select className="input-feild" onChange={(event) => handleFieldsChange(event)}>
           {langs.map((lang, idx) => (
             <option
               key={idx}
               name="language"
               value={lang}
+              placeholder="Pick a language"
               onClick={() => setLang(lang)}
             >
               {lang}
             </option>
           ))}
         </select>
-
-        <select onChange={(e)=>handleDeckChange(e)}>
+        <br></br>
+        <select className="input-feild" onChange={(e)=>handleDeckChange(e)}>
           {props.currentUserData
             ? props.currentUserData.Decks.map((deck, idx) => (
                 <option
@@ -194,12 +197,14 @@ const CreateFlashcard = (props) => {
                   name={deck.id}
                   value={deck.id}
                   onClick={() => setDeck(deck.title, deck.id)}
+                  placeholder="pick your deck"
                 >
                   {deck.title}
                 </option>
               ))
             : null}
         </select>
+        <br></br>
         <div className="container__editor">
           <Editor
             className="editor"
@@ -209,14 +214,17 @@ const CreateFlashcard = (props) => {
             padding={30}
           />
         </div>
+        <br></br>
         <textarea
+          className="input-feild"
           name="notes"
           type="text"
           value={state.notes}
           onChange={(event) => handleNotesChange(event)}
           placeholder="write a note"
         />
-        <button>Publish flashcard</button>
+        <br></br>
+        <button className="page-buttons">Publish flashcard</button>
       </form>
     </div>
   ) : (
