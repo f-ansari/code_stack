@@ -27,7 +27,9 @@ import {
   GET_ALL_DECKS,
   SET_CURRENT_USER,
   ADD_TO_CURRENT_USER_DECK,
-  SET_CURRENT_USER_SELECTED_DECK
+  SET_CURRENT_USER_SELECTED_DECK,
+  SET_CURRENT_USER_SELECTED_DECK_IDX,
+  UPDATE_CURRENT_USER_DECK
 } from './store/types'
 import './style/App.css'
 
@@ -42,7 +44,8 @@ const iState = {
   currentUser: {},
   currentUserData: null,
   currentUserSelectedDeck: [],
-  currentUserFlashcard: []
+  currentUserFlashcard: [],
+  currentUserDeckIdx: ''
 }
 
 const reducer = (state, action) => {
@@ -75,6 +78,19 @@ const reducer = (state, action) => {
         currentUserData: {
           ...state.currentUserData,
           Decks: [...state.currentUserData.Decks, action.payload]
+        }
+      }
+    case SET_CURRENT_USER_SELECTED_DECK_IDX:
+      return { ...state.currentUserDeckIdx, currentUserDeckIdx: action.payload }
+    case UPDATE_CURRENT_USER_DECK:
+      let updatedDeck = state.currentUserData.Decks.filter(
+        (deck) => deck.id !== action.payload.id
+      )
+      return {
+        ...state,
+        currentUserData: {
+          ...state.currentUserData,
+          Decks: [...updatedDeck, action.payload.deck]
         }
       }
     default:
@@ -184,6 +200,7 @@ function App() {
                 currentUserData={state.currentUserData}
                 decksByHandle={state.decksByHandle}
                 currentUserSelectedDeck={state.currentUserSelectedDeck}
+                currentUserDeckIdx={state.currentUserDeckIdx}
               />
             )}
           />
