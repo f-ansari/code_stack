@@ -65,50 +65,57 @@ const SignUp = () => {
         </div>
       ) : (
         <div>
-          <h1>SignUp</h1>
-          <form onSubmit={(event) => handleSubmit(event)}>
-            <input
-              name="name"
-              placeholder="First Name"
-              type="text"
-              value={state.name}
-              onChange={(event) => handleChange(event)}
-            />
-            <br></br>
-            <input
-              name="handle"
-              placeholder="handle"
-              type="text"
-              value={state.handle}
-              onChange={(event) => handleChange(event)}
-            />
-            <br></br>
-            <input
-              name="email"
-              placeholder="email@me.com"
-              type="text"
-              value={state.email}
-              onChange={(event) => handleChange(event)}
-            />
-            <br></br>
-            <input
-              name="password"
-              placeholder="password"
-              type="text"
-              value={state.password}
-              onChange={(event) => handleChange(event)}
-            />
-            <br></br>
-            <input
-              name="avatarUrl"
-              placeholder="Add an image URL to use for your profile"
-              type="text"
-              value={state.avatarUrl}
-              onChange={(event) => handleChange(event)}
-            />
-            <br></br>
-            <input type="submit" value="Submit" />
-          </form>
+          <section className="main-container">
+            <h1>SignUp</h1>
+            <form onSubmit={(event) => handleSubmit(event)}>
+              <input
+                name="name"
+                placeholder="First Name"
+                type="text"
+                value={state.name}
+                onChange={(event) => handleChange(event)}
+                className="input-feild"
+              />
+              <br></br>
+              <input
+                name="handle"
+                placeholder="handle"
+                type="text"
+                value={state.handle}
+                onChange={(event) => handleChange(event)}
+                className="input-feild"
+              />
+              <br></br>
+              <input
+                name="email"
+                placeholder="email@me.com"
+                type="text"
+                value={state.email}
+                onChange={(event) => handleChange(event)}
+                className="input-feild"
+              />
+              <br></br>
+              <input
+                name="password"
+                placeholder="password"
+                type="text"
+                value={state.password}
+                onChange={(event) => handleChange(event)}
+                className="input-feild"
+              />
+              <br></br>
+              <input
+                name="avatarUrl"
+                placeholder="Add an image URL to use for your profile"
+                type="text"
+                value={state.avatarUrl}
+                onChange={(event) => handleChange(event)}
+                className="input-feild"
+              />
+              <br></br>
+              <input className="page-buttons" type="submit" value="Submit" />
+            </form>
+          </section>
         </div>
       )}
     </div>
