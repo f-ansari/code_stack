@@ -85,7 +85,7 @@ const FriendDeck = (props) => {
         src={selectedUser ? selectedUser.avatarUrl : null}
         alt={`avatar for ${selectedUser ? selectedUser.handle : null}`}
       />
-
+      <h3>{deckTitle}</h3>
       <p>
         <button onClick={updateLikes}>Like</button>
         {selectedDeck.likeCount}
