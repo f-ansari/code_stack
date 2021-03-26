@@ -133,11 +133,12 @@ main {
   text-align: center;
   font-size: 12px;
   margin: 2px 5px 2px 2px;
-  opacity: 0.6;
+  opacity: 0.9;
   transition: 0.3s;
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
+  margin-top: 3em;
 }
 
 .page-buttons:hover {
@@ -158,6 +159,61 @@ form {
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
 
-  padding: 1vh 10vw;
+  padding: 1em 8em;
   margin-bottom: 2em;
+  max-width: 12em;
+  color: #48c13a;
+  text-align: center;
+}
+
+/*FLASHCARD*/
+.flashcard {
+  max-width: 40em;
+  min-height: 28em;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  justify-self: center;
+
+  margin-top: 3em;
+  margin-bottom: 2em;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-y: scroll;
+
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(221, 16, 232, 0.37);
+  backdrop-filter: blur(7.5px);
+  -webkit-backdrop-filter: blur(7.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  animation: fadeIn ease 1s;
+  -webkit-animation: fadeIn ease 1s;
+  -moz-animation: fadeIn ease 1s;
+  -o-animation: fadeIn ease 1s;
+  -ms-animation: fadeIn ease 1s;
+}
+
+.editor-view {
+  font-size: 18px;
+  background-color: #011627;
+  border-radius: 3px;
+  width: 55ch;
+
+  padding: 18px;
+  text-align: left;
+  tab-size: 4ch;
+  /* min-height: 300px; */
+  min-height: 10em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: auto;
+  margin-right: auto;
+
+  overflow-y: scroll;
+  font-family: 'Fira code', 'Fira Mono', Consolas, Menlo, Courier, monospace;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-weight: 500;
+  border-radius: 0.3em;
 }
