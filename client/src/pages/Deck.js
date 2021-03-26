@@ -150,56 +150,59 @@ const Deck = (props) => {
     setSelectedUser(storedSelectedUser)
   }, [])
   console.log(flashcards)
+
   return (
     <div>
-      <h1>
-        Profile:{' '}
-        {currentUserData && currentUserData.handle
-          ? currentUserData.handle
-          : null}
-      </h1>
-      {renderProfileButton()}
-      <img
-        src={currentUserData ? currentUserData.avatarUrl : null}
-        alt={`avatar for ${
-          currentUserData ? currentUserData.handle : 'undefined'
-        }`}
-      />
-      {isEditing ? (
-        <form onSubmit={(e) => submitUpdate(e)}>
-          <input
-            type="text"
-            placeholder="Enter a new title"
-            onChange={(e) => updateTitleState(e)}
-          />
-          <input type="submit" value="Submit" />
-          <button onClick={toggleEdit}>Cancel</button>
-        </form>
-      ) : (
-        <div>
-          <h1>{deckTitle}</h1>
-          <button onClick={toggleEdit}>Edit</button>
-          <button
-            onClick={() => history.push(`/user/${currentUserData.handle}`)}
-          >
-            Return to profile
-          </button>
-        </div>
-      )}
-
-      <p>
-        <button onClick={updateLikes}>Like</button>
-        {currentUserSelectedDeck.likeCount}
-      </p>
-      {flashcards.length ? (
-        flashcards.map((flashcard) => (
-          <div onClick={() => handleFlashcardClick(flashcard.id)}>
-            <h3>{flashcard.title}</h3>
+      <section className="main-container">
+        <h1>
+          Profile:{' '}
+          {currentUserData && currentUserData.handle
+            ? currentUserData.handle
+            : null}
+        </h1>
+        {renderProfileButton()}
+        <img
+          src={currentUserData ? currentUserData.avatarUrl : null}
+          alt={`avatar for ${
+            currentUserData ? currentUserData.handle : 'undefined'
+          }`}
+        />
+        {isEditing ? (
+          <form onSubmit={(e) => submitUpdate(e)}>
+            <input
+              type="text"
+              placeholder="Enter a new title"
+              onChange={(e) => updateTitleState(e)}
+            />
+            <input type="submit" value="Submit" />
+            <button onClick={toggleEdit}>Cancel</button>
+          </form>
+        ) : (
+          <div>
+            <h1>{deckTitle}</h1>
+            <button onClick={toggleEdit}>Edit</button>
+            <button
+              onClick={() => history.push(`/user/${currentUserData.handle}`)}
+            >
+              Return to profile
+            </button>
           </div>
-        ))
-      ) : (
-        <div>There aren't any flashcards in this deck yet!</div>
-      )}
+        )}
+
+        <p>
+          <button onClick={updateLikes}>Like</button>
+          {currentUserSelectedDeck.likeCount}
+        </p>
+        {flashcards.length ? (
+          flashcards.map((flashcard) => (
+            <div onClick={() => handleFlashcardClick(flashcard.id)}>
+              <h3>{flashcard.title}</h3>
+            </div>
+          ))
+        ) : (
+          <div>There aren't any flashcards in this deck yet!</div>
+        )}
+      </section>
     </div>
   )
 }
