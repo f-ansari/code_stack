@@ -52,7 +52,7 @@ const reducer = (state, action) => {
 const CreateFlashcard = (props) => {
   const [state, dispatch] = useReducer(reducer, iState)
   console.log(props)
-
+  const codeString = "1+1"
   const handleFlashcardSubmit = async (e) => {
     e.preventDefault()
     console.log('publish button clicked')
