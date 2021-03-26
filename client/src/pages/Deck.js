@@ -72,7 +72,8 @@ const Deck = (props) => {
     console.log('props.selectedDeck.id:', props.currentUserSelectedDeck.id)
     try {
       const response = await axios.get(
-        `${BASE_URL}/flashcards/deck/${props.currentUserSelectedDeck.id}`
+        // `${BASE_URL}/flashcards/deck/${props.currentUserSelectedDeck.id}`
+        `${BASE_URL}/flashcards/deck/34`
       )
       console.log('res for getFlashcardsByDeck', response.data)
       setFlashcards(response.data)
@@ -133,7 +134,7 @@ const Deck = (props) => {
     setDecksByHandle(storedDecksByHandle)
     setSelectedUser(storedSelectedUser)
   }, [])
-
+  console.log(flashcards)
   return (
     <div>
       <h1>Profile: {currentUserData.handle}</h1>
