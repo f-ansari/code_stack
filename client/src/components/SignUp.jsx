@@ -74,6 +74,7 @@ const SignUp = () => {
               value={state.name}
               onChange={(event) => handleChange(event)}
             />
+            <br></br>
             <input
               name="handle"
               placeholder="handle"
@@ -81,6 +82,7 @@ const SignUp = () => {
               value={state.handle}
               onChange={(event) => handleChange(event)}
             />
+            <br></br>
             <input
               name="email"
               placeholder="email@me.com"
@@ -88,6 +90,7 @@ const SignUp = () => {
               value={state.email}
               onChange={(event) => handleChange(event)}
             />
+            <br></br>
             <input
               name="password"
               placeholder="password"
@@ -95,6 +98,7 @@ const SignUp = () => {
               value={state.password}
               onChange={(event) => handleChange(event)}
             />
+            <br></br>
             <input
               name="avatarUrl"
               placeholder="Add an image URL to use for your profile"
@@ -102,7 +106,7 @@ const SignUp = () => {
               value={state.avatarUrl}
               onChange={(event) => handleChange(event)}
             />
-
+            <br></br>
             <input type="submit" value="Submit" />
           </form>
         </div>

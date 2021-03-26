@@ -14,7 +14,7 @@ const HomePage = (props) => {
   const renderDecksByHandle = () => {
     return decks.map((deck, idx) => (
       <div className="cards" key={`${idx}`} onClick={() => handleClick(deck)}>
-        <h3>Deck Title: {deck.title}</h3>
+        <h3 className="deck-title-home">Deck: {deck.title}</h3>
         <h3 className="library">@{deck.User.handle}</h3>
       </div>
     ))
@@ -32,9 +32,9 @@ const HomePage = (props) => {
   }, [])
 
   return (
-    <div className="homepage">
+    <div className="main-container">
       <h2 className="library">Library</h2>
-      <div className="card-container">{renderDecksByHandle()}</div>
+      <div>{renderDecksByHandle()}</div>
     </div>
   )
 }
