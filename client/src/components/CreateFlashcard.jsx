@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useEffect } from 'react'
 import Editor from 'react-simple-code-editor'
 import { highlight, languages } from 'prismjs/components/prism-core'
 import 'prismjs/components/prism-clike'
@@ -25,7 +25,7 @@ const iState = {
         <h1>all the codes</h1>
       );
     }`,
-    deckId: 5,   /// comeback to add useEffect to set inital value 
+    deckId: 5, /// comeback to add useEffect to set inital value
     language: `css`
   },
   flashcardPublished: false,
@@ -83,7 +83,7 @@ const CreateFlashcard = (props) => {
       } catch (err) {
         console.log(err)
       }
-    }
+  }
 
   const setCodeBlock = (e) => {
     console.log(e)
@@ -99,29 +99,27 @@ const CreateFlashcard = (props) => {
     })
   }
 
-  const setDeckId = (e) => {
-    const { name, value } = e.target
-    console.log(e.target.dataset.txt)
-    console.log('deckName', name, value)
-
+  const setDeck = (title, id) => {
+    console.log('deckName', title, id)
     dispatch({
       type: SET_FLASHCARD_DECK_ID,
-      payload: { deckId: e.target.value }
+      payload: { deckName: title, deckId: id }
     })
   }
 
-  const setDeckName = (title) => {
-    console.log('deckName', title)
+  const initFlashcardDeckState = () => {
     dispatch({
       type: SET_FLASHCARD_DECK_ID,
-      payload: { deckName: title }
+      payload: { deckId: props.currentUserSelectedDeck.id }
     })
   }
+
+  useEffect(() => {
+    initFlashcardDeckState()
+  }, [state.deckId])
 
   return !state.flashcardPublished ? (
     <div>
-      <form onChange={(event) => setDeckId(event)}></form>
-
       <form onSubmit={(e) => handleFlashcardSubmit(e)}>
         <input
           name="title"
@@ -135,16 +133,15 @@ const CreateFlashcard = (props) => {
           <option>Javascript</option>
           <option>CSS</option>
         </select>
-        <select
-        // onChange={(event) => setDeckName(event)}
-        >
+
+        <select>
           {props.currentUserData
             ? props.currentUserData.Decks.map((deck, idx) => (
                 <option
                   key={idx}
                   name={deck.id}
                   value={deck.title}
-                  onClick={() => setDeckName(deck.title)}
+                  onClick={() => setDeck(deck.title, deck.id)}
                 >
                   {deck.title}
                 </option>
