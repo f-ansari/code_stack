@@ -50,6 +50,11 @@ To get started, click [this link ](https://trello.com/b/vYAmm1du/project-3) to v
 
 ![CodeStack Component Hierarchy Diagram](/store/code_stackCHD-hor.png)
 
+<h3 align="center">Final Product</h3>
+
+![import](images/CodeStack2.png)
+![import](images/CodeStack.png)
+
 ***
 
 ### ***Future Updates***
