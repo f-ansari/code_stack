@@ -118,6 +118,7 @@ main {
 /*PROFILE-PAGE*/
 .profile-img {
   max-width: 20em;
+  margin-bottom: 1em;
 }
 
 .deck-title {
@@ -138,8 +139,8 @@ main {
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
-  margin-top: 3em;
-  margin-bottom: 2em;
+  margin-top: 0.5em;
+  margin-bottom: 1em;
 }
 
 .page-buttons:hover {
@@ -161,7 +162,7 @@ form {
   border: 1px solid rgba(255, 255, 255, 0.18);
 
   padding: 1em 8em;
-  margin-bottom: 2em;
+  margin-bottom: 1em;
   max-width: 12em;
   color: #48c13a;
   text-align: center;

@@ -123,6 +123,7 @@ const UserProfile = (props) => {
     return (
       <form onSubmit={(event) => handleDeckFormSubmit(event)}>
         <input
+          className="input-feild"
           name="deckForm"
           placeholder="Create a new deck"
           type="text"
@@ -131,8 +132,8 @@ const UserProfile = (props) => {
             dispatch({ type: DECK_FORM, payload: event.target.value })
           }
         />
-
-        <input type="submit" value="Submit" />
+        <br></br>
+        <input className="page-buttons" type="submit" value="Submit" />
       </form>
     )
   }
