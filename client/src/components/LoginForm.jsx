@@ -68,7 +68,7 @@ const LoginForm = (props) => {
             name="handle"
             value={state.handle}
             onChange={(e) => handleLoginChange(e)}
-            placeholder="jane_doe"
+            placeholder="handle"
             className="input-feild"
           />
           <br></br>
@@ -77,7 +77,7 @@ const LoginForm = (props) => {
             name="password"
             value={state.password}
             onChange={(e) => handleLoginChange(e)}
-            placeholder="jane_doe"
+            placeholder="password"
             className="input-feild"
           />
           <br></br>
