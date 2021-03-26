@@ -5,6 +5,7 @@ import Profile from './pages/Profile'
 
 import UserProfile from './pages/UserProfile'
 import Deck from './pages/Deck'
+import FriendDeck from './pages/FriendDeck'
 import HomePage from './pages/HomePage'
 import Flashcard from './pages/Flashcard'
 import CreateFlashcard from './components/CreateFlashcard'
@@ -158,6 +159,21 @@ function App() {
           />
           <Route
             path="/deck/:deckId"
+            component={(props) => (
+              <FriendDeck
+                {...props}
+                dispatch={dispatch}
+                selectedDeck={state.selectedDeck}
+                selectedUser={state.selectedUser}
+                currentUser={state.currentUser}
+                currentUserData={state.currentUserData}
+                decksByHandle={state.decksByHandle}
+                currentUserSelectedDeck={state.currentUserSelectedDeck}
+              />
+            )}
+          />
+          <Route
+            path="/myDeck/:deckId"
             component={(props) => (
               <Deck
                 {...props}
