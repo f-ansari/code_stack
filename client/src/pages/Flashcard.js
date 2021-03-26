@@ -82,7 +82,9 @@ const Flashcard = (props) => {
         </div>
         <h4>notes: {selectedFlashcard.notes}</h4>
       </section>
-      <button onClick={(e) => deleteFlashcard(e)}>Delete Flashcard</button>
+      {props.currentUser && props.currentUser.handle === selectedUser.handle ? (
+        <button onClick={(e) => deleteFlashcard(e)}>Delete Flashcard</button>
+      ) : null}
     </div>
   )
 }
