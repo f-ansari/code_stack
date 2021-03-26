@@ -8,8 +8,10 @@ import {
   GET_DECKS_BY_HANDLE,
   SET_CURRENT_USER_DATA,
   SET_CURRENT_USER_SELECTED_DECK,
+  SET_CURRENT_USER_SELECTED_DECK_IDX,
   SET_SELECTED_USER,
-  ADD_TO_CURRENT_USER_DECK
+  ADD_TO_CURRENT_USER_DECK,
+  UPDATE_CURRENT_USER_DECK
 } from '../store/types'
 
 const Deck = (props) => {
@@ -18,7 +20,8 @@ const Deck = (props) => {
     selectedDeck,
     decksByHandle,
     currentUserData,
-    currentUserSelectedDeck
+    currentUserSelectedDeck,
+    currentUserDeckIdx
   } = props
 
   const [isEditing, setEditing] = useState(false)
@@ -64,10 +67,10 @@ const Deck = (props) => {
   //AXIOS CALL TO POPULATE FLASHCARDS BY DECK
 
   const getFlashcardsByDeck = async () => {
-    console.log('props.selectedDeck.id:', props.currentUserSelectedDeck.id)
+    console.log('props.selectedDeck.id:', currentUserSelectedDeck)
     try {
       const response = await axios.get(
-        `${BASE_URL}/flashcards/deck/${props.currentUserSelectedDeck.id}`
+        `${BASE_URL}/flashcards/deck/${currentUserSelectedDeck.id}`
       )
       console.log('res for getFlashcardsByDeck', response.data)
       setFlashcards(response.data)
@@ -87,18 +90,23 @@ const Deck = (props) => {
 
     // const updatedDeckIndex = currentUserSelectedDeck.index
 
-    console.log(
-      currentUserData.Decks[1],
-      currentUserData.Decks[currentUserSelectedDeck.index].title
-    )
+    // console.log(
+    //   currentUserData.Decks[currentUserDeckIdx]
+    //   // currentUserData.Decks[currentUserSelectedDeck.index].title
+    // )
     try {
-      await axios.put(`${BASE_URL}/decks/${props.match.params.deckId}`, {
-        title: deckTitle
+      const res = await axios.put(
+        `${BASE_URL}/decks/${props.match.params.deckId}`,
+        {
+          title: deckTitle
+        }
+      )
+      console.log('res', res.data[1])
+      const deck = res.data[1][0]
+      props.dispatch({
+        type: UPDATE_CURRENT_USER_DECK,
+        payload: { deck: deck, id: deck.id }
       })
-      // props.dispatch({
-      //   type: SET_CURRENT_USER_DATA,
-      //   payload: {...currentUserData, currentUserData.Decks[1].id[`${updatedDeckId}`]: deckTitle }
-      // })
       props.dispatch({
         type: SET_CURRENT_USER_SELECTED_DECK,
         payload: {
@@ -181,7 +189,7 @@ const Deck = (props) => {
 
       <p>
         <button onClick={updateLikes}>Like</button>
-        {selectedDeck.likeCount}
+        {currentUserSelectedDeck.likeCount}
       </p>
       {flashcards.length ? (
         flashcards.map((flashcard) => (

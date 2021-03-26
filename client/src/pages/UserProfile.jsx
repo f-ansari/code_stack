@@ -91,13 +91,13 @@ const UserProfile = (props) => {
   //handled on renderDeckByHandle
   // route user to deck page to view deck details
   const targetDeck = (deck, deckIndex) => {
-    console.log('deck', deck)
+    console.log('deck', deck, deckIndex)
     appDispatch({ type: SET_CURRENT_USER_SELECTED_DECK, payload: deck })
-    appDispatch({
-      type: SET_CURRENT_USER_SELECTED_DECK_IDX,
-      payload: deckIndex
-    })
-    props.history.push(`/deck/${deck.id}`)
+    // appDispatch({
+    //   type: SET_CURRENT_USER_SELECTED_DECK_IDX,
+    //   payload: deckIndex
+    // })
+    props.history.push(`/myDeck/${deck.id}`)
   }
 
   const handleDeckFormSubmit = async (e) => {
